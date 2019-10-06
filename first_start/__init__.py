@@ -6,8 +6,6 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
 
 
-
-
 class FirstStart(Gtk.Window):
 
     def __init__(self):
@@ -23,47 +21,12 @@ class FirstStart(Gtk.Window):
 
         self.builder = Gtk.Builder()
 
-        for page in pages:
-            self.builder.add_from_file('glade/{}.glade'.format(page))
-            self.builder.connect_signals(Handler(self.stack))
-            variable = self.builder.get_object(page)
-            self.stack.add_named(variable, page)
+        for index in range(len(pages)):
+            self.builder.add_from_file('glade/{}.glade'.format(pages[index]))
+            self.builder.connect_signals(Handler(self.stack, position=index))
+            variable = self.builder.get_object(pages[index])
+            self.stack.add_named(variable, pages[index])
 
-
-
-        # builder.add_from_file("glade/welcome.glade")
-        #
-        #
-        #
-        # welcome_box = builder.get_object("welcome_box")
-        #
-        # self.stack.add_named(welcome_box, 'welcome_box')
-        #
-        # box1 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        # label = Gtk.Label("first page")
-        # self.button = Gtk.Button(label="next")
-        # self.button.connect("clicked", self.button_clicked1)
-        # box1.add(label)
-        # box1.add(self.button)
-        #
-        # box2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        # label = Gtk.Label("second page")
-        # self.button = Gtk.Button(label="next")
-        # self.button.connect("clicked", self.button_clicked2)
-        # box2.add(label)
-        # box2.add(self.button)
-        #
-        # self.stack.add_named(box1, 'box1')
-        # self.stack.add_named(box2, 'box2')
-
-
-
-
-    # def button_clicked1(self, widget):
-    #     self.stack.set_visible_child_name('page2')
-
-    # def button_clicked2(self, widget):
-    #     self.stack.set_visible_child_name('box1')
 
 win = FirstStart()
 win.connect("destroy", Gtk.main_quit)
