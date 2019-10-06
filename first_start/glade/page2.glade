@@ -5,7 +5,7 @@
     <property name="can_focus">False</property>
     <signal name="destroy" handler="on_destroy" swapped="no"/>
       <child>
-      <object class="GtkButton" id="button2">
+      <object class="GtkButton" id="Back">
         <property name="label" translatable="yes">back</property>
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
@@ -16,7 +16,7 @@
       </object>
     </child>
     <child>
-      <object class="GtkButton" id="button1">
+      <object class="GtkButton" id="Next">
         <property name="label" translatable="yes">next</property>
         <property name="use_action_appearance">False</property>
         <property name="visible">True</property>
