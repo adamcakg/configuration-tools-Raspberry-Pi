@@ -8,7 +8,6 @@ from gi.repository import Gtk, Gio, GLib
 
 
 class FirstStart(Gtk.Window):
-
     def __init__(self):
         Gtk.Window.__init__(self, title="Welcome")
         self.set_border_width(10)
@@ -33,6 +32,5 @@ class FirstStart(Gtk.Window):
 
 
 win = FirstStart()
-win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()
