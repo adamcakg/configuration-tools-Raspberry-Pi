@@ -1,25 +1,26 @@
+import gi
+
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from list_of_pages import pages
 
 
 class Handler:
-    def __init__(self, stack, position):
-        self.stack = stack
-        self.position = position
+    def __init__(self, controller, name_of_class=None):
+        self.controller = controller                                # Handlers controls only one controller
+        self.name = name_of_class
 
-    def on_destroy(self, *args):
+    def on_destroy(self, *args):                                    # Closing app
+        print('quiting of ' + self.name)
         Gtk.main_quit()
+        # del self
 
-    def next(self, button):
-        position = self.position + 1
-        if position > len(pages):
-            return
-        else:
-            self.stack.set_visible_child_name(pages[position])
+    def next(self, button):                                         # Button handler to get to next page
+        self.controller.next_page()
+        # self.on_destroy()
 
-    def back(self, button):
-        position = self.position - 1
-        if position < 0:
-            return
-        else:
-            self.stack.set_visible_child_name(pages[position])
+    def back(self, button):                                         # Button handler to get to previous page
+        self.controller.prev_page()
+        # self.on_destroy()
+
+
+

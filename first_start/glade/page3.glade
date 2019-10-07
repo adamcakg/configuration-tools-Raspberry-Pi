@@ -1,31 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkBox" id="page3">
-    <property name="can_focus">False</property>
-    <signal name="destroy" handler="on_destroy" swapped="no"/>
-      <child>
-      <object class="GtkButton" id="Back">
-        <property name="label" translatable="yes">back</property>
-        <property name="use_action_appearance">False</property>
+    <object class="GtkBox" id="page3">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="use_action_appearance">False</property>
-        <signal name="pressed" handler="back" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="Next">
-        <property name="label" translatable="yes">next</property>
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="use_action_appearance">False</property>
-        <signal name="pressed" handler="next" swapped="no"/>
-      </object>
-    </child>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
 
-  </object>
+        <child>
+            <placeholder/>
+        </child>
+        <child>
+            <placeholder/>
+        </child>
+        <child>
+            <object class="GtkEntry" id="password_label">
+              <property name="visible">True</property>
+              <property name="can_focus">True</property>
+              <property name="halign">center</property>
+              <property name="valign">center</property>
+              <property name="max_width_chars">20</property>
+              <property name="input_purpose">alpha</property>
+            </object>
+            <packing>
+              <property name="expand">True</property>
+              <property name="fill">False</property>
+              <property name="position">2</property>
+            </packing>
+        </child>
+        <child>
+            <object class="GtkEntry" id="confirm_password_label">
+              <property name="visible">True</property>
+              <property name="can_focus">True</property>
+              <property name="halign">center</property>
+              <property name="valign">center</property>
+              <property name="max_width_chars">20</property>
+              <property name="text" translatable="yes">@</property>
+            </object>
+            <packing>
+              <property name="expand">True</property>
+              <property name="fill">False</property>
+              <property name="position">3</property>
+            </packing>
+        </child>
+        <child>
+            <object class="GtkButton" id="Back">
+              <property name="label" translatable="yes">back</property>
+              <property name="use_action_appearance">False</property>
+              <property name="visible">True</property>
+              <property name="can_focus">True</property>
+              <property name="receives_default">True</property>
+              <property name="use_action_appearance">False</property>
+              <signal name="pressed" handler="back" swapped="no"/>
+            </object>
+        </child>
+        <child>
+            <object class="GtkButton" id="Next">
+              <property name="label" translatable="yes">next</property>
+              <property name="use_action_appearance">False</property>
+              <property name="visible">True</property>
+              <property name="can_focus">True</property>
+              <property name="receives_default">True</property>
+              <property name="use_action_appearance">False</property>
+              <signal name="pressed" handler="next" swapped="no"/>
+            </object>
+        </child>
+    </object>
 </interface>

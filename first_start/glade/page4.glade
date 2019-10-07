@@ -3,7 +3,7 @@
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkBox" id="page4">
     <property name="can_focus">False</property>
-    <signal name="destroy" handler="on_destroy" swapped="no"/>
+    <!--<signal name="destroy" handler="on_destroy" swapped="no"/>-->
       <child>
       <object class="GtkButton" id="Back">
         <property name="label" translatable="yes">back</property>
