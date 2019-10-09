@@ -26,3 +26,6 @@ class Page:
 
     def get_state(self):                                                        # Getting state (name)
         return self.__name
+
+    def get_builder(self):
+        return self.__builder

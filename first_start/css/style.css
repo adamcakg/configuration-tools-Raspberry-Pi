@@ -1,0 +1,44 @@
+* {
+    transition-property: color, background-color, border-color, background-image, padding, border-width;
+    transition-duration: 1s;
+}
+
+window{
+    background-color: white;
+}
+
+.box{
+
+}
+
+.welcome_label{
+    font-size: 25px;
+
+    background-image: url("../img/img1.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.next_button{
+    border-radius: 0;
+    border: 0;
+    border-image: none;
+    background-image: none;
+    border-color: white;
+    background: white;
+    box-shadow: none;
+
+}
+
+.back_button{
+    border-radius: 0;
+    border: 0;
+    border-image: none;
+    background-image: none;
+    border-color: white;
+    background: white;
+    box-shadow: none;
+
+
+}

@@ -16,11 +16,6 @@ class Handler:
 
     def next(self, button):                                         # Button handler to get to next page
         self.controller.next_page()
-        # self.on_destroy()
 
     def back(self, button):                                         # Button handler to get to previous page
         self.controller.prev_page()
-        # self.on_destroy()
-
-
-
