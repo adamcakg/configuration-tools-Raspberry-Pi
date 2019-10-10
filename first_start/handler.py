@@ -5,12 +5,11 @@ from gi.repository import Gtk
 
 
 class Handler:
-    def __init__(self, controller, name_of_class=None):
+    def __init__(self, controller):
         self.controller = controller                                # Handlers controls only one controller
-        self.name = name_of_class
 
     def on_destroy(self, *args):                                    # Closing app
-        print('quiting of ' + self.name)
+        # print('quiting of ' + self.name)
         Gtk.main_quit()
         # del self
 

@@ -6,7 +6,20 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <placeholder/>
+          <object class="GtkButton" id="no_button">
+            <property name="name">no_button</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="receives_default">True</property>
+            <style>
+                <class name="no_button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
         </child>
         <child>
           <object class="GtkFixed">
@@ -24,7 +37,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Welcome</property>
                 <property name="justify">center</property>
-                <property name="yalign">0.617</property>
+                <property name="yalign">0.62</property>
               <style>
                 <class name="welcome_label"/>
               </style>
@@ -38,8 +51,8 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton">
-            <property name="label" translatable="yes">button</property>
+          <object class="GtkButton" id="next_welcome_button">
+            <!--<property name="label" translatable="yes">button</property>-->
             <property name="name">next_page_button</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
