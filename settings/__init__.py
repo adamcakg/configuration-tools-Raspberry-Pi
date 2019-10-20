@@ -1,33 +1,29 @@
 import gi
-from handler import Handler
+import test.controller as controller
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gdk
 
 
 class Settings(Gtk.Window):
-
     def __init__(self):
-        Gtk.Window.__init__(self, title="Welcome")
-        self.set_border_width(10)
-        self.set_default_size(600, 200)
-        # TODO --
-
-        self.stack = Gtk.Stack()
-        self.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
-        self.stack.set_transition_duration(500)
-        self.add(self.stack)
-
-        self.builder = Gtk.Builder()
-
-        for index in range(len(pages)):
-            self.builder.add_from_file('glade/{}.glade'.format(pages[index]))
-            self.builder.connect_signals(Handler(self.stack, position=index))
-            variable = self.builder.get_object(pages[index])
-            self.stack.add_named(variable, pages[index])
+        Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
+        self.set_border_width(10)                           # Border all around window
+        self.set_default_size(600, 600)                     # Setting default size of window
+        # self.set_resizable(False)                           # Setting window to not be resizable
+        # self.fullscreen()
+        controller.Controller(self)                                    # Giving control to controller class
 
 
-win = Settings()
-win.connect("destroy", Gtk.main_quit)
+def gtk_style():
+        style_provider = Gtk.CssProvider()
+        style_provider.load_from_path('css/style.css')
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider,
+                                                 Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+
+gtk_style()
+
+win = Settings()                                          # Starting app
 win.show_all()
-Gtk.main()
+Gtk.main()                                                  # App loop

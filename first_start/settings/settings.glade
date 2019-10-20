@@ -9,7 +9,7 @@
         <child>
           <object class="GtkButton" id="back_settings_button">
             <property name="name">next_page_button</property>
-            <property name="can_focus">False</property>
+            <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <signal name="clicked" handler="back" swapped="no"/>
             <!--styles-->
@@ -61,6 +61,38 @@
                 </style>
               </object>
             </child>
+
+            <child>
+              <object class="GtkComboBoxText" id="combo_box_country">
+                <property name="visible">True</property>
+                <items>
+                  <item translatable="yes" id="none">None</item>
+                  <item translatable="yes" id="crossfade">Fade</item>
+                  <item translatable="yes" id="slide-left-right">Slide</item>
+                </items>
+              </object>
+              <packing>
+                  <property name="x">180</property>
+                  <property name="y">90</property>
+              </packing>
+            </child>
+
+            <child>
+              <object class="GtkComboBoxText" id="combo_box_language">
+                <property name="visible">True</property>
+                <items>
+                  <item translatable="yes" id="none">None</item>
+                  <item translatable="yes" id="crossfade">Fade</item>
+                  <item translatable="yes" id="slide-left-right">Slide</item>
+                </items>
+              </object>
+              <packing>
+                  <property name="x">180</property>
+                  <property name="y">130</property>
+              </packing>
+            </child>
+
+
 
           </object>
           <packing>
