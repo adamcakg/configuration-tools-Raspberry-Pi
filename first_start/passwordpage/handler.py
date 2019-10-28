@@ -1,28 +1,28 @@
-from test.keeper import update_keeper
-from test.keeper import get_atribute_from_keeper
+from test.keeper import keeper
 
 
 class Handler:
     def __init__(self, controller):
-        self.controller = controller
-        self.can_go_on = False
-        self.confirmed = get_atribute_from_keeper('passwordpage', 'password')
+        self.controller = controller                    # handling instance of controller
+        self.can_go_on = False                          # variable that keeping state if i can move on on next page
+        self.confirmed = keeper['passwordpage'][ 'password']            # getting password from keeper
 
     def next(self, button):
-        if self.compare(get_atribute_from_keeper('passwordpage', 'password'), self.confirmed):
-            self.controller.next()
+        if self.compare(keeper['passwordpage']['password'], self.confirmed):  # checking if passwords
+                                                                                                # are the same
+            self.controller.execute()                       # executing page settings
+            self.controller.next()                          # moving to next page
 
     def back(self, button):
-        if self.compare(get_atribute_from_keeper('passwordpage', 'password'), self.confirmed):
-            self.controller.back()
+        self.controller.back()                              # moving to previous page
 
     def input_password(self, entry, text, length, position):
-        password = get_atribute_from_keeper('passwordpage', 'password') + text
-        update_keeper('passwordpage', 'password', password)
+        password = keeper['passwordpage']['password'] + text      # password + char
+        keeper['passwordpage']['password'] = password                          # updating keeper
 
     def input_password_back(self, entry):
-        password = get_atribute_from_keeper('passwordpage', 'password')[:-1]
-        update_keeper('passwordpage', 'password', password)
+        password = keeper['passwordpage']['password'][:-1]        # len(password) - 1
+        keeper['passwordpage']['password'] = password                         # updating keeper
 
     def input_confirm_password(self, entry, text, length, position):
         self.confirmed += text
@@ -30,8 +30,7 @@ class Handler:
     def input_confirm_password_back(self, entry):
         self.confirmed = self.confirmed[:-1]
 
-    @staticmethod
-    def compare(string1, string2):
+    def compare(self, string1, string2):                                              # checking if strings are the same
         if string1 == '' or string2 == '':
             return False
         elif string1 == string2:

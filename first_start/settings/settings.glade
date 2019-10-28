@@ -62,17 +62,33 @@
               </object>
             </child>
 
+
+            <child>
+              <object class="GtkLabel" id="country_label">
+                <property name="name">country_label</property>
+                <property name="width_request">80</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                  <property name="label" translatable="yes">Country -></property>
+                  <!--styles-->
+                <style>
+
+                </style>
+              </object>
+              <packing>
+                  <property name="x">40</property>
+                  <property name="y">90</property>
+              </packing>
+            </child>
+
             <child>
               <object class="GtkComboBoxText" id="combo_box_country">
                 <property name="visible">True</property>
-                <items>
-                  <item translatable="yes" id="none">None</item>
-                  <item translatable="yes" id="crossfade">Fade</item>
-                  <item translatable="yes" id="slide-left-right">Slide</item>
-                </items>
+                <signal name="changed" handler="country_handler" swapped="no"/>
               </object>
               <packing>
-                  <property name="x">180</property>
+                  <property name="x">160</property>
                   <property name="y">90</property>
               </packing>
             </child>
@@ -80,19 +96,13 @@
             <child>
               <object class="GtkComboBoxText" id="combo_box_language">
                 <property name="visible">True</property>
-                <items>
-                  <item translatable="yes" id="none">None</item>
-                  <item translatable="yes" id="crossfade">Fade</item>
-                  <item translatable="yes" id="slide-left-right">Slide</item>
-                </items>
+                <signal name="changed" handler="language_handler" swapped="no"/>
               </object>
               <packing>
                   <property name="x">180</property>
                   <property name="y">130</property>
               </packing>
             </child>
-
-
 
           </object>
           <packing>

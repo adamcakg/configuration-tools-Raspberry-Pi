@@ -16,7 +16,7 @@ class WelcomePage:
         self.__list_of_welcomes = ['Welcome', 'Vitajte', 'Willkommen', 'Bienvenidos', '어서 오세요', 'Bienvenue', 'أهلا بك']
         self.__previous = 'Welcome'
         self.__label = self.__builder.get_object('welcome_label')
-        GLib.timeout_add_seconds(3, self.__get_random_welcome_text)
+        self.execute()
 
     def next(self, controller):
         controller.set_state(settings.SettingsPage())
@@ -40,6 +40,8 @@ class WelcomePage:
         self.__label.set_label(label)
         GLib.timeout_add_seconds(3, self.__get_random_welcome_text)
 
-
     def connect_handler(self, controller):
         self.__builder.connect_signals(Handler(controller))
+
+    def execute(self):
+        GLib.timeout_add_seconds(3, self.__get_random_welcome_text)

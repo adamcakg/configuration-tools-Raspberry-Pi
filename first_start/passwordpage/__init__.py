@@ -1,9 +1,7 @@
 import test.update_page as update_page
 import test.settings as settings
 from .handler import Handler
-from test.keeper import is_in_keeper
 from test.keeper import keeper
-from test.keeper import add_to_keeper
 
 import gi
 
@@ -14,35 +12,46 @@ from gi.repository import Gtk
 class PasswordPage:
 
     def __init__(self):
-        self.__builder = Gtk.Builder()
-        self.__builder.add_from_file('passwordpage/password_page.glade')
-        # TODO --------
-        if is_in_keeper('passwordpage'):
+        self.__builder = Gtk.Builder()                                                  # creating builder
+        self.__builder.add_from_file('passwordpage/password_page.glade')                # adding XML file
+
+        if 'passwordpage' in keeper:                                    # checking if password is already in keeper
             self.__builder.get_object('password').set_text(keeper['passwordpage']['password'])
             self.__builder.get_object('confirmed_password').set_text(keeper['passwordpage']['password'])
-
         else:
             self.default()
 
-        # TODO --------
 
-    def next(self, controller):
+
+    @staticmethod
+    def next(controller):                                         # next page
         controller.set_state(update_page.UpdatePage())
 
-    def back(self, controller):
+    @staticmethod
+    def back(controller):                                         # previous page
         controller.set_state(settings.SettingsPage())
 
     def get_xml_object(self):
         return self.__builder.get_object('password_page')
 
-    def destroy(self):
+    def destroy(self):                                                  # destroying object
         del self
 
-    def connect_handler(self, controller):
+    def connect_handler(self, controller):                              # connecting handler to page
         self.__builder.connect_signals(Handler(controller))
 
-    def default(self):
+    @staticmethod
+    def default():                                                  # setting default settings on page
         dict_to_add = {
             'passwordpage': {'password': ''}
         }
-        add_to_keeper(dict_to_add)
+        keeper.update(dict_to_add)
+
+    def execute(self):                                                  # executing page content
+        print('Password page executed')
+
+        # import os
+        # mycmd = os.popen('pip install --upgrade pip').read()
+        # print(mycmd)
+
+

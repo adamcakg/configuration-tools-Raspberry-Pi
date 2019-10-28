@@ -27,3 +27,6 @@ class SoftwarePage:
 
     def connect_handler(self, controller):
         self.__builder.connect_signals(Handler(controller))
+
+    def execute(self):
+        pass
