@@ -1,4 +1,4 @@
-import test.softwarepage as softwarepage
+import softwarepage as softwarepage
 from .handler import Handler
 
 import gi

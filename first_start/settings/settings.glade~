@@ -96,10 +96,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkComboBoxText" id="combo_box_timezone">
-            	<property name="visible">True</property>
-            	<property name="can_focus">False</property>
-		<property name="resize_mode">queue</property>
+          <object class="GtkComboBoxText" id="combo_box_time">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <signal name="changed" handler="timezone_handler" swapped="no"/>
           </object>
           <packing>

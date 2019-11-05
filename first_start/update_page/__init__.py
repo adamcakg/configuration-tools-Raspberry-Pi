@@ -1,5 +1,5 @@
-import test.passwordpage as passwordpage
-import test.softwarepage as softwarepage
+import passwordpage as passwordpage
+import softwarepage as softwarepage
 from .handler import Handler
 
 import gi

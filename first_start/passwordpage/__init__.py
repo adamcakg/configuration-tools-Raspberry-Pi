@@ -1,7 +1,7 @@
-import test.update_page as update_page
-import test.settings as settings
+import update_page as update_page
+import settings as settings
 from .handler import Handler
-from test.keeper import keeper
+from keeper import keeper
 
 import gi
 
@@ -17,41 +17,49 @@ class PasswordPage:
 
         if 'passwordpage' in keeper:                                    # checking if password is already in keeper
             self.__builder.get_object('password').set_text(keeper['passwordpage']['password'])
-            self.__builder.get_object('confirmed_password').set_text(keeper['passwordpage']['password'])
+            self.__builder.get_object('confirmed').set_text(keeper['passwordpage']['password'])
         else:
             self.default()
 
-
-
-    @staticmethod
-    def next(controller):                                         # next page
+# METHOD TO GO NEXT
+# ----------------------------------------------------------------------------------------------------------------------
+    def next(self, controller):                                         # next page
         controller.set_state(update_page.UpdatePage())
 
-    @staticmethod
-    def back(controller):                                         # previous page
+# METHOD TO GO BACK
+# ----------------------------------------------------------------------------------------------------------------------
+    def back(self, controller):                                         # previous page
         controller.set_state(settings.SettingsPage())
 
+# METHOD TO GET XML OBJECT
+# ----------------------------------------------------------------------------------------------------------------------
     def get_xml_object(self):
         return self.__builder.get_object('password_page')
 
+# METHOD TO DESTROY ITSELF
+# ----------------------------------------------------------------------------------------------------------------------
     def destroy(self):                                                  # destroying object
         del self
 
+# METHOD TO CONNECT HANDLER
+# ----------------------------------------------------------------------------------------------------------------------
     def connect_handler(self, controller):                              # connecting handler to page
-        self.__builder.connect_signals(Handler(controller))
+        self.__builder.connect_signals(Handler(controller, self.__builder))
 
-    @staticmethod
-    def default():                                                  # setting default settings on page
+# METHOD TO SET DEFAULTS
+# ----------------------------------------------------------------------------------------------------------------------
+    def default(self):                                                  # setting default settings on page
         dict_to_add = {
             'passwordpage': {'password': ''}
         }
         keeper.update(dict_to_add)
 
+# METHOD EXECUTE PAGE
+# ----------------------------------------------------------------------------------------------------------------------
     def execute(self):                                                  # executing page content
         print('Password page executed')
 
         # import os
-        # mycmd = os.popen('pip install --upgrade pip').read()
-        # print(mycmd)
-
+        # password = keeper['passwordpage']['password'] + '\n' + keeper['passwordpage']['password']
+        # os.system('echo "{}" | sudo passwd "pi"'.format(password))
 

@@ -1,5 +1,5 @@
-import test.update_page as update_page
-import test.allset as allset
+import update_page as update_page
+import allset as allset
 from .handler import Handler
 
 import gi

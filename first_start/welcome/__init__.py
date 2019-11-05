@@ -1,4 +1,4 @@
-import test.settings as settings
+import settings as settings
 import random
 from .handler import Handler
 
@@ -18,18 +18,28 @@ class WelcomePage:
         self.__label = self.__builder.get_object('welcome_label')
         self.execute()
 
+# METHOD TO GO NEXT
+# ----------------------------------------------------------------------------------------------------------------------
     def next(self, controller):
         controller.set_state(settings.SettingsPage())
 
+# METHOD TO GO BACK
+# ----------------------------------------------------------------------------------------------------------------------
     def back(self, controller):
         return
 
+# METHOD TO GET XML OBJECT
+# ----------------------------------------------------------------------------------------------------------------------
     def get_xml_object(self):
         return self.__builder.get_object('welcome')
 
+# METHOD TO DESTROY ITSELF
+# ----------------------------------------------------------------------------------------------------------------------
     def destroy(self):
         del self
 
+# METHOD TO SET RANDOM WELCOME TEXT LABEL ON SCREEN
+# ----------------------------------------------------------------------------------------------------------------------
     def __get_random_welcome_text(self):
         label = random.choice(self.__list_of_welcomes)
 
@@ -40,8 +50,12 @@ class WelcomePage:
         self.__label.set_label(label)
         GLib.timeout_add_seconds(3, self.__get_random_welcome_text)
 
+# METHOD TO CONNECT HANDLER
+# ----------------------------------------------------------------------------------------------------------------------
     def connect_handler(self, controller):
         self.__builder.connect_signals(Handler(controller))
 
+# METHOD TO EXECUTE PAGE
+# ----------------------------------------------------------------------------------------------------------------------
     def execute(self):
         GLib.timeout_add_seconds(3, self.__get_random_welcome_text)
