@@ -1,11 +1,11 @@
-import test.welcome as welcome
 
+import settings.main as main
 
 class Controller:
     def __init__(self, window):
         self.window = window
         self.state = None
-        self.set_state(welcome.WelcomePage())
+        self.set_state(main.Main())
 
     def set_state(self, s):
         if self.state is not None:

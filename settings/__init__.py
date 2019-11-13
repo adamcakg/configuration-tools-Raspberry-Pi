@@ -1,5 +1,5 @@
 import gi
-import test.controller as controller
+import settings.controller as controller
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
@@ -10,8 +10,8 @@ class Settings(Gtk.Window):
         Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
         self.set_border_width(10)                           # Border all around window
         self.set_default_size(600, 600)                     # Setting default size of window
-        # self.set_resizable(False)                           # Setting window to not be resizable
-        # self.fullscreen()
+        self.set_resizable(False)                           # Setting window to not be resizable
+
         controller.Controller(self)                                    # Giving control to controller class
 
 
