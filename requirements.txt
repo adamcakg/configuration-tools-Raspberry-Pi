@@ -1,4 +1,7 @@
-
 gi
+wifi
+
+ while Gtk.events_pending():
+            Gtk.main_iteration_do(True)
 
 
