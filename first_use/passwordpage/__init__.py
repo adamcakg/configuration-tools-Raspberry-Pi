@@ -2,6 +2,7 @@ import wifipage as wifi_page
 import settings as settings
 from .handler import Handler
 from keeper import keeper
+from thread import Thread
 
 import gi
 
@@ -14,12 +15,15 @@ class PasswordPage:
     def __init__(self):
         self.__builder = Gtk.Builder()                                                  # creating builder
         self.__builder.add_from_file('passwordpage/password_page.glade')                # adding XML file
+        
 
         if 'passwordpage' in keeper:                                    # checking if password is already in keeper
             self.__builder.get_object('password').set_text(keeper['passwordpage']['password'])
             self.__builder.get_object('confirmed').set_text(keeper['passwordpage']['password'])
         else:
             self.default()
+            
+        self.handler = Handler(builder=self.__builder)
 
 # METHOD TO GO NEXT
 # ----------------------------------------------------------------------------------------------------------------------
@@ -44,7 +48,8 @@ class PasswordPage:
 # METHOD TO CONNECT HANDLER
 # ----------------------------------------------------------------------------------------------------------------------
     def connect_handler(self, controller):                              # connecting handler to page
-        self.__builder.connect_signals(Handler(controller, self.__builder))
+        self.handler.add_controller(controller)
+        self.__builder.connect_signals(self.handler)
 
 # METHOD TO SET DEFAULTS
 # ----------------------------------------------------------------------------------------------------------------------
@@ -57,9 +62,13 @@ class PasswordPage:
 # METHOD EXECUTE PAGE
 # ----------------------------------------------------------------------------------------------------------------------
     def execute(self):                                                  # executing page content
-        print('Password page executed')
-
-        import os
-        password = keeper['passwordpage']['password'] + '\n' + keeper['passwordpage']['password']
-        os.system('echo "{}" | sudo passwd "pi"'.format(password))
+        thread = Thread(self.handler)
+        self.handler.create_modal()
+        
+        while(thread.alive()):
+             while Gtk.events_pending():
+                Gtk.main_iteration_do(True)
+        self.handler.delete_modal()
+        
+        
 

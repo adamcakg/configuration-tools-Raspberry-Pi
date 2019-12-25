@@ -7,7 +7,7 @@ import os
 
 
 class Handler:
-    def __init__(self, builder, controller=None):
+    def __init__(self, builder):
         self.builder = builder
         
 # ADDING CONTROLLER TO HANDLER
@@ -137,12 +137,7 @@ class Handler:
     def thread_function(self):
         self.set_timezone()
         self.set_locale()
-
-        # GOING TO NEXT PAGE AND DESTOYING DIALOG
-        #self.delete_modal()
         
-        
-
 # MODAL
 # ----------------------------------------------------------------------------------------------------------------------        
     def create_modal(self):
@@ -156,7 +151,7 @@ class Handler:
         
     def delete_modal(self):
         dialog = self.builder.get_object('settings_dialog')
-        dialog.hide()
+        dialog.destroy()
         self.controller.next()
 #    def app_main(self):
  #       win = Gtk.Window(default_height=50, default_width=300)

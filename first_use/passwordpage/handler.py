@@ -1,12 +1,17 @@
 from keeper import keeper
 
+import os
+
 
 class Handler:
-    def __init__(self, controller, builder):
-        self.controller = controller                    # handling instance of controller
+    def __init__(self,builder):
+                         # handling instance of controller
         self.builder = builder
         self.can_go_on = False                          # variable that keeping state if i can move on on next page
         self.confirmed = keeper['passwordpage'][ 'password']            # getting password from keeper
+    
+    def add_controller(self, controller):
+        self.controller = controller
 
 # NEXT
 # ----------------------------------------------------------------------------------------------------------------------
@@ -17,7 +22,7 @@ class Handler:
         if self.compare(password, confirmed):  # checking if passwords are the same
             keeper['passwordpage']['password'] = password
             self.controller.execute()                       # executing page settings
-            self.controller.next()                          # moving to next page
+            #self.controller.next()                          # moving to next page
 
 # BACK
 # ----------------------------------------------------------------------------------------------------------------------
@@ -78,4 +83,25 @@ class Handler:
             strength += 2
 
         self.builder.get_object('level_bar').set_value(strength)
-
+        
+# THREAD FUNCTION
+# ---------------------------------------------------------------------------------------------------
+    def thread_function(self):
+        password = keeper['passwordpage']['password'] + '\n' + keeper['passwordpage']['password']
+        os.system('echo "{}" | sudo passwd "pi"'.format(password))
+        
+    def create_modal(self):
+        print('modal function')
+        dialog = self.builder.get_object('password_dialog')
+        dialog.set_attached_to(self.builder.get_object('settings'))
+        dialog.set_destroy_with_parent(True)
+        dialog.set_modal(True)
+        dialog.show_all()
+        print('modal displayed')
+        
+    def delete_modal(self):
+        dialog = self.builder.get_object('password_dialog')
+        dialog.destroy()
+        self.controller.next()
+        
+    
