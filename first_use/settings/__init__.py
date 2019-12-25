@@ -1,8 +1,10 @@
 import passwordpage as passwordpage
 import welcome as welcome
 from .handler import Handler
+from thread import Thread
 
-import threading
+import locale
+from locale import gettext as _
 
 from keeper import keeper
 
@@ -60,20 +62,29 @@ class SettingsPage:
 
 # METHOD TO EXECUTE PAGE
 # ----------------------------------------------------------------------------------------------------------------------
-    def execute(self):
-        print('locales execute')
-        #t3 = threading.Thread(target=self.__builder.get_object('window').show())
-        #self.__builder.get_object('window').show()
-        #self.handler.modal()
+    def execute(self):   
+        thread = Thread(self.handler)
+        self.handler.create_modal()
         
-  #      t1 = threading.Thread(target=self.handler.set_timezone())
-   #     t2 = threading.Thread(target=self.handler.set_locale())
+        while(thread.alive()):
+             while Gtk.events_pending():
+                Gtk.main_iteration_do(True)
+        self.handler.delete_modal()
+
+
+    def apply_locale(self , current_lang ):
+        domain = "firstuse"
+        local_path = domain +"/data/locale"
+        locale.bindtextdomain(domain , local_path )
+        locale.textdomain(domain)
+        locale.setlocale(locale.LC_ALL, 'ar_AE.utf8')
+        # note that language is "ar_AE.utf8" not "ar" or "ar_AE"
+        self.builder.set_translation_domain(domain )
+
+
         
-    #    t1.start()
-     #   t2.start()
-        
-        self.handler.set_timezone()
-        self.handler.set_locale()
+     
+
         
         
 

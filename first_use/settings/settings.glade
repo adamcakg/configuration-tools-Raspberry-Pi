@@ -2,6 +2,7 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkEntryCompletion" id="entrycompletion1"/>
   <object class="GtkBox" id="settings">
     <property name="name">welcome_box</property>
     <property name="visible">True</property>
@@ -67,44 +68,7 @@
             <property name="label" translatable="yes">Country: </property>
           </object>
           <packing>
-            <property name="x">40</property>
-            <property name="y">90</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="combo_box_country">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="resize_mode">queue</property>
-            <signal name="changed" handler="country_handler" swapped="no"/>
-          </object>
-          <packing>
-            <property name="x">160</property>
-            <property name="y">90</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="combo_box_language">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="resize_mode">queue</property>
-            <signal name="changed" handler="language_handler" swapped="no"/>
-          </object>
-          <packing>
-            <property name="x">160</property>
-            <property name="y">130</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="combo_box_timezone">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="resize_mode">queue</property>
-            <signal name="changed" handler="timezone_handler" swapped="no"/>
-          </object>
-          <packing>
-            <property name="x">160</property>
-            <property name="y">170</property>
+            <property name="y">85</property>
           </packing>
         </child>
         <child>
@@ -116,8 +80,8 @@
             <property name="label" translatable="yes">Language:</property>
           </object>
           <packing>
-            <property name="x">40</property>
-            <property name="y">123</property>
+            <property name="x">7</property>
+            <property name="y">126</property>
           </packing>
         </child>
         <child>
@@ -129,8 +93,47 @@
             <property name="label" translatable="yes">Timezone:</property>
           </object>
           <packing>
-            <property name="x">40</property>
-            <property name="y">159</property>
+            <property name="x">6</property>
+            <property name="y">165</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="combo_box_language">
+            <property name="width_request">200</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="resize_mode">queue</property>
+            <signal name="changed" handler="language_handler" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">95</property>
+            <property name="y">130</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="combo_box_country">
+            <property name="width_request">159</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="resize_mode">queue</property>
+            <signal name="changed" handler="country_handler" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">95</property>
+            <property name="y">90</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="combo_box_timezone">
+            <property name="width_request">200</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="resize_mode">queue</property>
+            <signal name="changed" handler="timezone_handler" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">95</property>
+            <property name="y">170</property>
           </packing>
         </child>
       </object>
@@ -159,8 +162,8 @@
       </packing>
     </child>
   </object>
-  <object class="GtkWindow" id="window">
-    <property name="name">window</property>
+  <object class="GtkWindow" id="settings_dialog">
+    <property name="name">settings_dialog</property>
     <property name="can_focus">False</property>
     <property name="type">popup</property>
     <property name="modal">True</property>
@@ -190,6 +193,19 @@
               </object>
               <packing>
                 <property name="x">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinner">
+                <property name="width_request">100</property>
+                <property name="height_request">80</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="active">True</property>
+              </object>
+              <packing>
+                <property name="x">105</property>
+                <property name="y">61</property>
               </packing>
             </child>
           </object>

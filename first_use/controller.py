@@ -39,3 +39,7 @@ class Controller:
     def quit(self):                                                             # quiting window and code...
         self.window.close()
         exit(0)
+  
+        
+        
+

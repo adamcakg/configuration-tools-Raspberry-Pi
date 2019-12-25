@@ -1,10 +1,14 @@
 from keeper import keeper
 import locale
 
+from .settings_stuff import list_of_settings
+from .timezone import get_timezones_from_country
+import os
+
+
 class Handler:
     def __init__(self, builder, controller=None):
         self.builder = builder
-        
         
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------        
@@ -15,7 +19,6 @@ class Handler:
 # ----------------------------------------------------------------------------------------------------------------------
     def next(self,button):    
         self.controller.execute()
-        self.controller.next()
 
 # BACK
 # ----------------------------------------------------------------------------------------------------------------------
@@ -26,7 +29,7 @@ class Handler:
 # ----------------------------------------------------------------------------------------------------------------------
     def country_handler(self, item):
         print('Country')
-        keeper['settingspage']['country'] = item.get_active_text()
+        keeper['settingspage']['country'] = item.get_active_id()
         self.insert_languages()
         self.insert_timezones()
 
@@ -45,13 +48,10 @@ class Handler:
 # METHOD TO INSERT LANGUAGES
 # ----------------------------------------------------------------------------------------------------------------------
     def insert_languages(self):
-
-        from .settings_stuff import list_of_settings
-        
         languages_object = self.builder.get_object('combo_box_language')
         languages_object.remove_all()
         
-        country = self.builder.get_object('combo_box_country').get_active_text()
+        country = self.builder.get_object('combo_box_country').get_active_id()
         
         lang_in_keeper = keeper['settingspage']['language']
         list_of_lang = []
@@ -73,18 +73,16 @@ class Handler:
         from .settings_stuff import countries
         
         for item in countries:
-           countries_object.append(item, item)
+           countries_object.append(item, item[:22])
            
         countries_object.set_active_id(keeper['settingspage']['country'])          
            
 # METHOD TO INSERT COUNTRIES INTO TIMEZONE COMBO-BOX
 # ----------------------------------------------------------------------------------------------------------------------
-    def insert_timezones(self):    
-        from .timezone import get_timezones_from_country
-        
+    def insert_timezones(self):            
         timezone_object = self.builder.get_object('combo_box_timezone')
         timezone_object.remove_all()
-        country = self.builder.get_object('combo_box_country').get_active_text()
+        country = self.builder.get_object('combo_box_country').get_active_id()
         
         timezones = get_timezones_from_country(country)
         for timezone in timezones:
@@ -94,16 +92,27 @@ class Handler:
         if timezone_in_keeper in timezones:
             timezone_object.set_active_id(keeper['settingspage']['timezone'])
         else:
-            timezone_object.set_active_id(timezones[0][1])
+            timezone_object.set_active_id('New York')
             
-# METHOD FOR SETTING LOCALES ON PI
-# ----------------------------------------------------------------------------------------------------------------------      
-    def set_locale(self):
-        from .settings_stuff import list_of_settings
-        import os
+    def set_timezone(self):
+        country = self.builder.get_object('combo_box_country').get_active_text()
         
-        print('executing settings')
-        #locale.setlocale(locale.LC_ALL, str('ak_GH.UTF-8'))             locales does not working, DO IT TODO
+        print(keeper['settingspage']['timezone'])
+        timezone_in_keeper = keeper['settingspage']['timezone']
+        
+        timezones = get_timezones_from_country(country)
+        
+        for timezone in timezones:
+            if timezone[1] == timezone_in_keeper:
+                timezone_in_keeper = timezone[0]    
+        print(timezone_in_keeper)
+        
+        os.system('sudo timedatectl set-timezone {}'.format(timezone_in_keeper))
+        os.system('sudo rm -r /etc/localtime')
+        os.system("sudo dpkg-reconfigure --frontend noninteractive tzdata")
+    
+    def set_locale(self):
+        #locale.setlocale(locale.LC_ALL, str('ak_GH.UTF-8'))            
         print('Locale before set + ' + str(locale.getlocale()))
         
         lang = keeper['settingspage']['language']
@@ -122,43 +131,56 @@ class Handler:
        
         print('Locale was set + ' + str(locale.getlocale()))
         
-# METHOD FOR SETTING TIMEZONE ON PI
-# ----------------------------------------------------------------------------------------------------------------------        
-    def set_timezone(self):
-        from .timezone import get_timezones_from_country
-        import os
+            
+# METHOD FOR SETTING LOCALES AND TIME ON PI
+# ----------------------------------------------------------------------------------------------------------------------      
+    def thread_function(self):
+        self.set_timezone()
+        self.set_locale()
+
+        # GOING TO NEXT PAGE AND DESTOYING DIALOG
+        #self.delete_modal()
         
-        country = self.builder.get_object('combo_box_country').get_active_text()
         
-        print(keeper['settingspage']['timezone'])
-        timezone_in_keeper = keeper['settingspage']['timezone']
-        
-        timezones = get_timezones_from_country(country)
-        
-        for timezone in timezones:
-            if timezone[1] == timezone_in_keeper:
-                timezone_in_keeper = timezone[0]    
-        print(timezone_in_keeper)
-        
-        os.system('sudo timedatectl set-timezone {}'.format(timezone_in_keeper))
-        os.system('sudo rm -r /etc/localtime')
-        os.system("sudo dpkg-reconfigure --frontend noninteractive tzdata")
-    
+
 # MODAL
 # ----------------------------------------------------------------------------------------------------------------------        
-    def modal(self):
-#        print('modal function')
- #       dialog = self.builder.get_object('window')
-  #      dialog.set_attached_to(self.builder.get_object('settings'))
-   #     dialog.set_destroy_with_parent(True)
-    #    dialog.set_modal(True)
-     #   dialog.show()
-      #  dialog.present()
-       # print('modal displayed')
-       pass
-         
+    def create_modal(self):
+        print('modal function')
+        dialog = self.builder.get_object('settings_dialog')
+        dialog.set_attached_to(self.builder.get_object('settings'))
+        dialog.set_destroy_with_parent(True)
+        dialog.set_modal(True)
+        dialog.show_all()
+        print('modal displayed')
         
-        
-        
+    def delete_modal(self):
+        dialog = self.builder.get_object('settings_dialog')
+        dialog.hide()
+        self.controller.next()
+#    def app_main(self):
+ #       win = Gtk.Window(default_height=50, default_width=300)
+  #      win.connect("destroy", Gtk.main_quit)
+#
+ #       progress = Gtk.ProgressBar(show_text=True)
+  #      win.add(progress)
+#
+ #       def update_progess(i):
+  #          progress.pulse()
+   #         progress.set_text(str(i))
+    #        return False
+#
+ #       def example_target():
+  #          for i in range(50):
+   #             GLib.idle_add(update_progess, i)
+    #            time.sleep(0.2)
+#
+ #       win.show_all()
+#
+ #       thread = threading.Thread(target=example_target)
+  #      thread.daemon = True
+   #     thread.start()
+            
+   
 
 

@@ -24,6 +24,7 @@ def get_timezones_from_country(country):
     for timezone in timezones:
         if timezone[0] == country:
             country_timezones.append([timezone[2],timezone[2].split('/')[-1].replace('_', ' ')])
+    country_timezones.sort()
     return country_timezones
 
 def do_threading():

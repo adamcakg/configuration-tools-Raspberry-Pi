@@ -7,7 +7,7 @@ timezone = []
 # METHOD TO FIND TERRITORY AND LANGUAGE FROM LOCALE FILES
 # ----------------------------------------------------------------------------------------------------------------------
 def find_in_file(path, file, territory, language):
-    founded_lang = fouded_territory = ''
+    founded_language = founded_territory = ''
     
     with open(path + '/' + file) as file:
         line = file.readline()
@@ -26,10 +26,10 @@ def find_in_file(path, file, territory, language):
                 
                 line = line.split('"')
                 founded_language = line[1]
-                
-            
+
             line = file.readline()
     return [founded_territory, founded_language]
+
 
 # METHOD TO FULFILL LIST OF SETTINGS
 # ----------------------------------------------------------------------------------------------------------------------
@@ -68,9 +68,9 @@ def fullfill_country_language():
     countries = list(set(countries))
     languages = list(set(languages))
     
-    
     countries.sort()
     languages.sort()
+
 
 # METHOD TO DO THREADING
 # ----------------------------------------------------------------------------------------------------------------------
