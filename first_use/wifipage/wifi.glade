@@ -81,6 +81,21 @@
             <property name="y">70</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Refresh</property>
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="button_pressed" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">100</property>
+            <property name="y">329</property>
+          </packing>
+        </child>
       </object>
       <packing>
         <property name="expand">True</property>
