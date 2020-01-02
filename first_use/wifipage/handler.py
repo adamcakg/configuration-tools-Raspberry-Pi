@@ -72,14 +72,15 @@ class Handler:
 # CONNECTING    
 # ------------------------------------------------------------------------------------    
     def connect(self, cell, password=None):
-        if password == None or password = '':
-            os.popen("iwconfig " + winame + " essid " + network)
-        else:
-            connectstatus = os.popen("iwconfig " + 'wlan0' + " essid " +cell.ssid + " key s:" + password)
-        print "Connecting..."  
-        os.popen("dhclient " + winame)
-        ontest = os.popen("ping -c 1 google.com").read()
-        print(ontest)
+        pass
+        # if password == None or password = '':
+        #     os.popen("iwconfig " + winame + " essid " + network)
+        # else:
+        #     connectstatus = os.popen("iwconfig " + 'wlan0' + " essid " +cell.ssid + " key s:" + password)
+        # print "Connecting..."  
+        # os.popen("dhclient " + winame)
+        # ontest = os.popen("ping -c 1 google.com").read()
+        # print(ontest)
 
 # SEARCHING
 # -----------------------------------------------------------------------------------
