@@ -7,3 +7,9 @@ wifi
 https://drive.google.com/open?id=18Dc3VD0N9JIZLbMbHsVHswSbqq63t5D8
 
 
+.allset_bg{
+    background-image: url("../img/done.svg");
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
