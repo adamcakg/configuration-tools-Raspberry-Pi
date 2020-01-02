@@ -1,6 +1,7 @@
 import wifipage as wifi_page
 import softwarepage as softwarepage
 from .handler import Handler
+from thread import Thread
 
 import gi
 
@@ -31,4 +32,15 @@ class UpdatePage:
         self.__builder.connect_signals(self.handler)
         
     def execute(self):
-        pass
+        thread = Thread(self.handler)
+        self.handler.create_modal()
+        
+        while(thread.alive()):
+             while Gtk.events_pending():
+                Gtk.main_iteration_do(True)
+        self.handler.delete_modal()
+        
+        
+        
+        
+        

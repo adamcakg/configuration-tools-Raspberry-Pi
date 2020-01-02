@@ -72,6 +72,7 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="resize_mode">queue</property>
+            <signal name="row-activated" handler="create_modal" swapped="no"/>
             <child internal-child="selection">
               <object class="GtkTreeSelection"/>
             </child>
@@ -120,6 +121,93 @@
         <property name="pack_type">end</property>
         <property name="position">2</property>
       </packing>
+    </child>
+  </object>
+  <object class="GtkWindow" id="wifi_dialog">
+    <property name="name">wifi_dialog</property>
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">dialog</property>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkFixed">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel" id="connect_label">
+                <property name="name">connect_label</property>
+                <property name="width_request">100</property>
+                <property name="height_request">80</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Enter the password for : " "</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="connect_entry">
+                <property name="name">connect_entry</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="placeholder_text" translatable="yes">Password</property>
+              </object>
+              <packing>
+                <property name="y">76</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="connect_button">
+                <property name="label" translatable="yes">Connect</property>
+                <property name="name">connect_button</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="connect_pressed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="x">107</property>
+                <property name="y">123</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Back</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="delete_modal" swapped="no"/>
+              </object>
+              <packing>
+                <property name="y">123</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
     </child>
   </object>
 </interface>

@@ -1,6 +1,4 @@
-from wifi import Cell
-
-
+import wifi as wifi 
 import gi
 
 gi.require_version('Gtk', '3.0')
@@ -9,36 +7,89 @@ from gi.repository import Gtk
 class Handler:
     def __init__(self, builder):
         self.builder = builder
-        
+        self.list_of_networks = []
+        self.do_in_thread = 'search'
+        self.cell = None
+        self.password = ''
+
+# ADDING CONTROLLER TO HANDLER
+# ---------------------------------------------------------------------------------------       
     def add_controller(self, controller):
         self.controller = controller
 
 # METHOD TO GO NEXT
 # ----------------------------------------------------------------------------------------------------------------------
     def next(self, button):
-        self.controller.execute()
-        #self.controller.next()
+        #self.controller.execute()
+        self.controller.next()
 
 # METHOD TO GO BACK
 # ----------------------------------------------------------------------------------------------------------------------
     def back(self, button):
         self.controller.back()
         
+# CREATING MODAL FOR SETTING PASSWORD
+# -------------------------------------------------------------------------------------------------------------
+    def create_modal(self, tree, position, column):
+        position = int(str(position))
         
+        self.cell = self.list_of_networks[position]
         
+        if self.cell:
+            if self.cell.encrypted:
+                print('Creating modal for entering password')
+                dialog = self.builder.get_object('wifi_dialog')
+                self.builder.get_object('connect_label').set_label('Enter the password for : "' + self.cell.ssid  + "'")
+                dialog.set_attached_to(self.builder.get_object('wifi'))
+                dialog.set_destroy_with_parent(True)
+                dialog.set_modal(True)
+                dialog.show_all()
+                print('modal displayed')
+            else:
+                self.do_in_thread = 'connect'
+                self.controller.execute()
+# DELETE MODAL
+# ----------------------------------------------------------------------------------------------------------
+    def delete_modal(self, button=None):
+        dialog = self.builder.get_object('wifi_dialog')
+        dialog.hide()
+        self.cell = None
         
-        
-        
+
+# REFRESH BUTTON HANDLER FOR RESEARCHING NETWORK AGAIN
+# -----------------------------------------------------------------------------------------------
     def button_pressed(self, button):
-        self.search()
+        self.do_in_thread = 'search'
+        self.controller.execute()
         
+# CONNECT BUTTON HANDLER FOR CONNECTING TO NETWORK
+# --------------------------------------------------------------------------------------------------
+    def connect_pressed(self, button):
+        self.password = self.builder.get_object('connect_entry').get_text()
+        self.do_in_thread = 'connect'
+        self.controller.execute()
         
+# CONNECTING    
+# ------------------------------------------------------------------------------------    
+    def connect(self, cell, password=None):
+        if password == None or password = '':
+            os.popen("iwconfig " + winame + " essid " + network)
+        else:
+            connectstatus = os.popen("iwconfig " + 'wlan0' + " essid " +cell.ssid + " key s:" + password)
+        print "Connecting..."  
+        os.popen("dhclient " + winame)
+        ontest = os.popen("ping -c 1 google.com").read()
+        print(ontest)
+
+# SEARCHING
+# -----------------------------------------------------------------------------------
     def search(self):
-        available_networks = Cell.all('wlan0')
-        print(available_networks)
-        list_of_networks = []
+        print('Searching for the networks...')
+        available_networks = wifi.Cell.all('wlan0')
+        self.list_of_networks = []
         for item in available_networks:
-            list_of_networks.append(item)
+            self.list_of_networks.append(item)
+        
             
         wifi_tree = self.builder.get_object('wifi_tree')
         
@@ -48,9 +99,9 @@ class Handler:
                 wifi_tree.remove_column(column)
         
         store = Gtk.ListStore(str, bool, int)
-        list_of_networks.sort(key=lambda x: x.signal)
-        list_of_networks.reverse()
-        for item in list_of_networks:
+        self.list_of_networks.sort(key=lambda x: x.signal)
+        self.list_of_networks.reverse()
+        for item in self.list_of_networks:
             store.append([item.ssid[:20], item.encrypted, item.signal])
         
         wifi_tree.set_model(store)
@@ -70,4 +121,11 @@ class Handler:
         column.add_attribute(signal, 'text', 2)
 
         wifi_tree.append_column(column)
-        
+
+# THREAD FUNCTION OF HANDLER
+# --------------------------------------------------------------------------------------
+    def thread_function(self):
+        if self.do_in_thread == 'search':
+            self.search()
+        elif self.do_in_thread == 'connect':
+            self.connect(self.cell, self.password)

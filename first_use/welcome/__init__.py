@@ -13,7 +13,7 @@ class WelcomePage:
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('welcome/welcome.glade')   # creating object from XML(.glade files)
 
-        self.__list_of_welcomes = ['Welcome', 'Vitajte', 'Willkommen', 'Bienvenidos', '어서 오세요', 'Bienvenue', 'أهلا بك']
+        self.__list_of_welcomes = ['Welcome', 'Vitajte', 'Willkommen', 'Bienvenidos', 'Bienvenue', 'أهلا بك']
         self.__previous = 'Welcome'
         self.__label = self.__builder.get_object('welcome_label')
         self.execute()

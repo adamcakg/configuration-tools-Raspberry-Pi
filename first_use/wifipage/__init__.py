@@ -2,7 +2,7 @@ import update_page as update_page
 import passwordpage as password_page
 from .handler import Handler
 
- 
+from thread import Thread
 
 import gi
 
@@ -16,7 +16,8 @@ class WifiPage:
         self.__builder.add_from_file('wifipage/wifi.glade')   # creating object from XML(.glade files)
         self.handler = Handler(builder=self.__builder)
         
-        self.handler.search()
+        self.execute()
+        #self.handler.search()
 
 # METHOD TO GO NEXT
 # ----------------------------------------------------------------------------------------------------------------------
@@ -47,7 +48,10 @@ class WifiPage:
 # METHOD TO EXECUTE PAGE
 # ----------------------------------------------------------------------------------------------------------------------
     def execute(self):
-        self.handler.search()
+        Thread(self.handler)
+        
+        
+        #self.handler.search()
     
 
         

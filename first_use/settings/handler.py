@@ -92,7 +92,7 @@ class Handler:
         if timezone_in_keeper in timezones:
             timezone_object.set_active_id(keeper['settingspage']['timezone'])
         else:
-            timezone_object.set_active_id('New York')
+            timezone_object.set_active(0)
             
     def set_timezone(self):
         country = self.builder.get_object('combo_box_country').get_active_text()

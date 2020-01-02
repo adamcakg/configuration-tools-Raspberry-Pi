@@ -23,8 +23,9 @@ def get_timezones_from_country(country):
     
     for timezone in timezones:
         if timezone[0] == country:
-            country_timezones.append([timezone[2],timezone[2].split('/')[-1].replace('_', ' ')])
+            country_timezones.append([timezone[2].replace('\n', ''),timezone[2].split('/')[-1].replace('_', ' ').replace('\n', '')])
     country_timezones.sort()
+    
     return country_timezones
 
 def do_threading():
@@ -32,18 +33,19 @@ def do_threading():
 
 # TESTING
 # ----------------------------------------------------------------------------------------------------------------------
-if __name__ == '__main__':
+#if __name__ == '__main__':
+    
     #get_timezones_db()
     #country_timezones = get_timezones_from_country('US')
     #print(country_timezones)
     
-    import time, os
+    #import time, os
     #os.environ['TZ'] = 'Asia/Aden'
     #time.tzset()
     
-    os.system('sudo timedatectl set-timezone Australia/Sydney')
-    os.system('sudo rm -r /etc/localtime')
-    os.system("sudo dpkg-reconfigure --frontend noninteractive tzdata")
+    #os.system('sudo timedatectl set-timezone Australia/Sydney')
+    #os.system('sudo rm -r /etc/localtime')
+    #os.system("sudo dpkg-reconfigure --frontend noninteractive tzdata")
     
    
 
