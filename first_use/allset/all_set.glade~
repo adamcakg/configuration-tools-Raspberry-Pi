@@ -49,8 +49,7 @@
             <property name="height_request">80</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Now need to restart your 
-Raspberry Pi.
+            <property name="label" translatable="yes">Now need to restart your Raspberry Pi and setup is complete. 
 </property>
             <property name="justify">center</property>
             <property name="wrap">True</property>

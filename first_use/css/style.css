@@ -97,3 +97,23 @@ window{
     box-shadow: 0 0 0 1px #C51A4A;
 }
 
+.allset_bg{
+    background-image: url("../img/done.svg");
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+
+.allset_button{
+     border-radius: 0;
+    border: 0;
+    border-image: none;
+    background-image: url("../img/done.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: white;
+    border-color: white;
+    box-shadow: none;
+}
+
