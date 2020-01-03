@@ -12,6 +12,7 @@ class SoftwarePage:
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('softwarepage/software_page.glade')   # creating object from XML(.glade files)
+        self.handler = Handler(builder=self.__builder)
 
     def next(self, controller):
         controller.set_state(allset.AllSet())
@@ -26,7 +27,9 @@ class SoftwarePage:
         del self
 
     def connect_handler(self, controller):
-        self.__builder.connect_signals(Handler(controller))
+        self.handler.add_controller(controller)
+        self.__builder.connect_signals(self.handler)
 
     def execute(self):
-        pass
+        active_switches = self.handler.get_list_of_active_switches()
+        self.handler.turn_on_functions(active_switches)
