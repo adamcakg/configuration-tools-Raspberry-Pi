@@ -9,7 +9,7 @@ window{
     background-size: 250px;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: 10px;
+ 
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 
@@ -29,19 +29,6 @@ window{
 
 }
 
-.waiting_screen{
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-.waiting_screen_label{
-    
-}
-
-.waiting_screen_spinner{
-    
-}
 
 
 .next_button{
@@ -79,7 +66,7 @@ window{
 }
 
 .card_border{
-    border-radius: 10px;
+  
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }
@@ -97,18 +84,16 @@ window{
     box-shadow: 0 0 0 1px #C51A4A;
 }
 
-.allset_bg{
-    background-image: url("../img/done.svg");
-    background-repeat: no-repeat;
-    background-size: 50%;
-    background-position: center;
+.allset_image{
+    border-radius: 10px;
 }
 
 .allset_button{
-     border-radius: 0;
+    border-radius: 0;
     border: 0;
     border-image: none;
     background-image: url("../img/done.svg");
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

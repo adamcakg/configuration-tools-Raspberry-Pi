@@ -34,7 +34,6 @@
             <property name="height_request">380</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">All set</property>
             <property name="justify">center</property>
             <property name="yalign">0.75</property>
             <style>
@@ -58,7 +57,44 @@ Raspberry Pi.
           </object>
           <packing>
             <property name="x">25</property>
-            <property name="y">298</property>
+            <property name="y">131</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="gif">
+            <property name="name">gif</property>
+            <property name="width_request">62</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="hexpand">False</property>
+            <property name="vexpand">False</property>
+            <property name="pixbuf">../img/raspberry.gif</property>
+            <style>
+              <class name="allset_image"/>
+            </style>
+          </object>
+          <packing>
+            <property name="y">190</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">All set..</property>
+            <attributes>
+              <attribute name="scale" value="2"/>
+            </attributes>
+            <style>
+              <class name="all_set_font"/>
+            </style>
+          </object>
+          <packing>
+            <property name="x">100</property>
+            <property name="y">66</property>
           </packing>
         </child>
       </object>
