@@ -27,6 +27,8 @@ class Handler:
         print('upgraded')
         os.system('sudo apt-get update')
         print('apt-get updated')
+        os.system('sudo apt autoremove -y')
+        print('apt autoremoved...')
         
     def thread_function(self):
         self.update()

@@ -1,6 +1,7 @@
 import update_page as update_page
 import allset as allset
 from .handler import Handler
+from thread import Thread
 
 import gi
 
@@ -31,5 +32,18 @@ class SoftwarePage:
         self.__builder.connect_signals(self.handler)
 
     def execute(self):
-        active_switches = self.handler.get_list_of_active_switches()
-        self.handler.turn_on_functions(active_switches)
+        thread = Thread(self.handler)
+        
+        self.handler.create_modal()
+        
+        while(thread.alive()):
+             while Gtk.events_pending():
+                Gtk.main_iteration_do(True)
+        self.handler.delete_modal()
+        
+        
+        
+        
+        
+        
+        

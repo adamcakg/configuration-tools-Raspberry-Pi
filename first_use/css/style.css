@@ -117,3 +117,9 @@ window{
     box-shadow: none;
 }
 
+.modal{
+    border: 1px solid #C51A4A;
+    box-shadow: none;
+    transition: 0.3s;
+}
+
