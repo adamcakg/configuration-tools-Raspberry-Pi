@@ -1,11 +1,20 @@
 
-import settings.main as main
+import main
+from header import Header
+from main import Main
 
 class Controller:
     def __init__(self, window):
         self.window = window
         self.state = None
-        self.set_state(main.Main())
+        
+        self.set_title_bar(Header())
+        self.set_state(Main())
+        
+    def set_title_bar(self, header):
+        self.window.set_titlebar(header.get_xml_object())
+        header.connect_handler(self)
+        
 
     def set_state(self, s):
         if self.state is not None:

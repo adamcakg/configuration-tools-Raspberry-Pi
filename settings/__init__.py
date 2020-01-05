@@ -1,5 +1,5 @@
 import gi
-import settings.controller as controller
+import controller
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
@@ -9,9 +9,13 @@ class Settings(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
         self.set_border_width(10)                           # Border all around window
-        self.set_default_size(600, 600)                     # Setting default size of window
         self.set_resizable(False)                           # Setting window to not be resizable
-
+        
+        size = Gdk.Screen.get_default()
+        self.set_default_size(size.get_width()/2, size.get_height()/2)
+        
+        self.move(size.get_width()/4, size.get_height()/4)
+        
         controller.Controller(self)                                    # Giving control to controller class
 
 
@@ -25,5 +29,6 @@ def gtk_style():
 gtk_style()
 
 win = Settings()                                          # Starting app
+win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()                                                  # App loop
