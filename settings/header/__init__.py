@@ -4,6 +4,7 @@ from .handler import Handler
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
+
 class Header:
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
@@ -38,7 +39,7 @@ class Header:
         header = self.__builder.get_object('header')
         
         header.set_show_close_button(True)
-        header.props.title = "Settings"
+
         
         box = self.__builder.get_object('box')
         Gtk.StyleContext.add_class(box.get_style_context(), "linked")
@@ -49,8 +50,18 @@ class Header:
         button = self.__builder.get_object('right')
         button.add(Gtk.Arrow(Gtk.ArrowType.RIGHT, Gtk.ShadowType.NONE))
 
-        
-        
+# SETTING TITLE OF HEADER
+# ----------------------------------------------------------------------------------------------------------------------
+
+    def set_title(self, title):
+        header = self.__builder.get_object('header')
+        header.props.title = title
+
+    def get_back_button(self):
+        return self.__builder.get_object('left')
+
+    def get_next_button(self):
+        self.__builder.get_object('right')
         
         
         

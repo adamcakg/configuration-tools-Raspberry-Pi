@@ -10,11 +10,15 @@ class Main:
         self.__builder.add_from_file('main/main.glade')   # creating object from XML(.glade files)
         
         self.handler = Handler(builder=self.__builder)
+
         
     
     def next(self, controller):
         # there will be page where i was 
         pass
+
+    def back(self, controller):
+        pass            # DO NOTHING WHEN ON MAIN PAGE
     
     def get_xml_object(self):
         return self.__builder.get_object('main')
@@ -25,5 +29,9 @@ class Main:
     def connect_handler(self, controller):
         self.handler.add_controller(controller)
         self.__builder.connect_signals(self.handler)
-        
+
+    def connect_header(self, header):
+        self.header = header
+        self.header.set_title('Settings')
+        self.header.get_back_button().set_sensitive(False)
         

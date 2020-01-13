@@ -9,5 +9,3 @@ class Handler:
 # ----------------------------------------------------------------------------------------------------------------------        
     def add_controller(self, controller):
         self.controller = controller
-        
-        
