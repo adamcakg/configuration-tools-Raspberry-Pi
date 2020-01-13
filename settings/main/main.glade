@@ -167,6 +167,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <signal name="clicked" handler="go_to_interfaces" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>

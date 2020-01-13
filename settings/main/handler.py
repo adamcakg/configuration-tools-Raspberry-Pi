@@ -1,6 +1,7 @@
 
 from wifi import Wifi
 from bluetooth import Bluetooth
+from interfaces import Interfaces
 
 class Handler:
     def __init__(self, builder, controller=None):
@@ -17,3 +18,5 @@ class Handler:
     def go_to_bluetooth(self, button):
         self.controller.set_state(Bluetooth())
         
+    def go_to_interfaces(self, button):
+        self.controller.set_state(Interfaces())
