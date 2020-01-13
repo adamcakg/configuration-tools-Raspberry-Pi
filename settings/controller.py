@@ -25,6 +25,9 @@ class Controller:
         self.state.connect_header(self.header)
         self.window.add(self.state.get_xml_object())
         self.window.show_all()
+        
+    def get_state(self):
+        return self.state
 
     def next(self):
         self.state.next(self)

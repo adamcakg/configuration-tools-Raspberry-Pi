@@ -5,16 +5,18 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 class Main:
-    def __init__(self):
+    def __init__(self, next_page = None):
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('main/main.glade')   # creating object from XML(.glade files)
         
         self.handler = Handler(builder=self.__builder)
         self.header = None
+        
+        self.next_page = next_page
 
     def next(self, controller):
-        # there will be page where i was 
-        pass
+        if self.next_page:
+            controller.set_state(self.next_page)
 
     
     def get_xml_object(self):
@@ -31,5 +33,9 @@ class Main:
         self.header = header
         self.header.set_title('Settings')
         self.header.disable_button('left')
-        self.header.disable_button('right')
+        if self.next_page:
+            self.header.enable_button('right')
+        else:
+            self.header.disable_button('right')
+        
         

@@ -1,6 +1,5 @@
 import gi
 from .handler import Handler
-from main import Main
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -13,17 +12,7 @@ class Header:
         self.set_header()
         
         self.handler = Handler(builder=self.__builder)
-        self.next_page = None
-
-    def next(self, controller):
-        if self.next_page is None:
-            return
-        else:
-            controller.set_state(self.next_page)
-
-    def back(self, controller):
-        controller.set_state(Main())
-        
+       
     def get_xml_object(self):
         return self.__builder.get_object('header')
 
