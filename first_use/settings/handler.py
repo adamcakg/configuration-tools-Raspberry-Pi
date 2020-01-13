@@ -28,7 +28,6 @@ class Handler:
 # METHOD TO HANDLE COUNTRY COMBO-BOX
 # ----------------------------------------------------------------------------------------------------------------------
     def country_handler(self, item):
-        print('Country')
         keeper['settingspage']['country'] = item.get_active_id()
         self.insert_languages()
         self.insert_timezones()
@@ -36,13 +35,11 @@ class Handler:
 # METHOD TO HANDLE LANGUAGE COMBO-BOX
 # ----------------------------------------------------------------------------------------------------------------------
     def language_handler(self, item):
-        print('language')
         keeper['settingspage']['language'] = item.get_active_text()
         
 # METHOD TO HANDLE TIMEZONE COMBO-BOX
 # ----------------------------------------------------------------------------------------------------------------------
     def timezone_handler(self, item):
-        print('timezone')
         keeper['settingspage']['timezone'] = item.get_active_text()
 
 # METHOD TO INSERT LANGUAGES
@@ -94,6 +91,8 @@ class Handler:
         else:
             timezone_object.set_active(0)
             
+# SETTING TIMEZONE
+# --------------------------------------------------------------------------------------------------
     def set_timezone(self):
         country = self.builder.get_object('combo_box_country').get_active_text()
         
@@ -111,6 +110,8 @@ class Handler:
         os.system('sudo rm -r /etc/localtime')
         os.system("sudo dpkg-reconfigure --frontend noninteractive tzdata")
     
+# SETTING LOCALES
+# ------------------------------------------------------------------------------------------------------
     def set_locale(self):
         #locale.setlocale(locale.LC_ALL, str('ak_GH.UTF-8'))            
         print('Locale before set + ' + str(locale.getlocale()))
@@ -132,7 +133,7 @@ class Handler:
         print('Locale was set + ' + str(locale.getlocale()))
         
             
-# METHOD FOR SETTING LOCALES AND TIME ON PI
+# THREAD FUNCTION TO SET LOCALE AND TIMEZONE
 # ----------------------------------------------------------------------------------------------------------------------      
     def thread_function(self):
         self.set_timezone()
@@ -153,29 +154,3 @@ class Handler:
         dialog = self.builder.get_object('settings_dialog')
         dialog.destroy()
         self.controller.next()
-#    def app_main(self):
- #       win = Gtk.Window(default_height=50, default_width=300)
-  #      win.connect("destroy", Gtk.main_quit)
-#
- #       progress = Gtk.ProgressBar(show_text=True)
-  #      win.add(progress)
-#
- #       def update_progess(i):
-  #          progress.pulse()
-   #         progress.set_text(str(i))
-    #        return False
-#
- #       def example_target():
-  #          for i in range(50):
-   #             GLib.idle_add(update_progess, i)
-    #            time.sleep(0.2)
-#
- #       win.show_all()
-#
- #       thread = threading.Thread(target=example_target)
-  #      thread.daemon = True
-   #     thread.start()
-            
-   
-
-
