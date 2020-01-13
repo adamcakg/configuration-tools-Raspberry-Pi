@@ -1,5 +1,6 @@
 import gi
 from .handler import Handler
+from main import Main
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -12,16 +13,16 @@ class Header:
         self.set_header()
         
         self.handler = Handler(builder=self.__builder)
-        
-    
+        self.next_page = None
+
     def next(self, controller):
-        # there will be page where i was 
-        pass
-    
-    
+        if self.next_page is None:
+            return
+        else:
+            controller.set_state(self.next_page)
+
     def back(self, controller):
-        #controller.set_state()
-        pass
+        controller.set_state(Main())
         
     def get_xml_object(self):
         return self.__builder.get_object('header')
@@ -40,7 +41,6 @@ class Header:
         
         header.set_show_close_button(True)
 
-        
         box = self.__builder.get_object('box')
         Gtk.StyleContext.add_class(box.get_style_context(), "linked")
 
@@ -57,11 +57,11 @@ class Header:
         header = self.__builder.get_object('header')
         header.props.title = title
 
-    def get_back_button(self):
-        return self.__builder.get_object('left')
+    def disable_button(self, button: str):
+        self.__builder.get_object(button).set_sensitive(False)
 
-    def get_next_button(self):
-        self.__builder.get_object('right')
-        
-        
-        
+    def enable_button(self, button: str):
+        self.__builder.get_object(button).set_sensitive(True)
+
+    def set_next_page(self, next_page):
+        self.next_page(next_page)
