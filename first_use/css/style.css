@@ -108,3 +108,8 @@ window{
     transition: 0.3s;
 }
 
+.password_label{
+    font-size: 12px;
+    color: #C51A4A;
+}
+

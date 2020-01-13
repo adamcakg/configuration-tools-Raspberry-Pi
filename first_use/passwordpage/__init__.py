@@ -15,7 +15,6 @@ class PasswordPage:
     def __init__(self):
         self.__builder = Gtk.Builder()                                                  # creating builder
         self.__builder.add_from_file('passwordpage/password_page.glade')                # adding XML file
-        
 
         if 'passwordpage' in keeper:                                    # checking if password is already in keeper
             self.__builder.get_object('password').set_text(keeper['passwordpage']['password'])

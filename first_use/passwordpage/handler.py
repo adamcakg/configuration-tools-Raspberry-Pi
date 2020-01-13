@@ -23,6 +23,8 @@ class Handler:
             keeper['passwordpage']['password'] = password
             self.controller.execute()                       # executing page settings
             #self.controller.next()                          # moving to next page
+        else:
+            self.builder.get_object('password_label').set_opacity(1) 
 
 # BACK
 # ----------------------------------------------------------------------------------------------------------------------
