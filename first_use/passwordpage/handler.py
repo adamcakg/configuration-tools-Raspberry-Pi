@@ -18,18 +18,24 @@ class Handler:
     def next(self, button):
         password = self.builder.get_object('password').get_text()
         confirmed = self.builder.get_object('confirmed').get_text()
-
-        if self.compare(password, confirmed):  # checking if passwords are the same
-            keeper['passwordpage']['password'] = password
+        
+        if password == '':
+            self.builder.get_object('password_label').set_opacity(0) 
+            self.builder.get_object('missing_password_label').set_opacity(1) 
+        
+        elif self.compare(password, confirmed):  # checking if passwords are the same    
             self.controller.execute()                       # executing page settings
             #self.controller.next()                          # moving to next page
         else:
+            self.builder.get_object('missing_password_label').set_opacity(0) 
             self.builder.get_object('password_label').set_opacity(1) 
 
 # BACK
 # ----------------------------------------------------------------------------------------------------------------------
     def back(self, button):
+        keeper['passwordpage']['password'] = self.builder.get_object('password').get_text()
         self.controller.back()                              # moving to previous page
+        
 
 # METHOD TO HANDLE ENTRY WITH PASSWORD
 # ----------------------------------------------------------------------------------------------------------------------
