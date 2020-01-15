@@ -92,7 +92,14 @@ class Handler:
         for item in available_networks:
             self.list_of_networks.append(item)
         
-            
+        if len(self.list_of_networks) == 0:
+            self.builder.get_object('not_found_label').set_opacity(1)
+        else:
+            self.builder.get_object('not_found_label').set_opacity(0)
+            self.fulfill_wifi_tree()
+        
+        
+    def fulfill_wifi_tree(self):          
         wifi_tree = self.builder.get_object('wifi_tree')
         
         columns_to_remove = wifi_tree.get_columns()         #REMOVING COLUMNS IF EXIST ALREADY
@@ -123,9 +130,6 @@ class Handler:
         column.add_attribute(signal, 'text', 2)
 
         wifi_tree.append_column(column)
-        
-        # HIDING SEARCHING LABEL
-        self.builder.get_object('search_label').set_opacity(0)
 
 # THREAD FUNCTION OF HANDLER
 # --------------------------------------------------------------------------------------

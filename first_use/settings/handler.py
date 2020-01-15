@@ -154,3 +154,7 @@ class Handler:
         dialog = self.builder.get_object('settings_dialog')
         dialog.destroy()
         self.controller.next()
+
+
+
+

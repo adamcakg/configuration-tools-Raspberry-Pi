@@ -16,7 +16,6 @@ class FirstStart(Gtk.Window):
         Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
         self.set_border_width(10)                           # Border all around window
         self.set_default_size(600, 600)                     # Setting default size of window
-        #self.set_resizable(False)                           # Setting window to not be resizable
         #self.fullscreen()
         
         controller.Controller(self)                                    # Giving control to controller class

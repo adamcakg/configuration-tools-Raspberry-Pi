@@ -3,7 +3,9 @@ import softwarepage as softwarepage
 from .handler import Handler
 from thread import Thread
 
+
 import gi
+import requests
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -32,6 +34,12 @@ class UpdatePage:
         self.__builder.connect_signals(self.handler)
         
     def execute(self):
+        try:
+            request = requests.get('http://www.google.com/', timeout=2)
+        except requests.ConnectionError:
+            print("No internet connection available.")
+            return
+        
         thread = Thread(self.handler)
         self.handler.create_modal()
         
