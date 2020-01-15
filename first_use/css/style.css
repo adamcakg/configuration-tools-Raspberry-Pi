@@ -113,3 +113,26 @@ window{
     color: #C51A4A;
 }
 
+.bottom_strip_red{
+    background-image: url("../img/bottom_strip_red.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.bottom_strip_green{
+    background-image: url("../img/bottom_strip_green.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+.bottom_strip_blue{
+    background-image: url("../img/bottom_strip_blue.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
+
+

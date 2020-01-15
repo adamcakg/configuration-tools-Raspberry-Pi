@@ -23,7 +23,8 @@ class Handler:
             self.builder.get_object('password_label').set_opacity(0) 
             self.builder.get_object('missing_password_label').set_opacity(1) 
         
-        elif self.compare(password, confirmed):  # checking if passwords are the same    
+        elif self.compare(password, confirmed):  # checking if passwords are the same
+            keeper['passwordpage']['password'] = password
             self.controller.execute()                       # executing page settings
             #self.controller.next()                          # moving to next page
         else:

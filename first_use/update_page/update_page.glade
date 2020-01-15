@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.0"/>
-   <object class="GtkWindow" id="update_dialog">
+  <object class="GtkWindow" id="update_dialog">
     <property name="name">settings_dialog</property>
     <property name="can_focus">False</property>
     <property name="type">popup</property>
@@ -111,6 +111,7 @@
             <property name="can_focus">False</property>
             <style>
               <class name="card_border"/>
+              <class name="bottom_strip_red"/>
             </style>
           </object>
         </child>

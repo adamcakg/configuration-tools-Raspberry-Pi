@@ -51,6 +51,7 @@
             <property name="can_focus">False</property>
             <style>
               <class name="card_border"/>
+              <class name="bottom_strip_green"/>
             </style>
           </object>
         </child>
@@ -95,6 +96,20 @@
           <packing>
             <property name="x">100</property>
             <property name="y">329</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="search_label">
+            <property name="name">search_label</property>
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Searching...</property>
+          </object>
+          <packing>
+            <property name="x">100</property>
+            <property name="y">177</property>
           </packing>
         </child>
       </object>
@@ -142,12 +157,14 @@
         </child>
         <child>
           <object class="GtkFixed">
+            <property name="width_request">350</property>
+            <property name="height_request">-1</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkLabel" id="connect_label">
                 <property name="name">connect_label</property>
-                <property name="width_request">100</property>
+                <property name="width_request">350</property>
                 <property name="height_request">80</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -157,13 +174,14 @@
             <child>
               <object class="GtkEntry" id="connect_entry">
                 <property name="name">connect_entry</property>
-                <property name="width_request">100</property>
+                <property name="width_request">250</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="placeholder_text" translatable="yes">Password</property>
               </object>
               <packing>
+                <property name="x">50</property>
                 <property name="y">76</property>
               </packing>
             </child>
@@ -171,21 +189,22 @@
               <object class="GtkButton" id="connect_button">
                 <property name="label" translatable="yes">Connect</property>
                 <property name="name">connect_button</property>
-                <property name="width_request">100</property>
+                <property name="width_request">120</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <signal name="clicked" handler="connect_pressed" swapped="no"/>
               </object>
               <packing>
-                <property name="x">107</property>
+                <property name="x">180</property>
                 <property name="y">123</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton">
                 <property name="label" translatable="yes">Back</property>
-                <property name="width_request">100</property>
+                <property name="width_request">120</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -193,6 +212,7 @@
                 <signal name="clicked" handler="delete_modal" swapped="no"/>
               </object>
               <packing>
+                <property name="x">50</property>
                 <property name="y">123</property>
               </packing>
             </child>
@@ -208,5 +228,8 @@
         </child>
       </object>
     </child>
+    <style>
+      <class name="modal"/>
+    </style>
   </object>
 </interface>

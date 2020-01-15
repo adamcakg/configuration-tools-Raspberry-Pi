@@ -39,7 +39,8 @@ class Handler:
             if self.cell.encrypted:
                 print('Creating modal for entering password')
                 dialog = self.builder.get_object('wifi_dialog')
-                self.builder.get_object('connect_label').set_label('Enter the password for : "' + self.cell.ssid  + "'")
+                
+                self.builder.get_object('connect_label').set_label('Enter the password for : "' + self.cell.ssid[:15]  + '"')
                 dialog.set_attached_to(self.builder.get_object('wifi'))
                 dialog.set_destroy_with_parent(True)
                 dialog.set_modal(True)
@@ -103,7 +104,7 @@ class Handler:
         self.list_of_networks.sort(key=lambda x: x.signal)
         self.list_of_networks.reverse()
         for item in self.list_of_networks:
-            store.append([item.ssid[:20], item.encrypted, item.signal])
+            store.append([item.ssid[:15], item.encrypted, item.signal])
         
         wifi_tree.set_model(store)
         
@@ -122,6 +123,9 @@ class Handler:
         column.add_attribute(signal, 'text', 2)
 
         wifi_tree.append_column(column)
+        
+        # HIDING SEARCHING LABEL
+        self.builder.get_object('search_label').set_opacity(0)
 
 # THREAD FUNCTION OF HANDLER
 # --------------------------------------------------------------------------------------
