@@ -128,16 +128,39 @@
         <child>
           <object class="GtkToggleButton">
             <property name="label" translatable="yes">Sure I do</property>
-            <property name="width_request">100</property>
-            <property name="height_request">80</property>
+            <property name="width_request">150</property>
+            <property name="height_request">150</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <signal name="toggled" handler="update_button_pressed" swapped="no"/>
+            <style>
+              <class name="button_update"/>
+            </style>
           </object>
           <packing>
-            <property name="x">100</property>
-            <property name="y">150</property>
+            <property name="x">80</property>
+            <property name="y">120</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="no_internet_label">
+            <property name="name">no_internet_label</property>
+            <property name="width_request">100</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="opacity">0</property>
+            <property name="label" translatable="yes">Cannot update... 
+You're not connected to the internet</property>
+            <property name="justify">center</property>
+            <style>
+              <class name="update_label"/>
+            </style>
+          </object>
+          <packing>
+            <property name="x">60</property>
+            <property name="y">219</property>
           </packing>
         </child>
       </object>

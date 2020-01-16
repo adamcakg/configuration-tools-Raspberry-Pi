@@ -35,9 +35,9 @@ class UpdatePage:
         
     def execute(self):
         try:
-            request = requests.get('http://www.google.com/', timeout=2)
+            request = requests.get('http://www.raspberrypi.com/', timeout=30)
         except requests.ConnectionError:
-            print("No internet connection available.")
+            self.__builder.get_object('no_internet_label').set_opacity(1)
             return
         
         thread = Thread(self.handler)
