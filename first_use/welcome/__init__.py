@@ -2,13 +2,15 @@ import settings as settings
 import random
 from .handler import Handler
 
+from page import Page
+
 import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GLib
 
 
-class WelcomePage:
+class WelcomePage(Page):
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('welcome/welcome.glade')   # creating object from XML(.glade files)

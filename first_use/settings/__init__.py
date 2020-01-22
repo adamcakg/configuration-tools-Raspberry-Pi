@@ -8,12 +8,14 @@ from locale import gettext as _
 
 from keeper import keeper
 
+from page import Page
+
 import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-class SettingsPage:
+class SettingsPage(Page):
 
     def __init__(self):
         self.__builder = Gtk.Builder()                            # Initializing builder

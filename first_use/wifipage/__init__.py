@@ -2,6 +2,8 @@ import update_page as update_page
 import passwordpage as password_page
 from .handler import Handler
 
+from page import Page
+
 from thread import Thread
 
 import gi
@@ -10,7 +12,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
-class WifiPage:
+class WifiPage(Page):
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('wifipage/wifi.glade')   # creating object from XML(.glade files)

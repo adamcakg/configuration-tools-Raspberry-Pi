@@ -1,13 +1,15 @@
 import softwarepage as softwarepage
 from .handler import Handler
 
+from page import Page
+
 import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk,GdkPixbuf
 
 
-class AllSet:
+class AllSet(Page):
 
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder

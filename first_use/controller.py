@@ -1,5 +1,8 @@
+import gi
 import welcome as welcome
 
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 class Controller:
     def __init__(self, window):
@@ -38,7 +41,7 @@ class Controller:
 # ----------------------------------------------------------------------------------------------------------------------
     def quit(self):                                                             # quiting window and code...
         self.window.close()
-        exit(0)
+        Gtk.main_quit()
         
         # gtk quit
   

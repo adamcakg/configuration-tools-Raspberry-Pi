@@ -4,13 +4,15 @@ from .handler import Handler
 from keeper import keeper
 from thread import Thread
 
+from page import Page
+
 import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
-class PasswordPage:
+class PasswordPage(Page):
 
     def __init__(self):
         self.__builder = Gtk.Builder()                                                  # creating builder
