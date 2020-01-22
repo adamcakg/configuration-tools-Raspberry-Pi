@@ -29,13 +29,14 @@ def gtk_style():
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-settings_thread = threading.Thread(target=settings_stuff.do_thread())
-timezone_thread = threading.Thread(target=timezone.do_threading())
+if __name__ == '__main__':
+    settings_thread = threading.Thread(target=settings_stuff.do_thread())
+    timezone_thread = threading.Thread(target=timezone.do_threading())
 
-settings_thread.start()
-timezone_thread.start()
+    settings_thread.start()
+    timezone_thread.start()
 
-gtk_style()
-win = FirstStart()                                          # Starting app
-win.show_all()
-Gtk.main()                                                  # App loop
+    gtk_style()
+    win = FirstStart()                                          # Starting app
+    win.show_all()
+    Gtk.main()                                                  # App loop

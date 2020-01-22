@@ -74,7 +74,7 @@ class SettingsPage:
 
     def apply_locale(self , current_lang ):
         domain = "firstuse"
-        local_path = domain +"/data/locale"
+        local_path = domain +"/data/locale"  # fixme pathlib
         locale.bindtextdomain(domain , local_path )
         locale.textdomain(domain)
         locale.setlocale(locale.LC_ALL, 'ar_AE.utf8')

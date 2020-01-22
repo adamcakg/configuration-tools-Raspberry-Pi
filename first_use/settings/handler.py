@@ -106,13 +106,16 @@ class Handler:
                 timezone_in_keeper = timezone[0]    
         print(timezone_in_keeper)
         
-        os.system('sudo timedatectl set-timezone {}'.format(timezone_in_keeper))
+        os.system(f'sudo timedatectl set-timezone {timezone_in_keeper}')
         os.system('sudo rm -r /etc/localtime')
         os.system("sudo dpkg-reconfigure --frontend noninteractive tzdata")
     
 # SETTING LOCALES
 # ------------------------------------------------------------------------------------------------------
     def set_locale(self):
+        """
+        SETTING LOCALES
+        """
         #locale.setlocale(locale.LC_ALL, str('ak_GH.UTF-8'))            
         print('Locale before set + ' + str(locale.getlocale()))
         
