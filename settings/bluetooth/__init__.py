@@ -25,6 +25,4 @@ class Bluetooth:
     def connect_header(self, header):
         self.header = header
         self.header.set_title('Bluetooth')
-        self.header.enable_button('left')
-        self.header.disable_button('right')
         

@@ -8,19 +8,12 @@ from gi.repository import Gtk, Gdk, GLib
 class Settings(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
-        self.set_border_width(10)                           # Border all around window
                                    # Setting window to not be resizable
-        
-        
         size = Gdk.Screen.get_default()
         
-        if int(size.get_width()) < 800 or int(size.get_height()) < 600: 
-                self.set_resizable(True)
-                self.maximize()
-        else:
-            self.set_default_size(size.get_width()/2, size.get_height()/2)
-            self.move(size.get_width()/4, size.get_height()/4)
-            self.set_resizable(False)
+        self.set_default_size(size.get_width()/2, size.get_height()/2)
+        self.move(size.get_width()/4, size.get_height()/4)
+        self.set_resizable(False)
 
         controller.Controller(self)                                    # Giving control to controller class
 

@@ -30,15 +30,6 @@ class Header:
         
         header.set_show_close_button(True)
 
-        box = self.__builder.get_object('box')
-        Gtk.StyleContext.add_class(box.get_style_context(), "linked")
-
-        button = self.__builder.get_object('left')
-        button.add(Gtk.Arrow(Gtk.ArrowType.LEFT, Gtk.ShadowType.NONE))
-        
-        button = self.__builder.get_object('right')
-        button.add(Gtk.Arrow(Gtk.ArrowType.RIGHT, Gtk.ShadowType.NONE))
-
 # SETTING TITLE OF HEADER
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -46,11 +37,3 @@ class Header:
         header = self.__builder.get_object('header')
         header.props.title = title
 
-    def disable_button(self, button: str):
-        self.__builder.get_object(button).set_sensitive(False)
-
-    def enable_button(self, button: str):
-        self.__builder.get_object(button).set_sensitive(True)
-
-    def set_next_page(self, next_page):
-        self.next_page(next_page)
