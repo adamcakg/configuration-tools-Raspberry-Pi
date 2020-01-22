@@ -12,12 +12,12 @@ class Controller:
 
 # METHOD TO SET STATE
 # ----------------------------------------------------------------------------------------------------------------------
-    def set_state(self, s):
+    def set_state(self, new_state):
         if self.state is not None:
             self.window.remove(self.state.get_xml_object())                     # removing old object from window
             self.state.destroy()                                                # destroying current page
 
-        self.state = s                                                          # setting new state
+        self.state = new_state                                                          # setting new state
         self.state.connect_handler(self)                                        # connecting handler to page
         self.window.add(self.state.get_xml_object())                            # adding object to window
         self.window.show_all()                                                  # displaying on window
