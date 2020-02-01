@@ -6,16 +6,16 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
-class Wifi(Page):
+class Appearance(Page):
     def __init__(self):
-        self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('wifi/wifi.glade')   # creating object from XML(.glade files)
-        
+        self.__builder = Gtk.Builder()  # Initializing builder
+        self.__builder.add_from_file('appearance/appearance.glade')  # creating object from XML(.glade files)
+
         self.handler = Handler(builder=self.__builder)
         self.header = None
-        
+
     def get_xml_object(self):
-        return self.__builder.get_object('wifi')
+        return self.__builder.get_object('appearance')
 
     def destroy(self):
         del self
@@ -26,5 +26,4 @@ class Wifi(Page):
 
     def connect_header(self, header):
         self.header = header
-        self.header.set_title('WiFi')
-        
+        self.header.set_title('Appearance')

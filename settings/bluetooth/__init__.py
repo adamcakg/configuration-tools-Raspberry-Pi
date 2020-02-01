@@ -1,10 +1,12 @@
 import gi
 from .handler import Handler
+from page import Page
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-class Bluetooth:
+
+class Bluetooth(Page):
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('bluetooth/bluetooth.glade')   # creating object from XML(.glade files)

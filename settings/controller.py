@@ -19,9 +19,10 @@ class Controller:
     def set_left_bar(self, main):
         self.window.add(main.get_xml_object())
         main.connect_handler(self)
-        main.set_pages()
 
     def set_state(self, new_state):
+        print(new_state)
+
         box = self.main.get_xml_object()
         
         if self.state is not None:
