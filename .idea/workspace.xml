@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c2d6d27-2578-417f-bc2f-bbc89a4cac56" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/settings/appearance/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings/appearance/appearance.glade" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings/appearance/handler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings/pages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/bluetooth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/bluetooth/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/main/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/main/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/main/handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/page.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/wifi/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/wifi/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/first_use/page.py" beforeDir="false" afterPath="$PROJECT_DIR$/first_use/page.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,11 +28,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings/appearance/appearance.glade">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="16" column="60" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/first_use/page.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -82,6 +81,7 @@
         <option value="$PROJECT_DIR$/settings/appearance/handler.py" />
         <option value="$PROJECT_DIR$/settings/pages.py" />
         <option value="$PROJECT_DIR$/settings/appearance/appearance.glade" />
+        <option value="$PROJECT_DIR$/first_use/page.py" />
       </list>
     </option>
   </component>
@@ -97,7 +97,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -108,12 +107,13 @@
             <path>
               <item name="bakalarska-praca" type="b2602c69:ProjectViewProjectNode" />
               <item name="bakalarska-praca" type="462c0819:PsiDirectoryNode" />
-              <item name="settings" type="462c0819:PsiDirectoryNode" />
+              <item name="first_use" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -125,7 +125,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/settings/appearance" />
+      <recent name="$PROJECT_DIR$/first_use/wifipage" />
+      <recent name="$PROJECT_DIR$/first_use/welcome" />
+      <recent name="$PROJECT_DIR$/first_use/update_page" />
+      <recent name="$PROJECT_DIR$/first_use/softwarepage" />
+      <recent name="$PROJECT_DIR$/first_use/settings" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -213,16 +217,18 @@
       <workItem from="1578907929984" duration="3492000" />
       <workItem from="1579794870440" duration="2537000" />
       <workItem from="1579960684745" duration="326000" />
+      <workItem from="1580732818111" duration="1219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17497000" />
+    <option name="totallyTimeSpent" value="18716000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27110156" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2746781" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -380,6 +386,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="60" selection-start-line="16" selection-start-column="60" selection-end-line="16" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/first_use/page.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
         </state>
       </provider>
     </entry>

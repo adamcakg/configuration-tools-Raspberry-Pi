@@ -12,10 +12,21 @@ class Page(ABC):
         raise NotImplementedError("get_xml_object(self) method must be implemented...")
     
     def destroy(self):
-        raise NotImplementedError("destroy(self) method must be implemented...")
+        del self
     
     def connect_handler(self, controller=None):
         raise NotImplementedError("connect_handler(self, ....) method must be implemented")
 
     def execute(self):
         raise NotImplementedError("execute(self) method must be implemented")
+
+
+
+
+    
+
+
+
+
+
+
