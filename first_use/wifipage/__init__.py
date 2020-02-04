@@ -52,8 +52,6 @@ class WifiPage(Page):
     def execute(self):
         Thread(self.handler)
         
-        
-        #self.handler.search()
     
 
         
