@@ -17,3 +17,6 @@ class Page(ABC):
 
     def execute(self):
         raise NotImplementedError("execute(self) method must be implemented")
+    
+    def get_name(self):
+        raise NotImplementedError("get_name must be implemented")

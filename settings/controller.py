@@ -21,10 +21,7 @@ class Controller:
         main.connect_handler(self)
 
     def set_state(self, new_state):
-        print(new_state)
-
         box = self.main.get_xml_object()
-        
         if self.state is not None:
             box.remove(self.state.get_xml_object())
             self.state.destroy()
@@ -38,3 +35,6 @@ class Controller:
     def quit(self):
         self.window.close()
         exit(0)
+        
+    def execute(self):
+        self.state.execute()

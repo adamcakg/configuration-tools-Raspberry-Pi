@@ -1,6 +1,8 @@
 import gi
 import os
 
+from .settings_stuff import list_of_settings
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -90,6 +92,19 @@ class Handler:
                 file.write(wpa2_file)
                 
             os.popen("ifconfig wlan0 up")
+            
+            # TESTING
+            country = keeper['settingspage']['country']
+            for locales in list_of_settings:
+                if country == locales[3]:
+                    country == locales[3]
+            
+            os.popen("wpa_cli -i wlan0 set country " + country)
+            
+            os.popen("iw reg set " + country)
+            os.open("wpa_cli -i wlan0 save_config")
+            
+            # TESTING
 
             os.popen("wpa_cli -i wlan0 reconfigure")
         
@@ -106,7 +121,7 @@ class Handler:
 
     def search(self):
         print('Searching for the networks...')
-        wifi_networks = os.popen("sudo iwlist wlan0 scan").read() 
+        wifi_networks = os.popen("iwlist wlan0 scan").read() 
         self.list_of_networks = [] 
          
         cell = self.get_empty_cell()

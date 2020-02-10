@@ -24,7 +24,7 @@ class Handler:
         os.system('echo {} | apt update'.format('yes'))
         os.system('echo {} | apt upgrade'.format('yes'))
         print('apt updated')
-        os.system('echo {} | sudo apt dist-upgrade'.format('yes'))
+        os.system('echo {} | apt dist-upgrade'.format('yes'))
         print('upgraded')
         os.system('sudo apt-get update')
         print('apt-get updated')

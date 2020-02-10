@@ -66,16 +66,27 @@
           </object>
         </child>
         <child>
-          <object class="GtkTreeView" id="wifi_tree">
-            <property name="name">wifi_tree</property>
+          <object class="GtkScrolledWindow">
             <property name="width_request">250</property>
             <property name="height_request">250</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="resize_mode">queue</property>
-            <signal name="row-activated" handler="create_modal" swapped="no"/>
-            <child internal-child="selection">
-              <object class="GtkTreeSelection"/>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="wifi_tree">
+                <property name="name">wifi_tree</property>
+                <property name="width_request">250</property>
+                <property name="height_request">250</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="resize_mode">queue</property>
+                <property name="vscroll_policy">natural</property>
+                <property name="enable_grid_lines">horizontal</property>
+                <signal name="row-activated" handler="create_modal" swapped="no"/>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection"/>
+                </child>
+              </object>
             </child>
           </object>
           <packing>
@@ -99,8 +110,8 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="search_label">
-            <property name="name">search_label</property>
+          <object class="GtkLabel" id="not_found_label">
+            <property name="name">not_found_label</property>
             <property name="width_request">100</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>

@@ -1,31 +1,210 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
-  <object class="GtkBox" id="wifi">
-    <property name="name">wifi</property>
+  <requires lib="gtk+" version="3.0"/>
+  <object class="GtkFixed" id="wifi">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="hexpand">False</property>
-    <property name="vexpand">False</property>
-    <property name="orientation">vertical</property>
-    <child>
-      <placeholder/>
-    </child>
     <child>
       <object class="GtkLabel">
+        <property name="height_request">40</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Wifi page</property>
+        <property name="label" translatable="yes">Airplane mode:</property>
+        <property name="xalign">0</property>
       </object>
       <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
+        <property name="x">80</property>
+        <property name="y">20</property>
       </packing>
     </child>
     <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Wifi:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">50</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSwitch">
+        <property name="width_request">90</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+      </object>
+      <packing>
+        <property name="x">280</property>
+        <property name="y">25</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSwitch">
+        <property name="height_request">20</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+      </object>
+      <packing>
+        <property name="x">280</property>
+        <property name="y">60</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="width_request">290</property>
+        <property name="height_request">180</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="shadow_type">in</property>
+        <child>
+          <object class="GtkTreeView" id="wifi_tree">
+            <property name="name">wifi_tree</property>
+            <property name="width_request">290</property>
+            <property name="height_request">180</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="vscroll_policy">natural</property>
+            <property name="enable_grid_lines">vertical</property>
+            <signal name="row-activated" handler="create_modal" swapped="no"/>
+            <child internal-child="selection">
+              <object class="GtkTreeSelection"/>
+            </child>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">95</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="not_found_label">
+        <property name="name">not_found_label</property>
+        <property name="width_request">100</property>
+        <property name="height_request">80</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="opacity">0</property>
+        <property name="label" translatable="yes">No networks found...</property>
+      </object>
+      <packing>
+        <property name="x">144</property>
+        <property name="y">172</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">Refresh</property>
+        <property name="width_request">290</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <signal name="clicked" handler="button_pressed" swapped="no"/>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">278</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkWindow" id="wifi_dialog">
+    <property name="name">wifi_dialog</property>
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">dialog</property>
+    <child type="titlebar">
       <placeholder/>
     </child>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <object class="GtkFixed">
+            <property name="width_request">350</property>
+            <property name="height_request">180</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel" id="connect_label">
+                <property name="name">connect_label</property>
+                <property name="width_request">350</property>
+                <property name="height_request">80</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Enter the password for : " "</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="connect_entry">
+                <property name="name">connect_entry</property>
+                <property name="width_request">250</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="placeholder_text" translatable="yes">Password</property>
+              </object>
+              <packing>
+                <property name="x">50</property>
+                <property name="y">76</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="connect_button">
+                <property name="label" translatable="yes">Connect</property>
+                <property name="name">connect_button</property>
+                <property name="width_request">120</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="connect_pressed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="x">180</property>
+                <property name="y">123</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Back</property>
+                <property name="width_request">120</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="delete_modal" swapped="no"/>
+              </object>
+              <packing>
+                <property name="x">50</property>
+                <property name="y">123</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="modal"/>
+    </style>
   </object>
 </interface>

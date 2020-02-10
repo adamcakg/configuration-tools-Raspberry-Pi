@@ -8,6 +8,7 @@ from gi.repository import Gtk
 
 class Bluetooth(Page):
     def __init__(self):
+        self.name = "Bluetooth"
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('bluetooth/bluetooth.glade')   # creating object from XML(.glade files)
         
@@ -26,5 +27,8 @@ class Bluetooth(Page):
 
     def connect_header(self, header):
         self.header = header
-        self.header.set_title('Bluetooth')
+        self.header.set_title(self.name)
+        
+    def get_name(self):
+        return self.name
         

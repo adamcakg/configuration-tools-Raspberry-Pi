@@ -1,6 +1,7 @@
 import gi
 from .handler import Handler
 from page import Page
+from thread import Thread
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -8,6 +9,7 @@ from gi.repository import Gtk
 
 class Wifi(Page):
     def __init__(self):
+        self.name = "Wifi"
         self.__builder = Gtk.Builder()                  # Initializing builder
         self.__builder.add_from_file('wifi/wifi.glade')   # creating object from XML(.glade files)
         
@@ -26,5 +28,16 @@ class Wifi(Page):
 
     def connect_header(self, header):
         self.header = header
-        self.header.set_title('WiFi')
+        self.header.set_title(self.name)
+        
+    def get_name(self):
+        return self.name
+    
+# METHOD TO EXECUTE PAGE
+# ----------------------------------------------------------------------------------------------------------------------
+    def execute(self):
+        Thread(self.handler)
+        
+        
+        
         

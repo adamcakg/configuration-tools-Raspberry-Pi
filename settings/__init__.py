@@ -11,7 +11,7 @@ class Settings(Gtk.Window):
                                    # Setting window to not be resizable
         size = Gdk.Screen.get_default()
         
-        self.set_default_size(size.get_width()/2, size.get_height()/2)
+        self.set_default_size(600, 300)
         self.move(size.get_width()/4, size.get_height()/4)
         self.set_resizable(False)
 

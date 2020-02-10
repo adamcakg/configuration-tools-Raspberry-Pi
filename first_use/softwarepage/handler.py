@@ -63,15 +63,15 @@ class Handler:
     def ssh(self):
         print('---ssh')
         self.builder.get_object('software_dialog_label').set_label("Setting up SSH")
-        system('sudo systemctl enable ssh')
-        system('sudo systemctl start ssh')
+        system('systemctl enable ssh')
+        system('systemctl start ssh')
 
 #VNC -----------------------------------------------------------------------------------------------------------------
     def vnc(self):
         print('---vnc')
         self.builder.get_object('software_dialog_label').set_label("Setting up VNC")
-        system('sudo systemctl enable vncserver-x11-serviced')
-        system('sudo systemctl start vncserver-x11-serviced')
+        system('systemctl enable vncserver-x11-serviced')
+        system('systemctl start vncserver-x11-serviced')
 
 #SPI -----------------------------------------------------------------------------------------------------------------
     def spi(self):

@@ -31,21 +31,5 @@ def get_timezones_from_country(country):
 def do_threading():
     get_timezones_db()
 
-# TESTING
-# ----------------------------------------------------------------------------------------------------------------------
-#if __name__ == '__main__':
-    
-    #get_timezones_db()
-    #country_timezones = get_timezones_from_country('US')
-    #print(country_timezones)
-    
-    #import time, os
-    #os.environ['TZ'] = 'Asia/Aden'
-    #time.tzset()
-    
-    #os.system('sudo timedatectl set-timezone Australia/Sydney')
-    #os.system('sudo rm -r /etc/localtime')
-    #os.system("sudo dpkg-reconfigure --frontend noninteractive tzdata")
-    
    
 

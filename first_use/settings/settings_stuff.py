@@ -52,7 +52,6 @@ def fulfill_list_settings():
                 cname, lname = find_in_file("/usr/share/i18n/locales", cptr, 'territory', 'language')
                  
                 list_of_settings.append([lang, country,lname,cname])
-                #print([lang, country,lname,cname])
             line = file.readline()
             
 

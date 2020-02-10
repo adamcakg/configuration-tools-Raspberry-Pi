@@ -115,8 +115,7 @@ class Handler:
     def set_locale(self):
         """
         SETTING LOCALES
-        """
-        #locale.setlocale(locale.LC_ALL, str('ak_GH.UTF-8'))            
+        """           
         print('Locale before set + ' + str(locale.getlocale()))
         
         lang = keeper['settingspage']['language']
@@ -128,10 +127,10 @@ class Handler:
                     count = locales[1]
                     break
         
-        os.system("sudo sed -i /etc/locale.gen -e 's/^\\([^#].*\\)/# \\1/g'")
-        os.system("sudo sed -i /etc/locale.gen -e 's/^# \\({}_{}[\\. ].*UTF-8\\)/\\1/g'".format(lang, count))
-        os.system("sudo locale-gen")
-        os.system("sudo LC_ALL={0}_{1}{2} LANG={0}_{1}{2} LANGUAGE={0}_{1}{2} update-locale LANG={0}_{1}{2}  LC_ALL={0}_{1}{2} LANGUAGE={0}_{1}{2} ".format(lang, count,'.UTF-8'))
+        os.system("sed -i /etc/locale.gen -e 's/^\\([^#].*\\)/# \\1/g'")
+        os.system("sed -i /etc/locale.gen -e 's/^# \\({}_{}[\\. ].*UTF-8\\)/\\1/g'".format(lang, count))
+        os.system("locale-gen")
+        os.system("LC_ALL={0}_{1}{2} LANG={0}_{1}{2} LANGUAGE={0}_{1}{2} update-locale LANG={0}_{1}{2}  LC_ALL={0}_{1}{2} LANGUAGE={0}_{1}{2} ".format(lang, count,'.UTF-8'))
        
         print('Locale was set + ' + str(locale.getlocale()))
         

@@ -8,6 +8,7 @@ from gi.repository import Gtk
 
 class Appearance(Page):
     def __init__(self):
+        self.name = 'Appearance'
         self.__builder = Gtk.Builder()  # Initializing builder
         self.__builder.add_from_file('appearance/appearance.glade')  # creating object from XML(.glade files)
 
@@ -26,4 +27,7 @@ class Appearance(Page):
 
     def connect_header(self, header):
         self.header = header
-        self.header.set_title('Appearance')
+        self.header.set_title(self.name)
+        
+    def get_name(self):
+        return self.name

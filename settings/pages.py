@@ -3,7 +3,10 @@
 from wifi import Wifi
 from bluetooth import Bluetooth
 from appearance import Appearance
-
+from system import System
+from localisation import Localisation
+from interfaces import Interfaces
+from accessibility import Accessibility
 
 def get_pages():
         """
@@ -12,8 +15,11 @@ def get_pages():
         :return - list of pages with instances
         """
         return [
-            ['WiFi', Wifi()],
-            ['Bluetooth', Bluetooth()],
-            ["Appearance", Appearance()]
-
+            Wifi(),
+            Bluetooth(),
+            Appearance(),
+            System(),
+            Interfaces(),
+            Localisation(),
+            Accessibility()
         ]

@@ -19,7 +19,7 @@ class Handler:
 
     def row_activated(self, list_box, list_row):
         page_index = list_row.get_index()
-        page = get_pages()[page_index][1]
+        page = get_pages()[page_index]
         self.next_page(page)
         
     def next_page(self, next_page):
@@ -32,5 +32,5 @@ class Handler:
         list_box.connect("row-selected", self.row_activated)
 
         for page in pages:
-            list_box.insert(Gtk.Label.new(page[0]), -1)
+            list_box.insert(Gtk.Label.new(page.get_name()), -1)
 
