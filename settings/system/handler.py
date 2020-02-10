@@ -7,7 +7,6 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
-
 class Handler:
     def __init__(self, builder, controller=None):
         self.builder = builder
@@ -21,8 +20,6 @@ class Handler:
                 
                 
         self.set_apply_button('disable')
-            
-        
 
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------
@@ -77,6 +74,17 @@ class Handler:
         if 'autologin' not in self.what_changed:
             self.what_changed.append('autologin')
             self.set_apply_button('enable')
+# PASSWORD MODAL
+# ---------------------------------------------------------------  
+    def create_password_modal(self, widget):
+        dialog = self.builder.get_object('password_modal')
+        dialog.set_attached_to(self.builder.get_object('system'))
+        dialog.show_all()
+        
+
+    def delete_password_modal(self, widget=None):
+        dialog = self.builder.get_object('password_modal')
+        dialog.hide()
            
            
 # SET APPLY
@@ -96,8 +104,7 @@ class Handler:
                 self.set_hostname()
             elif item == 'autologin':
                 self.set_autologin()
-        
-        
+          
         self.what_changed = []
         self.set_apply_button('disable')
 

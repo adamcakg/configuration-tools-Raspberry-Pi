@@ -78,7 +78,9 @@
                 <property name="width_request">250</property>
                 <property name="height_request">250</property>
                 <property name="visible">True</property>
+                <property name="app_paintable">True</property>
                 <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
                 <property name="resize_mode">queue</property>
                 <property name="vscroll_policy">natural</property>
                 <property name="enable_grid_lines">horizontal</property>
