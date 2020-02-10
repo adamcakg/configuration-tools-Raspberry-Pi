@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkFixed" id="localisation">
+    <property name="name">localisation</property>
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Locale:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">20</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">Set Locale</property>
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">25</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Timezone:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">60</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">Set Timezone</property>
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">65</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Keyboard:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">100</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">Set Keyboard:</property>
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">105</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">WiFi Country:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">140</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton">
+        <property name="label" translatable="yes">Set Country</property>
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">145</property>
+      </packing>
+    </child>
+  </object>
+</interface>
