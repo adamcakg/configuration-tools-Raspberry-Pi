@@ -7,13 +7,15 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkButton">
+      <object class="GtkButton" id="apply_button">
         <property name="label" translatable="yes">Apply</property>
+        <property name="name">apply_button</property>
         <property name="width_request">70</property>
         <property name="height_request">0</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <signal name="clicked" handler="apply" swapped="no"/>
       </object>
       <packing>
         <property name="x">365</property>
@@ -80,6 +82,7 @@
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="changed" handler="hostname_entry_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">200</property>
