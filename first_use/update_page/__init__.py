@@ -45,7 +45,7 @@ class UpdatePage(Page):
         thread = Thread(self.handler)
         self.handler.create_modal()
         
-        while(thread.alive()):
+        while thread.alive() :
              while Gtk.events_pending():
                 Gtk.main_iteration_do(True)
         self.handler.delete_modal()

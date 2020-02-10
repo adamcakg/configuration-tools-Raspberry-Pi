@@ -104,10 +104,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
+              <object class="GtkSwitch" id="autologin_switch">
+                <property name="name">autologin_switch</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="autologin_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
