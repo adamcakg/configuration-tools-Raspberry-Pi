@@ -27,6 +27,7 @@ class Controller:
             self.state.destroy()
 
         self.state = new_state
+        self.state.connect_builder()
         self.state.connect_handler(self)
         self.state.connect_header(self.header)
         box.add(self.state.get_xml_object())

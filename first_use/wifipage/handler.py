@@ -1,7 +1,9 @@
 import gi
 import os
 
-from .settings_stuff import list_of_settings
+from settings.settings_stuff import list_of_settings
+from keeper import keeper
+
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk

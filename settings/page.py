@@ -8,6 +8,9 @@ class Page(ABC):
     
     def destroy(self):
         self.destroy()
+        
+    def connect_builder(self):
+        raise NotImplementedError("connect_builder(self, ....) method must be implemented")
     
     def connect_handler(self, controller=None):
         raise NotImplementedError("connect_handler(self, ....) method must be implemented")
