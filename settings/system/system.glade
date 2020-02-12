@@ -12,21 +12,28 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="gravity">static</property>
     <child>
+      <placeholder/>
+    </child>
+    <child>
       <object class="GtkFixed">
+        <property name="width_request">350</property>
+        <property name="height_request">150</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkButton">
+          <object class="GtkButton" id="change_password_button">
             <property name="label" translatable="yes">Change</property>
+            <property name="name">change_password_button</property>
             <property name="width_request">100</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
+            <signal name="clicked" handler="change_password" swapped="no"/>
           </object>
           <packing>
-            <property name="x">250</property>
-            <property name="y">100</property>
+            <property name="x">240</property>
+            <property name="y">110</property>
           </packing>
         </child>
         <child>
@@ -40,31 +47,102 @@
             <signal name="clicked" handler="delete_password_modal" swapped="no"/>
           </object>
           <packing>
-            <property name="x">135</property>
-            <property name="y">100</property>
+            <property name="x">130</property>
+            <property name="y">110</property>
           </packing>
         </child>
         <child>
-          <object class="GtkEntry">
-            <property name="width_request">100</property>
+          <object class="GtkEntry" id="confirmed_password_entry">
+            <property name="name">confirmed_password_entry</property>
+            <property name="width_request">190</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="visibility">False</property>
+            <property name="invisible_char">*</property>
           </object>
           <packing>
-            <property name="x">180</property>
-            <property name="y">35</property>
+            <property name="x">150</property>
+            <property name="y">50</property>
           </packing>
         </child>
         <child>
-          <object class="GtkEntry">
-            <property name="width_request">100</property>
+          <object class="GtkEntry" id="password_entry">
+            <property name="name">password_entry</property>
+            <property name="width_request">190</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="visibility">False</property>
+            <property name="invisible_char">*</property>
+          </object>
+          <packing>
+            <property name="x">150</property>
+            <property name="y">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">New password:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Confirm password:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">45</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="pasword_missing_label">
+            <property name="name">pasword_missing_label</property>
+            <property name="width_request">100</property>
+            <property name="height_request">10</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="opacity">0</property>
+            <property name="label" translatable="yes">Password is missing...</property>
+            <attributes>
+              <attribute name="size" value="9000"/>
+            </attributes>
           </object>
           <packing>
             <property name="x">180</property>
+            <property name="y">87</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="not_match_password_label">
+            <property name="name">not_match_password_label</property>
+            <property name="width_request">100</property>
+            <property name="height_request">10</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="opacity">0</property>
+            <property name="label" translatable="yes">Passwords didn't match...</property>
+            <attributes>
+              <attribute name="size" value="9000"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">175</property>
+            <property name="y">87</property>
           </packing>
         </child>
       </object>
@@ -217,11 +295,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
+              <object class="GtkSwitch" id="boot_to_desktop_switch">
+                <property name="name">boot_to_desktop_switch</property>
                 <property name="width_request">10</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="active">True</property>
+                <signal name="state-set" handler="boot_to_desktop_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
@@ -243,11 +324,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
+              <object class="GtkSwitch" id="network_at_boot_switch">
+                <property name="name">network_at_boot_switch</property>
                 <property name="width_request">-1</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="network_at_boot_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
