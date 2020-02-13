@@ -352,34 +352,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
-                <property name="width_request">100</property>
-                <property name="height_request">40</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Overscan:</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="x">40</property>
-                <property name="y">130</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="width_request">-1</property>
-                <property name="height_request">40</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Composite video:</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="x">40</property>
-                <property name="y">170</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkSwitch" id="splash_screen_switch">
                 <property name="name">splash_screen_switch</property>
                 <property name="width_request">-1</property>
@@ -391,30 +363,6 @@
               <packing>
                 <property name="x">280</property>
                 <property name="y">95</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch">
-                <property name="width_request">0</property>
-                <property name="height_request">30</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="x">280</property>
-                <property name="y">135</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
-                <property name="height_request">30</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="x">280</property>
-                <property name="y">175</property>
               </packing>
             </child>
           </object>

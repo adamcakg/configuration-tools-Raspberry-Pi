@@ -28,6 +28,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <signal name="clicked" handler="create_localisation_modal" swapped="no"/>
       </object>
       <packing>
         <property name="x">220</property>
@@ -78,7 +79,7 @@
     </child>
     <child>
       <object class="GtkButton">
-        <property name="label" translatable="yes">Set Keyboard:</property>
+        <property name="label" translatable="yes">Set Keyboard</property>
         <property name="width_request">150</property>
         <property name="height_request">30</property>
         <property name="visible">True</property>
@@ -117,6 +118,85 @@
         <property name="x">220</property>
         <property name="y">145</property>
       </packing>
+    </child>
+  </object>
+  <object class="GtkWindow" id="localisation_modal">
+    <property name="name">localisation_modal</property>
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">notification</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="gravity">center</property>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkFixed">
+        <property name="width_request">230</property>
+        <property name="height_request">150</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton" id="change_option_in_localisation_button">
+            <property name="label" translatable="yes">Change</property>
+            <property name="name">change_option_in_localisation_button</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="change_option_in_localisation" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">120</property>
+            <property name="y">110</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Back</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="delete_localisation_modal" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">110</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width_request">210</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">adsad ads as as asd sd asd </property>
+            <property name="xalign">0.5</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="localisation_combo_box">
+            <property name="name">localisation_combo_box</property>
+            <property name="width_request">210</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">55</property>
+          </packing>
+        </child>
+      </object>
     </child>
   </object>
 </interface>

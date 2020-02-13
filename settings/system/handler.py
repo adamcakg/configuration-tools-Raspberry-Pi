@@ -205,8 +205,6 @@ EOF''')
             self.builder.get_object('splash_screen_switch').set_state(False)
             self.builder.get_object('splash_screen_error_label').set_opacity(1)
        
-       
-       
 # SET APPLY
 # ---------------------------------------------------------------        
     def set_apply_button(self, action):
