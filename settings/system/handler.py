@@ -1,7 +1,9 @@
 import os
 from thread import Thread
 from .boot_option import set_boot_option
-from . boot_option import get_boot_wait
+from .boot_option import get_boot_wait
+from .boot_option import get_boot_splash
+from .boot_option import do_boot_splash
 
 import gi
 
@@ -17,6 +19,7 @@ class Handler:
         self.autologin = False
         self.graphical_boot = True
         self.network_at_boot = False
+        self.splash_screen_at_boot = False
         
         thread = Thread(self)
         
@@ -180,6 +183,29 @@ ExecStart=/usr/lib/dhcpcd5/dhcpcd -q -w
 EOF''')
         elif self.network_at_boot == False:
             os.popen('rm -f /etc/systemd/system/dhcpcd.service.d/wait.conf')
+
+# SPLASH SCREEN
+# --------------------------------------------------------------------------------
+    def get_splash_screen(self):
+        if get_boot_splash() == True:
+            self.builder.get_object('splash_screen_switch').set_state(True)
+            self.splash_screen_at_boot = True
+        else:
+            self.builder.get_object('splash_screen_switch').set_state(False)
+       
+    def splash_screen_switch_changed(self, widget, state):
+        self.splash_screen_at_boot = state
+        if 'splash_screen' not in self.what_changed:
+            self.what_changed.append('splash_screen')
+            self.set_apply_button('enable')
+
+    def set_splash_screen(self):
+        state = do_boot_splash(self.splash_screen_at_boot)
+        if state == 'error': 
+            self.builder.get_object('splash_screen_switch').set_state(False)
+            self.builder.get_object('splash_screen_error_label').set_opacity(1)
+       
+       
        
 # SET APPLY
 # ---------------------------------------------------------------        
@@ -203,6 +229,8 @@ EOF''')
                 set_boot_option(self.graphical_boot, self.autologin)
             elif item == 'network_at_boot':
                 self.set_wait_for_network()
+            elif item == 'splash_screen':
+                self.set_splash_screen()
         
           
         self.what_changed = []
@@ -215,4 +243,5 @@ EOF''')
         self.get_autologin()
         self.get_boot_option()
         self.get_wait_for_network()
+        self.get_splash_screen()
         

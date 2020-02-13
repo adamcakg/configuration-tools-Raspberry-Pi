@@ -52,7 +52,7 @@ EOF
         disable_raspi_config_at_boot()
 
 
-
+# BOOT WAIT ---------------------------------------------------------
 
 def get_boot_wait():
     try:
@@ -61,8 +61,58 @@ def get_boot_wait():
        return 0
     return 1
 
+# BOOT SPLASH SCREN ---------------------------------------------------------
+def get_boot_splash():
+    if is_pi():
+        if os.popen('grep "splash" /boot/cmdline.txt').read() == '':
+            return False
+        else:
+            return True
+    else:
+        if os.popen('grep "GRUB_CMDLINE_LINUX_DEFAULT.*splash" /etc/default/grub').read() == '':
+            return False
+        else:
+            return True
+
+def is_pi():
+    status = os.popen('dpkg --print-architecture').read()
+    if 'armhf' in status:
+        return True
+    else:
+        return False
 
 
+def do_boot_splash(state):
+    if os.popen('cat /usr/share/plymouth/themes/pix/pix.script').read() == '':
+        return 'error'
+
+    if state:
+        if is_pi():
+            if os.popen('grep "splash" /boot/cmdline.txt').read() == '': 
+                os.popen('sed -i /boot/cmdline.txt -e "s/$/ quiet splash plymouth.ignore-serial-consoles/"')
+        else:
+            os.popen('sed -i /etc/default/grub -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\(.*\)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1 quiet splash plymouth.ignore-serial-consoles\"/"')
+            os.popen('sed -i /etc/default/grub -e "s/  \+/ /g"')
+            os.popen('sed -i /etc/default/grub -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\" /GRUB_CMDLINE_LINUX_DEFAULT=\"/"')
+            os.popen('update-grub')
+        return 'enabled'
+    else:
+        if is_pi():
+            if os.popen('grep "splash" /boot/cmdline.txt').read() != '':
+                os.popen('sed -i /boot/cmdline.txt -e "s/ quiet//"')
+                os.popen('sed -i /boot/cmdline.txt -e "s/ splash//"')
+                os.popen('sed -i /boot/cmdline.txt -e "s/ plymouth.ignore-serial-consoles//"')
+        else:
+            os.popen('sed -i /etc/default/grub -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\(.*\)quiet\(.*\)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1\2\"/"')
+            os.popen(' -i /etc/default/grub -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\(.*\)splash\(.*\)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1\2\"/"')
+            os.popen('sed -i /etc/default/grub -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\(.*\)plymouth.ignore-serial-consoles\(.*\)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1\2\"/"')
+            os.popen('sed -i /etc/default/grub -e "s/  \+/ /g"')
+            os.popen('sed -i /etc/default/grub -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\" /GRUB_CMDLINE_LINUX_DEFAULT=\"/"')
+            os.popen('update-grub')
+        return 'disabled'
+
+
+# TESTING --------------------------------------------------------------------
 if __name__ == '__main__':
     result = os.popen('[ -e /etc/profile.d/raspi-config.sh ]').read()
     print(type(result))

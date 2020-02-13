@@ -380,11 +380,13 @@
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
+              <object class="GtkSwitch" id="splash_screen_switch">
+                <property name="name">splash_screen_switch</property>
                 <property name="width_request">-1</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <signal name="state-set" handler="splash_screen_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
@@ -442,6 +444,24 @@
       <packing>
         <property name="x">5</property>
         <property name="y">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="splash_screen_error_label">
+        <property name="name">splash_screen_error_label</property>
+        <property name="width_request">100</property>
+        <property name="height_request">10</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="opacity">0</property>
+        <property name="label" translatable="yes">The splash screen is not installed so cannot be activated</property>
+        <attributes>
+          <attribute name="size" value="9000"/>
+        </attributes>
+      </object>
+      <packing>
+        <property name="x">10</property>
+        <property name="y">275</property>
       </packing>
     </child>
   </object>
