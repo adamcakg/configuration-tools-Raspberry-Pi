@@ -1,6 +1,5 @@
 from thread import Thread
 from .locale import get_language_and_country
-from .locale import languages
 
 import gi
 
@@ -11,12 +10,13 @@ from gi.repository import Gtk
 class Handler:
     def __init__(self, builder, controller=None):
         self.builder = builder
+        self.option = None
+        self.language_store = None
+        self.country = []
         
         thread = Thread(self)
         
-        while thread.alive() :
-             while Gtk.events_pending():
-                Gtk.main_iteration_do(True)
+      
 
     # ADDING CONTROLLER TO HANDLER
     # ----------------------------------------------------------------------------------------------------------------------
@@ -25,10 +25,26 @@ class Handler:
     
     
     def create_localisation_modal(self, widget):
+        self.create_locale_modal()
+        
         dialog = self.builder.get_object('localisation_modal')
         dialog.set_attached_to(self.builder.get_object('localisation'))
         dialog.show_all()
-        
+    
+    def create_locale_modal(self):
+        self.builder.get_object('localisation_dialog_label').set_text('Choose a locale:')
+        combo_box = self.builder.get_object('localisation_combo_box')
+        combo_box.set_model(self.language_store)
+
+    
+    def create_timezone_modal(self):
+        pass
+    
+    def create_keyboard_modal(self):
+        pass
+    
+    def create_country_modal(self):
+        pass
 
     def delete_localisation_modal(self, widget=None):
         dialog = self.builder.get_object('localisation_modal')
@@ -43,4 +59,10 @@ class Handler:
     
         
     def thread_function(self):
-        get_language_and_country()
+        languages, self.country = get_language_and_country()
+        self.language_store = Gtk.ListStore(str)
+        for language in languages:
+            self.language_store.append([language])
+        
+        
+        

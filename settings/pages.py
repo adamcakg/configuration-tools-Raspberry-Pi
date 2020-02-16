@@ -15,11 +15,11 @@ def get_pages():
         :return - list of pages with instances
         """
         return [
+            System(),
+            Localisation(),
             Wifi(),
             Bluetooth(),
             Appearance(),
-            System(),
             Interfaces(),
-            Localisation(),
             Accessibility()
         ]

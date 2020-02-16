@@ -123,12 +123,12 @@
   <object class="GtkWindow" id="localisation_modal">
     <property name="name">localisation_modal</property>
     <property name="can_focus">False</property>
-    <property name="type">popup</property>
     <property name="modal">True</property>
-    <property name="window_position">center</property>
+    <property name="window_position">mouse</property>
     <property name="type_hint">notification</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="gravity">center</property>
+    <property name="gravity">static</property>
+    <property name="attached_to">localisation</property>
     <child>
       <placeholder/>
     </child>
@@ -138,6 +138,7 @@
         <property name="height_request">150</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="resize_mode">queue</property>
         <child>
           <object class="GtkButton" id="change_option_in_localisation_button">
             <property name="label" translatable="yes">Change</property>
@@ -170,12 +171,13 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="localisation_dialog_label">
+            <property name="name">localisation_dialog_label</property>
             <property name="width_request">210</property>
             <property name="height_request">40</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">adsad ads as as asd sd asd </property>
+            <property name="label" translatable="yes">Choose a locale:</property>
             <property name="xalign">0.5</property>
           </object>
           <packing>
@@ -184,12 +186,19 @@
           </packing>
         </child>
         <child>
-          <object class="GtkComboBox" id="localisation_combo_box">
+          <object class="GtkComboBoxText" id="localisation_combo_box">
             <property name="name">localisation_combo_box</property>
             <property name="width_request">210</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="hexpand">False</property>
+            <property name="vexpand">False</property>
+            <property name="resize_mode">immediate</property>
+            <property name="active">1</property>
+            <property name="add_tearoffs">True</property>
           </object>
           <packing>
             <property name="x">10</property>

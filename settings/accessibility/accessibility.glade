@@ -2,25 +2,32 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkAdjustment" id="adjustment1">
-    <property name="upper">100</property>
+  <object class="GtkAdjustment" id="double_click_delay_adjustment">
+    <property name="lower">100</property>
+    <property name="upper">1990</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+    <signal name="value-changed" handler="mouse_double_click_delay_changed" swapped="no"/>
   </object>
-  <object class="GtkAdjustment" id="adjustment2">
+  <object class="GtkAdjustment" id="mouse_acceleration_adjustment">
     <property name="upper">100</property>
-    <property name="step_increment">1</property>
+    <property name="step_increment">0.01</property>
     <property name="page_increment">10</property>
+    <signal name="value-changed" handler="mouse_acceleration_changed" swapped="no"/>
   </object>
-  <object class="GtkAdjustment" id="adjustment3">
-    <property name="upper">100</property>
+  <object class="GtkAdjustment" id="repeat_delay_adjustment">
+    <property name="lower">10</property>
+    <property name="upper">1000</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+    <signal name="value-changed" handler="keyboard_repeat_delay_changed" swapped="no"/>
   </object>
-  <object class="GtkAdjustment" id="adjustment4">
-    <property name="upper">100</property>
+  <object class="GtkAdjustment" id="repeat_interval_adjustment">
+    <property name="lower">10</property>
+    <property name="upper">200</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+    <signal name="value-changed" handler="keyboard_repeat_interval_changed" swapped="no"/>
   </object>
   <object class="GtkFixed" id="accessibility">
     <property name="name">accessibility</property>
@@ -59,7 +66,7 @@
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="adjustment">adjustment1</property>
+                            <property name="adjustment">mouse_acceleration_adjustment</property>
                             <property name="fill_level">100</property>
                             <property name="round_digits">10</property>
                             <property name="draw_value">False</property>
@@ -142,8 +149,8 @@
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="adjustment">adjustment2</property>
-                            <property name="fill_level">100</property>
+                            <property name="adjustment">double_click_delay_adjustment</property>
+                            <property name="fill_level">1990</property>
                             <property name="draw_value">False</property>
                           </object>
                           <packing>
@@ -185,11 +192,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="double_click_delay_label">
+                            <property name="name">double_click_delay_label</property>
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">100</property>
+                            <property name="label" translatable="yes">0</property>
                             <property name="xalign">0</property>
                           </object>
                           <packing>
@@ -214,14 +222,16 @@
               </packing>
             </child>
             <child>
-              <object class="GtkCheckButton">
+              <object class="GtkCheckButton" id="left_handed_check_button">
                 <property name="label" translatable="yes">Left handed (Swap left and right mouse buttons)</property>
+                <property name="name">left_handed_check_button</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="left_handed_checkbox_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">30</property>
@@ -297,11 +307,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="repeat_delay_label">
+                            <property name="name">repeat_delay_label</property>
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">500</property>
+                            <property name="label" translatable="yes">0</property>
                           </object>
                           <packing>
                             <property name="x">305</property>
@@ -313,8 +324,8 @@
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="adjustment">adjustment3</property>
-                            <property name="fill_level">100</property>
+                            <property name="adjustment">repeat_delay_adjustment</property>
+                            <property name="fill_level">1000</property>
                             <property name="draw_value">False</property>
                           </object>
                           <packing>
@@ -327,8 +338,8 @@
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="adjustment">adjustment4</property>
-                            <property name="fill_level">100</property>
+                            <property name="adjustment">repeat_interval_adjustment</property>
+                            <property name="fill_level">200</property>
                             <property name="draw_value">False</property>
                           </object>
                           <packing>
@@ -358,16 +369,17 @@
                             <property name="xalign">0</property>
                           </object>
                           <packing>
-                            <property name="x">115</property>
+                            <property name="x">350</property>
                             <property name="y">40</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="repeat_interval_label">
+                            <property name="name">repeat_interval_label</property>
                             <property name="height_request">40</property>
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">30</property>
+                            <property name="label" translatable="yes">0</property>
                             <property name="xalign">0</property>
                           </object>
                           <packing>
@@ -383,7 +395,7 @@
                             <property name="label" translatable="yes">Long</property>
                           </object>
                           <packing>
-                            <property name="x">350</property>
+                            <property name="x">115</property>
                             <property name="y">40</property>
                           </packing>
                         </child>
@@ -405,14 +417,16 @@
               </packing>
             </child>
             <child>
-              <object class="GtkCheckButton">
+              <object class="GtkCheckButton" id="beep_check_button">
                 <property name="label" translatable="yes">Beep when there is an error of keyboard input</property>
+                <property name="name">beep_check_button</property>
                 <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
                 <property name="draw_indicator">True</property>
+                <signal name="toggled" handler="beep_checkbox_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">40</property>
@@ -460,20 +474,6 @@
       <packing>
         <property name="x">5</property>
         <property name="y">5</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton">
-        <property name="label" translatable="yes">Apply</property>
-        <property name="width_request">70</property>
-        <property name="height_request">0</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-      </object>
-      <packing>
-        <property name="x">365</property>
-        <property name="y">270</property>
       </packing>
     </child>
   </object>

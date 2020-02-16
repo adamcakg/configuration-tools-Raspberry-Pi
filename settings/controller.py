@@ -12,6 +12,8 @@ class Controller:
         self.main = Main()
         self.set_left_bar(self.main)
         
+
+        
     def set_title_bar(self, header):
         self.window.set_titlebar(header.get_xml_object())
         header.connect_handler(self)

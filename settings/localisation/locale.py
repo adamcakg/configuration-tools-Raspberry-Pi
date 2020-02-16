@@ -1,8 +1,4 @@
 list_of_settings = []
-countries = []
-languages = []
-
-
 
 # METHOD TO FIND TERRITORY AND LANGUAGE FROM LOCALE FILES
 # ----------------------------------------------------------------------------------------------------------------------
@@ -58,7 +54,8 @@ def fulfill_list_settings():
 # METHOD TO FULFULL COUNTRY AND LANGUAGE LISTS
 # ----------------------------------------------------------------------------------------------------------------------
 def fullfill_country_language():
-    global countries, languages
+    countries = []
+    languages = []
     
     for item in list_of_settings:
         countries.append(item[3])
@@ -70,7 +67,9 @@ def fullfill_country_language():
     countries.sort()
     languages.sort()
     
+    return languages, countries
+    
 def get_language_and_country():
     fulfill_list_settings()
-    fullfill_country_language()
+    return fullfill_country_language()
 
