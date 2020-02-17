@@ -13,7 +13,8 @@ class Handler:
         self.repeat_interval = 10
         self.beep = True
         self.left_handed = False
-        mouse_acceleration = 0
+        self.mouse_acceleration = 0
+        self.list_of_mouses = []
         
         Thread(self)
 
@@ -47,25 +48,28 @@ class Handler:
     
     def set_beep(self):
         self.builder.get_object('beep_check_button').set_active(self.beep)
+        
+    
 # ---------------------------------------------------------------------------------------------             
     def left_handed_checkbox_changed(self, widget):
         self.left_handed = widget.get_active()
-        os.popen('xinput set-prop 6 271 {}'.format( '1' if self.left_handed else '0'))
+        for mouse in self.list_of_mouses:
+            os.popen('xinput set-prop "{}" "libinput Left Handed Enabled" {}'.format( mouse, '1' if self.left_handed else '0'))
     
     def set_left_handed(self):
         self.builder.get_object('left_handed_check_button').set_active(self.left_handed)
 # ---------------------------------------------------------------------------------------------
     def mouse_acceleration_changed(self, widget):
         self.mouse_acceleration = (int(widget.get_value()) - 50 ) /50
-        os.popen('xinput set-prop 6 266 {}'.format(str(self.mouse_acceleration)))
+        for mouse in self.list_of_mouses:
+            os.popen('xinput set-prop "{}" "libinput Accel Speed" {}'.format(mouse, str(self.mouse_acceleration)))
         
     def set_mouse_acceleration(self):
+        print(self.mouse_acceleration * 50 + 50)
         self.builder.get_object('mouse_acceleration_adjustment').set_value(self.mouse_acceleration * 50 + 50)
         
 
     def mouse_double_click_delay_changed(self, widget):
-       
-        
         self.builder.get_object('double_click_delay_label').set_text(str(int(widget.get_value())))
         
         
@@ -91,8 +95,16 @@ class Handler:
         self.set_beep()
 
     def get_mouse_settings(self):
-        config = os.popen('xinput --list-props 6').read().split('\n')
+        self.list_of_mouses = os.popen("xinput list | grep pointer | grep slave | cut -f 1 | cut -d ' ' -f 5-").read()
+        self.list_of_mouses = self.list_of_mouses.split('\n')
         
+        for index in range(len(self.list_of_mouses)):
+            self.list_of_mouses[index] = self.list_of_mouses[index].rstrip()
+        
+        self.list_of_mouses.remove('Virtual core XTEST pointer')
+        self.list_of_mouses.remove('')
+
+        config = os.popen('xinput --list-props "{}"'.format(self.list_of_mouses[0])).read().split('\n')
         for line in config:
             if 'Left Handed Enabled' in line:
                 line = line.split()
@@ -101,13 +113,14 @@ class Handler:
                 elif line[5] == '1':
                     self.left_handed = True
             
-            if 'Accel Speed (266):' in line:
+            elif 'Accel Speed' in line:
                 line = line.split()
                 self.mouse_acceleration = float(line[4])
+                break
                 
-    
         self.set_left_handed()
         self.set_mouse_acceleration()
+        
 # THREAD FUNCTION    
 # ----------------------------------------------------------------------------
     def thread_function(self):

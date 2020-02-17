@@ -79,7 +79,7 @@
       </object>
       <packing>
         <property name="x">80</property>
-        <property name="y">95</property>
+        <property name="y">90</property>
       </packing>
     </child>
     <child>
@@ -109,7 +109,7 @@
       </object>
       <packing>
         <property name="x">80</property>
-        <property name="y">278</property>
+        <property name="y">270</property>
       </packing>
     </child>
   </object>

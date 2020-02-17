@@ -150,6 +150,8 @@
   </object>
   <object class="GtkFixed" id="system">
     <property name="name">system</property>
+    <property name="width_request">450</property>
+    <property name="height_request">310</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
@@ -224,21 +226,21 @@
             <child>
               <object class="GtkEntry" id="hostname_entry">
                 <property name="name">hostname_entry</property>
-                <property name="width_request">170</property>
+                <property name="width_request">200</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <signal name="changed" handler="hostname_entry_changed" swapped="no"/>
               </object>
               <packing>
-                <property name="x">200</property>
+                <property name="x">170</property>
                 <property name="y">15</property>
               </packing>
             </child>
             <child>
               <object class="GtkButton">
                 <property name="label" translatable="yes">Change password</property>
-                <property name="width_request">170</property>
+                <property name="width_request">200</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -246,7 +248,7 @@
                 <signal name="clicked" handler="create_password_modal" swapped="no"/>
               </object>
               <packing>
-                <property name="x">200</property>
+                <property name="x">170</property>
                 <property name="y">55</property>
               </packing>
             </child>

@@ -56,7 +56,7 @@
     </child>
     <child>
       <object class="GtkScrolledWindow">
-        <property name="width_request">243</property>
+        <property name="width_request">290</property>
         <property name="height_request">180</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -64,7 +64,7 @@
         <child>
           <object class="GtkTreeView" id="wifi_tree">
             <property name="name">wifi_tree</property>
-            <property name="width_request">243</property>
+            <property name="width_request">290</property>
             <property name="height_request">180</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -78,8 +78,8 @@
         </child>
       </object>
       <packing>
-        <property name="x">99</property>
-        <property name="y">95</property>
+        <property name="x">80</property>
+        <property name="y">90</property>
       </packing>
     </child>
     <child>
@@ -100,7 +100,7 @@
     <child>
       <object class="GtkButton">
         <property name="label" translatable="yes">Refresh</property>
-        <property name="width_request">243</property>
+        <property name="width_request">290</property>
         <property name="height_request">30</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -108,8 +108,8 @@
         <signal name="clicked" handler="button_pressed" swapped="no"/>
       </object>
       <packing>
-        <property name="x">99</property>
-        <property name="y">278</property>
+        <property name="x">80</property>
+        <property name="y">270</property>
       </packing>
     </child>
   </object>
