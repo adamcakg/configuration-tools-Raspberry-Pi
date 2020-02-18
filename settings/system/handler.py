@@ -71,7 +71,6 @@ class Handler:
         lightdm = os.popen('cat /etc/lightdm/lightdm.conf').read()
 
         if '#autologin-user=pi' in lightdm:
-            print('#autologin-user=pi')
             self.builder.get_object('autologin_switch').set_state(False)
             self.autologin = False
         elif 'autologin-user=pi' in lightdm:

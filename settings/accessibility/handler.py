@@ -65,7 +65,6 @@ class Handler:
             os.popen('xinput set-prop "{}" "libinput Accel Speed" {}'.format(mouse, str(self.mouse_acceleration)))
         
     def set_mouse_acceleration(self):
-        print(self.mouse_acceleration * 50 + 50)
         self.builder.get_object('mouse_acceleration_adjustment').set_value(self.mouse_acceleration * 50 + 50)
         
 
