@@ -31,6 +31,8 @@
   </object>
   <object class="GtkFixed" id="accessibility">
     <property name="name">accessibility</property>
+    <property name="width_request">-1</property>
+    <property name="height_request">-1</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
@@ -242,7 +244,7 @@
         </child>
         <child type="tab">
           <object class="GtkLabel">
-            <property name="width_request">80</property>
+            <property name="width_request">201</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Mouse</property>
@@ -454,7 +456,7 @@
         </child>
         <child type="tab">
           <object class="GtkLabel">
-            <property name="width_request">80</property>
+            <property name="width_request">201</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Keyboard</property>

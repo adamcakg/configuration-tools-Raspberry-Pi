@@ -12,20 +12,23 @@ class Handler:
         self.builder = builder
         self.changed = False
         self.monitors = 1
+        self.pcman_file_desktop_0 = ''
+        self.pcman_file_desktop_1 = ''
+        self.mode_0 = ''
+        self.mode_1 = ''
         
         
         Thread(self)
         
-        
-        
-        #self.set_apply_button('disable')
 # ADDING CONTROLLER TO HANDLER
 # ---------------------------------------------------------------------------------
+    
     def add_controller(self, controller):
         self.controller = controller
 
 # RELOADING SETTINGS
 # -----------------------------------------------------------------------------------
+    
     def reload_lxpanel(self):
         os.popen("lxpanelctl refresh")
 
@@ -37,43 +40,109 @@ class Handler:
 
     def reload_lxsession(self):
         os.popen("lxsession -r")
-
+   
+# GET PCMANFM FILE
 # ---------------------------------------------------------------------------------------
-    def check_dir(path):
-        GLib.mkdir_with_parents(path, 6)
-        
-# ---------------------------------------------------------------------------------------
-        
-    def get_openbox_file(self):
-        filename = GLib.getenv ("DESKTOP_SESSION").lower() + '-rc.xml'
-        path = GLib.get_user_config_dir() + '/openbox/' + filename
+    def get_pcmanfm_file(self, desktop, global_settings):
+        desktop_session = GLib.getenv ("DESKTOP_SESSION")
+        path = ( "/etc/xdg" if global_settings else GLib.get_user_config_dir()) + "/pcmanfm/" + desktop_session + '/{}'.format("desktop-items-0.conf" if desktop == 0 else "desktop-items-1.conf")
         return path
     
-    def get_lxsession_file(self):
-        desktop_session = GLib.getenv ("DESKTOP_SESSION")
-        path = GLib.get_user_config_dir() + '/lxsession/' + desktop_session + "/desktop.conf"
-        return path
+    def save_pcman_file(self, desktop):
+        if desktop == 0:
+            os.popen('sudo echo "{}" > {}'.format(self.pcman_file_desktop_0, self.get_pcmanfm_file(desktop, False)))
+        else:
+            os.popen('sudo echo "{}" > {}'.format(self.pcman_file_desktop_1, self.get_pcmanfm_file(desktop, False)))
+        self.reload_pcmanfm()
+# ---------------------------------------------------------------------------------------             
     
-    def get_lxpanel_file(self):
-        desktop_session = GLib.getenv ("DESKTOP_SESSION")
-        path = GLib.get_user_config_dir() + '/lxpanel/' + desktop_session + "/panels/panel"
-        return path
+    def set_wallpaper_mode(self, desktop):
+        if desktop == 0:
+            self.mode_0 = self.pcman_file_desktop_0.split('\n')[1].split('=')
+            self.builder.get_object('wallpaper_laytout_combo_box_1').set_active_id(self.mode_0[1]) # mode from pcmanfm file
+        elif desktop == 1:
+            self.mode_1 = self.pcman_file_desktop_1.split('\n')[1].split('=')
+            self.builder.get_object('wallpaper_laytout_combo_box_2').set_active_id(self.mode_1[1]) # mode from pcmanfm file
+    
+    def wallpaper_1_changed(self, widget):
+        mode = widget.get_active_id()
+        self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace(self.mode_0[1], mode)
+        self.mode_0[1] = mode
+        self.save_pcman_file(0)
+        
+        
+    def wallpaper_2_changed(self, widget):
+        mode = widget.get_active_id()
+        self.pcman_file_desktop_1 = self.pcman_file_desktop_1.replace(self.mode_1[1], mode)
+        self.mode_1[1] = mode
+        self.save_pcman_file(1)
+    
+    
+# DOCUMENTS CHECKBUTTON
+# ---------------------------------------------------------------------------------
+    def get_desktop_one_items(self):
+        config_file = self.get_pcmanfm_file(0, False)
+        file_exist = os.path.exists(config_file)
+        if file_exist:
+            self.pcman_file_desktop_0 = os.popen('cat {}'.format(config_file)).read()
+            checkbox_documents = self.builder.get_object('checkbox_documents_monitor_1')
+            checkbox_trash = self.builder.get_object('checkbox_trash_monitor_1')
+            checkbox_mounts = self.builder.get_object('checkbox_mounts_monitor_1')
+            if 'show_documents=1' in self.pcman_file_desktop_0:
+                checkbox_documents.set_active(True)
+                
+            if 'show_trash=1' in self.pcman_file_desktop_0:
+                checkbox_trash.set_active(True)
+                
+            if 'show_mounts=1' in self.pcman_file_desktop_0:
+                checkbox_mounts.set_active(True)
+                
+            checkbox_documents.connect("toggled", self.checkbutton_desktop_one_items_changed)
+            checkbox_trash.connect("toggled", self.checkbutton_desktop_one_items_changed)
+            checkbox_mounts.connect("toggled", self.checkbutton_desktop_one_items_changed)
+            
+            self.set_wallpaper_mode(0)
+            
+    def get_desktop_two_items(self):
+        config_file = self.get_pcmanfm_file(1, False)
+        file_exist = os.path.exists(config_file)
+        if file_exist:
+            self.pcman_file_desktop_1 = os.popen('cat ' + config_file).read()
+            checkbox_documents = self.builder.get_object('checkbox_documents_monitor_2')
+            checkbox_trash = self.builder.get_object('checkbox_trash_monitor_2')
+            checkbox_mounts = self.builder.get_object('checkbox_mounts_monitor_2')
+            if 'show_documents=1' in self.pcman_file_desktop_1:
+                checkbox_documents.set_active(True)
+                
+            if 'show_trash=1' in self.pcman_file_desktop_1:
+                checkbox_trash.set_active(True)
+                
+            if 'show_mounts=1' in self.pcman_file_desktop_1:
+                checkbox_mounts.set_active(True)
+                
+            checkbox_documents.connect("toggled", self.checkbutton_desktop_two_items_changed)
+            checkbox_trash.connect("toggled", self.checkbutton_desktop_two_items_changed)
+            checkbox_mounts.connect("toggled", self.checkbutton_desktop_two_items_changed)
 
-    def get_pcmanfm_file(self, desktop):
-        desktop_session = GLib.getenv ("DESKTOP_SESSION")
-        path = GLib.get_user_config_dir() + "/pcmanfm/" + desktop_session + ''.format("desktop-items-0.conf" if desktop else "desktop-items-1.conf")
+            self.set_wallpaper_mode(1)
+# ---------------------------------------------------------------------------------
+
+    def checkbutton_desktop_one_items_changed(self, widget):
         
-        return path
+        if widget.get_active():
+            self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace('{}=0'.format(widget.get_name()), '{}=1'.format(widget.get_name()))
+        else:
+            self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace('{}=1'.format(widget.get_name()), '{}=0'.format(widget.get_name()))    
+        self.save_pcman_file(0)
+        
+    def checkbutton_desktop_two_items_changed(self, widget):
+        if widget.get_active():
+            self.pcman_file_desktop_1 = self.pcman_file_desktop_1.replace('{}=0'.format(widget.get_name()), '{}=1'.format(widget.get_name()))
+        else:
+            self.pcman_file_desktop_1 = self.pcman_file_desktop_1.replace('{}=1'.format(widget.get_name()), '{}=0'.format(widget.get_name()))    
+        self.save_pcman_file(1)
     
-    def get_pcmanfm_g_file(self):
-        desktop_session = GLib.getenv ("DESKTOP_SESSION")
-        path = GLib.get_user_config_dir() + "/pcmanfm/" + desktop_session + "/pcmanfm.conf"
-        return path
-        
-    def get_libfm_file(self):
-        desktop_session = GLib.getenv ("DESKTOP_SESSION")
-        path = GLib.get_user_config_dir() + "/libfm/libfm.conf"
-        return path
+    
 # NUMBER OF MONITORS
 # ---------------------------------------------------------------------------------
     def get_number_of_monitors(self):
@@ -91,26 +160,8 @@ class Handler:
         #desktop_session = GLib.getenv ("DESKTOP_SESSION")
         #print(GLib.get_user_config_dir())
         #GLib.mkdir_with_parents(path, 6)
-        pass
-    
-    
-    
-# SET APPLY
-# ---------------------------------------------------------------        
-    def set_apply_button(self, action):
-        if action == 'disable':
-            self.builder.get_object("apply_button").set_sensitive(False)
-        elif action == 'enable':
-            if self.changed:
-                self.builder.get_object("apply_button").set_sensitive(True)
-                
-# APPLY METHOD
-# ---------------------------------------------------------------          
-    def apply(self, widget):
-        
-        
-        
-        self.set_apply_button('disable')
+        self.get_desktop_one_items()
+        self.get_desktop_two_items()
         
         
     
@@ -118,12 +169,6 @@ class Handler:
         self.get_number_of_monitors()
         self.get_settings()
     
-       
-        print(self.get_pcmanfm_file(0))
-        print(self.get_openbox_file())
-        print(self.get_lxsession_file())
-        print(self.get_lxpanel_file())
-        print(self.get_pcmanfm_g_file())
-        print(self.get_libfm_file())
+
         
     

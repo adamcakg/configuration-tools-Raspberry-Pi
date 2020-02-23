@@ -94,14 +94,12 @@ class Handler:
         self.set_beep()
 
     def get_mouse_settings(self):
-        self.list_of_mouses = os.popen("xinput list | grep pointer | grep slave | cut -f 1 | cut -d ' ' -f 5-").read()
+        self.list_of_mouses = os.popen("xinput list | grep pointer | grep slave | cut -f 2 | cut -d ' ' -f 5-").read()
         self.list_of_mouses = self.list_of_mouses.split('\n')
-        
-        for index in range(len(self.list_of_mouses)):
-            self.list_of_mouses[index] = self.list_of_mouses[index].rstrip()
-        
-        self.list_of_mouses.remove('Virtual core XTEST pointer')
+        for mouse in range(len(self.list_of_mouses)):
+            self.list_of_mouses[mouse] = self.list_of_mouses[mouse].replace('id=', '')
         self.list_of_mouses.remove('')
+        self.list_of_mouses.remove('4')
 
         config = os.popen('xinput --list-props "{}"'.format(self.list_of_mouses[0])).read().split('\n')
         for line in config:
