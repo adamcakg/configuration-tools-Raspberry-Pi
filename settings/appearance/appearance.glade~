@@ -98,7 +98,6 @@
                       <item id="stretch" translatable="yes">Stretch to cover screen</item>
                       <item id="tile" translatable="yes">Tile image</item>
                     </items>
-                    <signal name="changed" handler="wallpaper_1_changed" swapped="no"/>
                   </object>
                   <packing>
                     <property name="x">170</property>
@@ -120,12 +119,14 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkFileChooserButton">
+                  <object class="GtkFileChooserButton" id="image_choosing_dialog_0">
+                    <property name="name">image_choosing_dialog_0</property>
                     <property name="width_request">200</property>
                     <property name="height_request">30</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="title" translatable="yes"/>
+                    <signal name="file-set" handler="wallpaper_1_changed" swapped="no"/>
                   </object>
                   <packing>
                     <property name="x">170</property>
@@ -147,7 +148,8 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkColorButton">
+                  <object class="GtkColorButton" id="bg_color_button_1">
+                    <property name="name">bg_color_button_1</property>
                     <property name="width_request">200</property>
                     <property name="height_request">30</property>
                     <property name="visible">True</property>
@@ -174,7 +176,8 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkColorButton">
+                  <object class="GtkColorButton" id="fg_color_button_1">
+                    <property name="name">fg_color_button_1</property>
                     <property name="width_request">200</property>
                     <property name="height_request">30</property>
                     <property name="visible">True</property>
@@ -280,7 +283,6 @@
                       <item id="stretch" translatable="yes">Stretch to cover screen</item>
                       <item id="tile" translatable="yes">Tile image</item>
                     </items>
-                    <signal name="changed" handler="wallpaper_2_changed" swapped="no"/>
                   </object>
                   <packing>
                     <property name="x">170</property>
@@ -302,12 +304,14 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkFileChooserButton">
+                  <object class="GtkFileChooserButton" id="image_choosing_dialog_1">
+                    <property name="name">image_choosing_dialog_1</property>
                     <property name="width_request">200</property>
                     <property name="height_request">30</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="title" translatable="yes"/>
+                    <signal name="file-set" handler="wallpaper_2_changed" swapped="no"/>
                   </object>
                   <packing>
                     <property name="x">170</property>
@@ -329,7 +333,8 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkColorButton">
+                  <object class="GtkColorButton" id="bg_color_button_2">
+                    <property name="name">bg_color_button_2</property>
                     <property name="width_request">200</property>
                     <property name="height_request">30</property>
                     <property name="visible">True</property>
@@ -356,7 +361,8 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkColorButton">
+                  <object class="GtkColorButton" id="fg_color_button_2">
+                    <property name="name">fg_color_button_2</property>
                     <property name="width_request">200</property>
                     <property name="height_request">30</property>
                     <property name="visible">True</property>
