@@ -17,10 +17,10 @@ def get_pages():
         return [
             System(),
             Accessibility(),
+            Appearance(),
             Localisation(),
             Wifi(),
             Bluetooth(),
-            Appearance(),
             Interfaces()
             
         ]

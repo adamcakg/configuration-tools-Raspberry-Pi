@@ -583,7 +583,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkFontButton">
+              <object class="GtkFontButton" id="system_font_button">
+                <property name="name">system_font_button</property>
                 <property name="width_request">200</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
@@ -591,6 +592,7 @@
                 <property name="receives_default">True</property>
                 <property name="font">Sans 12</property>
                 <property name="language">en-us</property>
+                <property name="level">GTK_FONT_CHOOSER_LEVEL_STYLE | GTK_FONT_CHOOSER_LEVEL_SIZE | GTK_FONT_CHOOSER_LEVEL_VARIATIONS | GTK_FONT_CHOOSER_LEVEL_FEATURES | GTK_FONT_CHOOSER_LEVEL_FAMILY</property>
                 <property name="preview_text"/>
               </object>
               <packing>
@@ -612,7 +614,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkColorButton">
+              <object class="GtkColorButton" id="system_bg_color_button">
+                <property name="name">system_bg_color_button</property>
                 <property name="width_request">200</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
@@ -638,7 +641,8 @@
               </packing>
             </child>
             <child>
-              <object class="GtkColorButton">
+              <object class="GtkColorButton" id="system_fg_color_button">
+                <property name="name">system_fg_color_button</property>
                 <property name="width_request">170</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>

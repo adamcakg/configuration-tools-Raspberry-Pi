@@ -1,10 +1,12 @@
 from thread import Thread
 import os
 
+from .helper_functions import insert_font_into_xml, color_to_hex
+
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GLib, Gdk
+from gi.repository import Gtk, GLib, Gdk, Pango
 
 
 class Handler:
@@ -26,6 +28,11 @@ class Handler:
                                     'bg_color': '#ffffffffffff',
                                     'fg_color': '#000000000000'
                                    }
+        self.system_properties = { 'font': '',
+                                   'bg_color': '',
+                                   'fg_color': ''
+            }
+        
         Thread(self)
         
 # ADDING CONTROLLER TO HANDLER
@@ -58,7 +65,7 @@ class Handler:
             os.popen('sudo echo "{}" > {}'.format(self.pcman_file_desktop_0.rstrip(), self.get_pcmanfm_file(desktop, False)))
         else:
             os.popen('sudo echo "{}" > {}'.format(self.pcman_file_desktop_1.rstrip(), self.get_pcmanfm_file(desktop, False)))
-        self.reload_pcmanfm()
+        
 
 # LXPANEL FILE
 # ---------------------------------------------------------------------------------------                 
@@ -72,7 +79,6 @@ class Handler:
         os.popen('sed -i s/iconsize=.*/iconsize={}/g {}'.format(self.panel_properties['iconsize'], path))
         os.popen('sed -i s/height=.*/height={}/g {}'.format(self.panel_properties['iconsize'], path))
         os.popen('sed -i s/edge=.*/edge={}/g {}'.format(self.panel_properties['barpos'], path))
-        self.reload_lxpanel()
 
 # LXSESSION FILE
 # ---------------------------------------------------------------------------------------                 
@@ -91,11 +97,25 @@ class Handler:
                 config_file[1][index] = 'bar_bg_color:' + self.panel_properties['bg_color']
             elif 'bar_fg_color:' in config_file[1][index]:
                 config_file[1][index] = 'bar_fg_color:' + self.panel_properties['fg_color']
+            elif 'selected_bg_color:' in config_file[1][index]:
+                config_file[1][index] = 'sGtk/ColorScheme=selected_bg_color:' + self.system_properties['bg_color']
+            elif 'selected_fg_color:' in config_file[1][index]:
+                config_file[1][index] = 'selected_fg_color:' + self.system_properties['fg_color']
                 
-        config_file[1] = '\\n'.join(config_file[1])        
+        config_file[1] = '\\n'.join(config_file[1])
+        config_file[2] = 'sGtk/FontName=' + self.system_properties['font']
+        config_file = '\n'.join(config_file)
+        config_file = config_file.rstrip()
         
-        os.popen('sudo echo "{}" > {}'.format('\n'.join(config_file), path))
-        self.reload_pcmanfm()
+        os.popen('sudo echo "{}" > {}'.format(config_file, path))
+    
+    
+# OPENBOX FILE
+# ---------------------------------------------------------------------------------------                 
+    def get_openbox_file(self):
+        filename = GLib.getenv ("DESKTOP_SESSION").lower() + '-rc.xml'
+        path = GLib.get_user_config_dir() + '/openbox/' + filename
+        return path
     
 # WALLPAPER MODE
 # ---------------------------------------------------------------------------------------             
@@ -112,12 +132,14 @@ class Handler:
         self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace(self.mode_0[1], mode)
         self.mode_0[1] = mode
         self.save_pcman_file(0)
+        self.reload_pcmanfm()
         
     def wallpaper_mode_2_changed(self, widget):
         mode = widget.get_active_id()
         self.pcman_file_desktop_1 = self.pcman_file_desktop_1.replace(self.mode_1[1], mode)
         self.mode_1[1] = mode
         self.save_pcman_file(1)
+        self.reload_pcmanfm()
         
 # IMAGES OF DESKTOPS
 # ---------------------------------------------------------------------------------------             
@@ -134,6 +156,7 @@ class Handler:
         self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace(self.wallpaper_path_0, new_file_path)
         self.wallpaper_path_0 = new_file_path
         self.save_pcman_file(0)
+        self.reload_pcmanfm()
     
     
     def wallpaper_2_changed(self, widget):
@@ -141,6 +164,7 @@ class Handler:
         self.pcman_file_desktop_1 = self.pcman_file_desktop_1.replace(self.wallpaper_path_1, new_file_path)
         self.wallpaper_path_1 = new_file_path
         self.save_pcman_file(1)
+        self.reload_pcmanfm()
 
 # BACKGROUND OF DESKTOPS
 # ---------------------------------------------------------------------------------------
@@ -158,24 +182,26 @@ class Handler:
     
     def bg_color_1_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        color = self.color_to_hex(color)
+        color = color_to_hex(color)
         self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace('desktop_bg=' + self.bg_color_0,
                                                                       'desktop_bg=' + color)
         self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace('desktop_shadow=' + self.bg_color_0,
                                                                       'desktop_shadow=' + color)
         self.bg_color_0 = color
         self.save_pcman_file(0)
+        self.reload_pcmanfm()
 
             
     def bg_color_2_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        color = self.color_to_hex(color)
+        color = color_to_hex(color)
         self.pcman_file_desktop_1 = self.pcman_file_desktop_0.replace('desktop_bg=' + self.bg_color_0,
                                                                       'desktop_bg=' + color)
         self.pcman_file_desktop_1 = self.pcman_file_desktop_0.replace('desktop_shadow=' + self.bg_color_0,
                                                                       'desktop_shadow=' + color) 
         self.bg_color_1 = color
         self.save_pcman_file(1)
+        self.reload_pcmanfm()
 
 # TEXT COLOR DESKTOP
 # ---------------------------------------------------------------------------------------        
@@ -194,32 +220,22 @@ class Handler:
             
     def fg_color_1_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        color = self.color_to_hex(color)
+        color = color_to_hex(color)
         self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace('desktop_fg=' + self.fg_color_0,
                                                                       'desktop_fg=' + color)
         self.fg_color_0 = color
         self.save_pcman_file(0)
+        self.reload_pcmanfm()
         
         
     def fg_color_2_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        color = self.color_to_hex(color)
+        color = color_to_hex(color)
         self.pcman_file_desktop_1 = self.pcman_file_desktop_1.replace('desktop_fg=' + self.fg_color_1,
                                                                       'desktop_fg=' + color)
         self.fg_color_1 = color
         self.save_pcman_file(1)
-        
-# METHOD TO CONVERT COLOR TO HEX
-# ---------------------------------------------------------------------------------------
-    def color_to_hex(self, color):
-        color = color.split(',')
-        color_string = '#'
-        for index in range(len(color)):
-            hex_temp_color = hex(int(color[index]))[2:] * 2
-            if len(hex_temp_color) < 4:
-                hex_temp_color += hex_temp_color
-            color_string += hex_temp_color
-        return color_string
+        self.reload_pcmanfm()
         
 # GETTING DESKTOP ITEMS TO SET WIDGETS IN APP
 # ---------------------------------------------------------------------------------
@@ -292,6 +308,7 @@ class Handler:
         else:
             self.pcman_file_desktop_0 = self.pcman_file_desktop_0.replace('{}=1'.format(widget.get_name()), '{}=0'.format(widget.get_name()))    
         self.save_pcman_file(0)
+        self.reload_pcmanfm()
         
     def checkbutton_desktop_two_items_changed(self, widget):
         if widget.get_active():
@@ -299,6 +316,7 @@ class Handler:
         else:
             self.pcman_file_desktop_1 = self.pcman_file_desktop_1.replace('{}=1'.format(widget.get_name()), '{}=0'.format(widget.get_name()))    
         self.save_pcman_file(1)
+        self.reload_pcmanfm()
     
 # NUMBER OF MONITORS
 # ---------------------------------------------------------------------------------
@@ -360,6 +378,7 @@ class Handler:
     def panel_size_combo_box_changed(self, widget):
         self.panel_properties['iconsize'] = widget.get_active_id()
         self.save_lxpanel_file()
+        self.reload_lxpanel()
 
     def panel_position_changed(self, widget):
         if widget.get_active():
@@ -367,18 +386,105 @@ class Handler:
         else:
             self.panel_properties['barpos'] = 'bottom' 
         self.save_lxpanel_file()
+        self.reload_lxpanel()
         
     def panel_bg_color_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        color = self.color_to_hex(color)
+        color = color_to_hex(color)
         self.panel_properties['bg_color'] = color
         self.save_lx_session_file()
+        self.reload_pcmanfm()
         
     def panel_fg_color_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        color = self.color_to_hex(color)
+        color = color_to_hex(color)
         self.panel_properties ['fg_color'] = color
         self.save_lx_session_file()
+        self.reload_pcmanfm()
+# ---------------------------------------------------------------------------------------         
+    def get_system_properties(self):
+        font_path = self.get_lxsession_file(False)
+        font = os.popen('cat {} | grep -oP "FontName=([a-zA-Z0-9 ])+"'.format(font_path)).read()[:-1]
+        self.set_font(font)
+        
+        path = self.get_lxsession_file(False)
+        system_bg = os.popen("cat {} | grep -oP 'selected_bg_color:#([a-f0-9])+'".format(path)).read()
+        self.set_system_bg(system_bg)
+        
+        system_fg = os.popen("cat {} | grep -oP 'selected_fg_color:#([a-f0-9])+'".format(path)).read()
+        self.set_system_fg(system_fg)
+
+# ---------------------------------------------------------------------------------------
+    def set_font(self,font):
+        self.system_properties['font'] = font.replace('FontName=', '')
+        self.builder.get_object('system_font_button').set_font_name(self.system_properties['font'])
+        self.builder.get_object('system_font_button').connect("font-set", self.font_changed)
+        
+    def set_system_bg(self, bg):
+        self.system_properties['bg_color'] = bg.replace('selected_bg_color:', '')
+        color = Gdk.RGBA()
+        color.parse(self.panel_properties['bg_color'])
+        self.builder.get_object('system_bg_color_button').set_rgba(color)
+        self.builder.get_object('system_bg_color_button').connect("color-set", self.system_bg_changed)
+        
+    def set_system_fg(self, fg):
+        self.system_properties['fg_color'] = fg.replace('selected_fg_color:', '')
+        color = Gdk.RGBA()
+        color.parse(self.panel_properties['fg_color'])
+        self.builder.get_object('system_fg_color_button').set_rgba(color)
+        self.builder.get_object('system_fg_color_button').connect("color-set", self.system_fg_changed)
+        
+
+# --------------------------------------------------------------------------------------- 
+    def font_changed(self, widget):
+        self.system_properties['font'] = widget.get_font_name()
+        
+        pcman_file = self.pcman_file_desktop_0.split('\n')
+        pcman_file[7] = 'desktop_font=' + self.system_properties['font']
+        self.pcman_file_desktop_0 = '\n'.join(pcman_file)
+        
+        pcman_file = self.pcman_file_desktop_1.split('\n')
+        pcman_file[7] = 'desktop_font=' + self.system_properties['font']
+        self.pcman_file_desktop_1 = '\n'.join(pcman_file)
+        
+        path = self.get_openbox_file()
+        openbox_file_string = os.popen('cat {}'.format(path)).read()
+        openbox_file_string = insert_font_into_xml(openbox_file_string, self.system_properties['font'])
+        
+        os.popen("echo '{}' > {}".format(openbox_file_string, path))
+        
+        self.save_lx_session_file()
+        self.save_pcman_file(0)
+        self.save_pcman_file(1)
+
+        self.reload_pcmanfm()
+        self.reload_openbox()
+        
+    def system_bg_changed(self, widget):
+        color = widget.get_rgba().to_string()[4:][:-1]
+        print(color)
+        color = color_to_hex(color)
+        self.system_properties['bg_color'] = color
+        
+        path = self.get_openbox_file()
+        openbox_file_string = os.popen('cat {}'.format(path)).read()
+        tree = ElementTree.fromstring(openbox_file_string)
+        
+        print(color)
+        print(tree[0][3].text)
+        print(tree[0][4].text)
+        
+        
+        #openbox_file_string = '<?xml version="1.0"?>\n' + ElementTree.tostring(tree).decode()
+        #os.popen("echo '{}' > {}".format(openbox_file_string, path))
+        
+        #self.save_lx_session_file()
+    
+    def system_fg_changed(self, widget):
+        color = widget.get_rgba().to_string()[4:][:-1]
+        color = color_to_hex(color)
+        self.system_properties['fg_color'] = color
+        #self.save_lx_session_file()
         
 # --------------------------------------------------------------------------------------- 
 # GET SETTINGS (METHOD TO THREAD)
@@ -387,6 +493,7 @@ class Handler:
         self.get_desktop_one_items()
         self.get_desktop_two_items()
         self.get_panel_properties()
+        self.get_system_properties()
         
     def thread_function(self):
         self.get_number_of_monitors()
