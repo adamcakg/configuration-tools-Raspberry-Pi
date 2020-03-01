@@ -62,7 +62,7 @@ class Handler:
     def mouse_acceleration_changed(self, widget):
         self.mouse_acceleration = (int(widget.get_value()) - 50 ) /50
         for mouse in self.list_of_mouses:
-            os.popen('xinput set-prop "{}" "libinput Accel Speed" {}'.format(mouse, str(self.mouse_acceleration)))
+            os.popen('xinput set-prop "{}" "libinput Accel Speed" {} > /dev/null 2>&1'.format(mouse, str(self.mouse_acceleration)))
         
     def set_mouse_acceleration(self):
         self.builder.get_object('mouse_acceleration_adjustment').set_value(self.mouse_acceleration * 50 + 50)
@@ -100,8 +100,16 @@ class Handler:
             self.list_of_mouses[mouse] = self.list_of_mouses[mouse].replace('id=', '')
         self.list_of_mouses.remove('')
         self.list_of_mouses.remove('4')
+        
+        right_mouse_id = 0
+        for mouse in self.list_of_mouses:
+            if os.popen('xinput --list-props "{}" | grep "Accel Speed"'.format(mouse)).read() != '':
+                right_mouse_id = mouse
+        
+        
+        
 
-        config = os.popen('xinput --list-props "{}"'.format(self.list_of_mouses[0])).read().split('\n')
+        config = os.popen('xinput --list-props "{}"'.format(right_mouse_id)).read().split('\n')
         for line in config:
             if 'Left Handed Enabled' in line:
                 line = line.split()
