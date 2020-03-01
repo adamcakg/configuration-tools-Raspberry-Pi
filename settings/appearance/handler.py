@@ -1,7 +1,7 @@
 from thread import Thread
 import os
 
-from .helper_functions import insert_font_into_xml, color_to_hex
+from .helper_functions import insert_font_into_xml, color_to_hex, insert_color_in_xml, color_to_short_hex
 
 import gi
 
@@ -30,7 +30,9 @@ class Handler:
                                    }
         self.system_properties = { 'font': '',
                                    'bg_color': '',
-                                   'fg_color': ''
+                                   'fg_color': '',
+                                   'orig_cursor': '',
+                                   'cursor': ''
             }
         
         Thread(self)
@@ -104,6 +106,7 @@ class Handler:
                 
         config_file[1] = '\\n'.join(config_file[1])
         config_file[2] = 'sGtk/FontName=' + self.system_properties['font']
+        config_file[5] = 'iGtk/CursorThemeSize=' + self.system_properties['cursor']
         config_file = '\n'.join(config_file)
         config_file = config_file.rstrip()
         
@@ -116,7 +119,23 @@ class Handler:
         filename = GLib.getenv ("DESKTOP_SESSION").lower() + '-rc.xml'
         path = GLib.get_user_config_dir() + '/openbox/' + filename
         return path
+# GTK3 FILE
+# ---------------------------------------------------------------------------------------      
+    def get_gtk3_file(self):
+        return GLib.get_user_config_dir() + '/gtk-3.0/gtk.css'
     
+    def save_gtk3_file(self, typ, color):
+        path = self.get_gtk3_file()
+        file = os.popen('cat {}'.format(path)).read().split('\n')
+        if typ == 'bg':
+            file[0] = '@define-color theme_selected_bg_color {};'.format(color)
+        elif typ == 'fg':
+            file[1] = '@define-color theme_selected_fg_color {};'.format(color)
+            
+        file = file[0] + '\n' + file[1]    
+        os.popen('sudo echo "{}" > {}'.format(file, path))
+        
+        
 # WALLPAPER MODE
 # ---------------------------------------------------------------------------------------             
     def set_wallpaper_mode(self, desktop):
@@ -413,6 +432,10 @@ class Handler:
         
         system_fg = os.popen("cat {} | grep -oP 'selected_fg_color:#([a-f0-9])+'".format(path)).read()
         self.set_system_fg(system_fg)
+        
+        cursor_size = os.popen("cat {} | grep -oP 'iGtk/CursorThemeSize=([0-9])+'".format(path)).read().rstrip()
+        self.set_cursor(cursor_size)
+        
 
 # ---------------------------------------------------------------------------------------
     def set_font(self,font):
@@ -421,19 +444,25 @@ class Handler:
         self.builder.get_object('system_font_button').connect("font-set", self.font_changed)
         
     def set_system_bg(self, bg):
-        self.system_properties['bg_color'] = bg.replace('selected_bg_color:', '')
+        self.system_properties['bg_color'] = bg.replace('selected_bg_color:', '')[:-1]
         color = Gdk.RGBA()
-        color.parse(self.panel_properties['bg_color'])
+        color.parse(self.system_properties['bg_color'])
         self.builder.get_object('system_bg_color_button').set_rgba(color)
         self.builder.get_object('system_bg_color_button').connect("color-set", self.system_bg_changed)
         
     def set_system_fg(self, fg):
-        self.system_properties['fg_color'] = fg.replace('selected_fg_color:', '')
+        self.system_properties['fg_color'] = fg.replace('selected_fg_color:', '')[:-1]
         color = Gdk.RGBA()
-        color.parse(self.panel_properties['fg_color'])
+        color.parse(self.system_properties['fg_color'])
         self.builder.get_object('system_fg_color_button').set_rgba(color)
         self.builder.get_object('system_fg_color_button').connect("color-set", self.system_fg_changed)
         
+    def set_cursor(self, cursor):
+        cursor = cursor.replace('iGtk/CursorThemeSize=','')
+        self.system_properties['cursor'] = cursor
+        self.system_properties['orig_cursor'] = cursor
+        self.builder.get_object('system_cursor_combo_box').set_active_id(cursor)
+        self.builder.get_object('system_cursor_combo_box').connect("changed", self.system_cursor_changed)
 
 # --------------------------------------------------------------------------------------- 
     def font_changed(self, widget):
@@ -459,32 +488,49 @@ class Handler:
 
         self.reload_pcmanfm()
         self.reload_openbox()
+        self.reload_lxpanel()
         
     def system_bg_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        print(color)
-        color = color_to_hex(color)
-        self.system_properties['bg_color'] = color
+        self.system_properties['bg_color'] = color_to_hex(color)
+        color = color_to_short_hex(color)
         
         path = self.get_openbox_file()
         openbox_file_string = os.popen('cat {}'.format(path)).read()
-        tree = ElementTree.fromstring(openbox_file_string)
+        openbox_file_string = insert_color_in_xml(openbox_file_string, 'bg', color)
+        os.popen("echo '{}' > {}".format(openbox_file_string, path))
         
-        print(color)
-        print(tree[0][3].text)
-        print(tree[0][4].text)
+        self.save_gtk3_file('bg', color)
         
-        
-        #openbox_file_string = '<?xml version="1.0"?>\n' + ElementTree.tostring(tree).decode()
-        #os.popen("echo '{}' > {}".format(openbox_file_string, path))
-        
-        #self.save_lx_session_file()
+        self.save_lx_session_file()
+        self.reload_pcmanfm()
+        self.reload_openbox()
     
     def system_fg_changed(self, widget):
         color = widget.get_rgba().to_string()[4:][:-1]
-        color = color_to_hex(color)
-        self.system_properties['fg_color'] = color
-        #self.save_lx_session_file()
+        self.system_properties['fg_color'] = color_to_hex(color)
+        color = color_to_short_hex(color)
+        
+        path = self.get_openbox_file()
+        openbox_file_string = os.popen('cat {}'.format(path)).read()
+        openbox_file_string = insert_color_in_xml(openbox_file_string, 'fg', color)
+        os.popen("echo '{}' > {}".format(openbox_file_string, path))
+        
+        self.save_gtk3_file('fg', color)
+        
+        self.save_lx_session_file()
+        self.reload_pcmanfm()
+        self.reload_openbox()
+        
+    def system_cursor_changed(self, widget):
+        self.system_properties['cursor'] = widget.get_active_id()
+        
+        if self.system_properties['cursor'] == self.system_properties['orig_cursor']:
+            self.builder.get_object('system_mouse_cursor_restart_label').set_opacity(0)
+        else:
+            self.builder.get_object('system_mouse_cursor_restart_label').set_opacity(1)
+        
+        self.save_lx_session_file()
         
 # --------------------------------------------------------------------------------------- 
 # GET SETTINGS (METHOD TO THREAD)

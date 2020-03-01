@@ -28,8 +28,24 @@ def insert_font_into_xml(openbox_file_string, font):
             
         return '<?xml version="1.0"?>\n' + ElementTree.tostring(tree).decode()
     
+    
+def insert_color_in_xml(openbox_file_string, typ, color):
+    tree = ElementTree.fromstring(openbox_file_string)
+    if typ == 'bg':
+        tree[0][3].text = color
+    elif typ == 'fg':
+        tree[0][4].text = color
+    return '<?xml version="1.0"?>\n' + ElementTree.tostring(tree).decode() 
+    
 # METHOD TO CONVERT COLOR TO HEX
 # ---------------------------------------------------------------------------------------
+def color_to_short_hex(color):
+    color = color.split(',')
+    color_string = '#'
+    for index in range(len(color)):
+        color_string += hex(int(color[index]))[2:]
+    return color_string
+
 def color_to_hex(color):
         color = color.split(',')
         color_string = '#'

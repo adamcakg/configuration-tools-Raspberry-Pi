@@ -668,20 +668,38 @@
               </packing>
             </child>
             <child>
-              <object class="GtkComboBoxText">
+              <object class="GtkComboBoxText" id="system_cursor_combo_box">
+                <property name="name">system_cursor_combo_box</property>
                 <property name="width_request">200</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <items>
-                  <item id="s" translatable="yes">Small</item>
-                  <item id="m" translatable="yes">Medium</item>
-                  <item id="l" translatable="yes">Large</item>
+                  <item id="24" translatable="yes">Small</item>
+                  <item id="36" translatable="yes">Medium</item>
+                  <item id="48" translatable="yes">Large</item>
                 </items>
               </object>
               <packing>
                 <property name="x">170</property>
                 <property name="y">135</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="system_mouse_cursor_restart_label">
+                <property name="name">system_mouse_cursor_restart_label</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="opacity">0</property>
+                <property name="label" translatable="yes">Mouse cursor size will take effect after restart</property>
+                <property name="justify">center</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">58</property>
+                <property name="y">170</property>
               </packing>
             </child>
           </object>
