@@ -2,66 +2,38 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <object class="GtkScrolledWindow" id="interfaces">
+  <object class="GtkFixed" id="interfaces">
     <property name="name">interfaces</property>
-    <property name="width_request">450</property>
-    <property name="height_request">300</property>
     <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="shadow_type">in</property>
+    <property name="can_focus">False</property>
     <child>
-      <object class="GtkViewport">
+      <object class="GtkNotebook">
+        <property name="width_request">440</property>
+        <property name="height_request">260</property>
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="can_focus">True</property>
+        <property name="scrollable">True</property>
         <child>
           <object class="GtkFixed">
+            <property name="width_request">0</property>
+            <property name="height_request">0</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
               <object class="GtkLabel">
-                <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Camera:</property>
+                <property name="label" translatable="yes">Serial port</property>
                 <property name="xalign">0</property>
               </object>
               <packing>
-                <property name="x">80</property>
-                <property name="y">20</property>
+                <property name="x">40</property>
+                <property name="y">10</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="width_request">100</property>
-                <property name="height_request">40</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">SSH:</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="x">80</property>
-                <property name="y">60</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="width_request">100</property>
-                <property name="height_request">40</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">VNC:</property>
-                <property name="xalign">0</property>
-              </object>
-              <packing>
-                <property name="x">80</property>
-                <property name="y">100</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -69,41 +41,36 @@
                 <property name="xalign">0</property>
               </object>
               <packing>
-                <property name="x">80</property>
-                <property name="y">140</property>
+                <property name="x">40</property>
+                <property name="y">50</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
-                <property name="width_request">100</property>
-                <property name="height_request">40</property>
+              <object class="GtkSwitch" id="serial_port_switch">
+                <property name="name">serial_port_switch</property>
+                <property name="height_request">30</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">I2C:</property>
-                <property name="xalign">0</property>
+                <property name="can_focus">True</property>
               </object>
               <packing>
-                <property name="x">80</property>
-                <property name="y">180</property>
+                <property name="x">280</property>
+                <property name="y">15</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
-                <property name="width_request">100</property>
-                <property name="height_request">40</property>
+              <object class="GtkSwitch" id="spi_switch">
+                <property name="name">spi_switch</property>
+                <property name="height_request">30</property>
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Serial Port:</property>
-                <property name="xalign">0</property>
+                <property name="can_focus">True</property>
               </object>
               <packing>
-                <property name="x">80</property>
-                <property name="y">220</property>
+                <property name="x">280</property>
+                <property name="y">55</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -111,13 +78,80 @@
                 <property name="xalign">0</property>
               </object>
               <packing>
-                <property name="x">80</property>
-                <property name="y">260</property>
+                <property name="x">40</property>
+                <property name="y">90</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="serial_console_switch">
+                <property name="name">serial_console_switch</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="x">280</property>
+                <property name="y">95</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel">
+            <property name="width_request">201</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Serial</property>
+          </object>
+          <packing>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFixed">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Camera:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">10</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">VNC</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">50</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">I2C:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">90</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -125,13 +159,12 @@
                 <property name="xalign">0</property>
               </object>
               <packing>
-                <property name="x">80</property>
-                <property name="y">300</property>
+                <property name="x">40</property>
+                <property name="y">130</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="width_request">100</property>
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -139,124 +172,113 @@
                 <property name="xalign">0</property>
               </object>
               <packing>
-                <property name="x">80</property>
-                <property name="y">340</property>
+                <property name="x">40</property>
+                <property name="y">170</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
+              <object class="GtkSwitch" id="camera_switch">
+                <property name="name">camera_switch</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
               <packing>
                 <property name="x">280</property>
-                <property name="y">25</property>
+                <property name="y">15</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
+              <object class="GtkSwitch" id="vnc_switch">
+                <property name="name">vnc_switch</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
               <packing>
                 <property name="x">280</property>
-                <property name="y">65</property>
+                <property name="y">55</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
+              <object class="GtkSwitch" id="i2c_switch">
+                <property name="name">i2c_switch</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
               <packing>
                 <property name="x">280</property>
-                <property name="y">105</property>
+                <property name="y">95</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
+              <object class="GtkSwitch" id="1wire_switch">
+                <property name="name">1wire_switch</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
               <packing>
                 <property name="x">280</property>
-                <property name="y">145</property>
+                <property name="y">135</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
+              <object class="GtkSwitch" id="remote_gpio_switch">
+                <property name="name">remote_gpio_switch</property>
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
               </object>
               <packing>
                 <property name="x">280</property>
-                <property name="y">185</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
-                <property name="height_request">30</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="x">280</property>
-                <property name="y">225</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
-                <property name="height_request">30</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="x">280</property>
-                <property name="y">265</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
-                <property name="height_request">30</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="x">280</property>
-                <property name="y">305</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch">
-                <property name="width_request">-1</property>
-                <property name="height_request">30</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </object>
-              <packing>
-                <property name="x">280</property>
-                <property name="y">345</property>
+                <property name="y">175</property>
               </packing>
             </child>
           </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel">
+            <property name="width_request">201</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Other</property>
+          </object>
+          <packing>
+            <property name="position">1</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child type="tab">
+          <placeholder/>
         </child>
       </object>
+      <packing>
+        <property name="x">5</property>
+        <property name="y">5</property>
+      </packing>
     </child>
-    <style>
-      <class name="scrolled_window_border"/>
-    </style>
+    <child>
+      <object class="GtkButton" id="apply_button">
+        <property name="label" translatable="yes">Apply</property>
+        <property name="name">apply_button</property>
+        <property name="width_request">70</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <signal name="clicked" handler="apply_button_clicked" swapped="no"/>
+      </object>
+      <packing>
+        <property name="x">365</property>
+        <property name="y">270</property>
+      </packing>
+    </child>
   </object>
 </interface>

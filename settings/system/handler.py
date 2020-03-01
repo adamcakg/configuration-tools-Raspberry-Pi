@@ -40,18 +40,21 @@ class Handler:
 # ---------------------------------------------------------------
     def set_hostname(self):
         new_hostname = self.builder.get_object('hostname_entry').get_text()
-        with open('/etc/hostname', 'w') as file:
-            file.write(new_hostname + '\n')
+        os.popen('sudo echo "{}" > /etc/hostname'.format(new_hostname + '\n'))
+        
+        #with open('/etc/hostname', 'w') as file:
+        #    file.write(new_hostname + '\n')
             
         hosts = os.popen('cat /etc/hosts').read()
         hosts = hosts.replace(self.hostname, new_hostname)
         
-        with open('/etc/hosts', 'w') as file:
-            file.write(hosts)
+        os.popen('sudo echo "{}" > /etc/hosts'.format(hosts))
+        
+        #with open('/etc/hosts', 'w') as file:
+         #   file.write(hosts)
         
         self.hostname = new_hostname
         
-            
 # GETTING HOSTNAME
 # ---------------------------------------------------------------
     def get_hostname(self):
