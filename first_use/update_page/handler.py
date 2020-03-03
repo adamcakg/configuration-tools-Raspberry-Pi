@@ -21,19 +21,19 @@ class Handler:
     def update(self):
         print('updating')
         import os
-        os.system('echo {} | apt update'.format('yes'))
-        os.system('echo {} | apt upgrade'.format('yes'))
-        os.system('echo {} | apt dist-upgrade'.format('yes'))
-        os.system('apt-get update')
-        os.system("sudo apt full-upgrade -y")
-        os.system('apt-get update')
-        os.system('apt autoremove -y')
+        os.system('sudo apt update -y -q')
+        os.system('echo {} | sudo apt upgrade -q'.format('yes'))
+        os.system('echo {} | sudo apt dist-upgrade -q'.format('yes'))
+        os.system('sudo apt-get update -q')
+        os.system("sudo apt full-upgrade -y -q")
+        os.system('sudo apt-get update -q')
+        os.system('sudo apt autoremove -y -q')
         
-        os.system('echo {} | apt update'.format('yes'))
-        os.system('echo {} | apt upgrade'.format('yes'))
-        os.system('echo {} | apt dist-upgrade'.format('yes'))
-        os.system('apt-get update')
-        os.system('apt autoremove -y')
+        os.system('echo {} | sudo apt update -q'.format('yes'))
+        os.system('echo {} | sudo apt upgrade -q'.format('yes'))
+        os.system('echo {} | sudo apt dist-upgrade -q'.format('yes'))
+        os.system('sudo apt-get update -q')
+        os.system('sudo apt autoremove -y -q')
         
     def thread_function(self):
         self.update()
