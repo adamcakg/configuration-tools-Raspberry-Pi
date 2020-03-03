@@ -63,7 +63,7 @@ class Handler:
         if os.popen('raspi-config nonint get_rgpio').read()[:-1] == '0':
             self.original_interfaces['remote_gpio'] = 1
             self.interfaces['remote_gpio'] = 1
-            self.builder.get_object('remote_gpio').set_active(True)
+            self.builder.get_object('remote_gpio_switch').set_active(True)
     
     
     def connect_method_to_switches(self):
