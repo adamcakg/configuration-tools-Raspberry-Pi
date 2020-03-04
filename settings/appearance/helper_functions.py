@@ -1,50 +1,47 @@
-from xml.etree import ElementTree 
-
-
+import os
 
 def insert_font_into_xml(openbox_file_string, font):
-        tree = ElementTree.fromstring(openbox_file_string)
-        
-        font = font.split()
-        tree[0][0][0].text = font[0]
-        tree[0][1][0].text = font[0]
-        
-        tree[0][0][1].text = font[-1]
-        tree[0][1][1].text = font[-1]
-        
-        if 'Bold' in font:
-            tree[0][0][2].text = 'Bold'
-            tree[0][1][2].text = 'Bold'
-        else:
-            tree[0][0][2].text = 'Normal'
-            tree[0][1][2].text = 'Normal'
+    font = font.split()
+    file = openbox_file_string.replace('"', "'")
+    file = file.split('\n')
+
+    for index in range(len(file)):
+        if 'font' in file[index]:
+            file[index+1] = '\t\t<name>' + font[0] + '</name>'
+            file[index + 2] = '\t\t<size>' + font[-1] + '</size>'
             
-        if 'Italic' in font:
-            tree[0][0][3].text = 'Italic'
-            tree[0][1][3].text = 'Italic'
-        else:
-            tree[0][0][3].text = 'Normal'
-            tree[0][1][3].text = 'Normal'
-            
-        return '<?xml version="1.0"?>\n' + ElementTree.tostring(tree).decode()
-    
+            if 'Bold' in font:
+                file[index + 4] = '\t\t<weight>' + 'Bold' + '</weight>'
+            else:
+                file[index + 4] = '\t\t<weight>' + 'Normal' + '</weight>'
+                
+            if 'Italic' in font:
+                file[index + 6] = '\t\t<slant>' + "Italic" + '</slant>'
+            else:
+                file[index + 6] = '\t\t<slant>' + "Normal" + '</slant>'
+
+    return '\n'.join(file)
     
 def insert_color_in_xml(openbox_file_string, typ, color):
-    tree = ElementTree.fromstring(openbox_file_string)
+    file = openbox_file_string.replace('"', "'")
+    file = file.split('\n')
     if typ == 'bg':
-        tree[0][3].text = color
+        for index in range(len(file)):
+            if 'titleColor' in file[index]:
+                file[index] = '<titleColor>' + color + '</titleColor>'
     elif typ == 'fg':
-        tree[0][4].text = color
-    return '<?xml version="1.0"?>\n' + ElementTree.tostring(tree).decode() 
+        for index in range(len(file)):
+            if 'textColor' in file[index]:
+                file[index] = '<textColor>' + color + '</textColor>'
+    return '\n'.join(file)
     
 # METHOD TO CONVERT COLOR TO HEX
 # ---------------------------------------------------------------------------------------
 def color_to_short_hex(color):
     color = color.split(',')
-    color_string = '#'
     for index in range(len(color)):
-        color_string += hex(int(color[index]))[2:]
-    return color_string
+        color[index] = int(color[index])
+    return '#%02x%02x%02x' % tuple(color)
 
 def color_to_hex(color):
         color = color.split(',')

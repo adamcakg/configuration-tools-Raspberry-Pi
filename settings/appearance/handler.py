@@ -54,12 +54,27 @@ class Handler:
 
     def reload_lxsession(self):
         os.popen("lxsession -r")
+        
+    def check_dir(self, path):
+        path = path.split('/')
+        path = path[:-1]
+        path = '/'.join(path)
+        #print(path)
+        os.popen('mkdir -p {}'.format(path))
    
 # PCMANFM FILE
 # ---------------------------------------------------------------------------------------
-    def get_pcmanfm_file(self, desktop, global_settings):
+    def get_pcmanfm_file(self, desktop, global_settings):        
         desktop_session = GLib.getenv ("DESKTOP_SESSION")
         path = ( "/etc/xdg" if global_settings else GLib.get_user_config_dir()) + "/pcmanfm/" + desktop_session + '/{}'.format("desktop-items-0.conf" if desktop == 0 else "desktop-items-1.conf")
+        try:
+            file = open(path)    
+        except IOError:
+            self.check_dir(path)
+            global_path = self.get_pcmanfm_file(desktop, 1)
+            os.popen('cat {} > {}'.format(global_path, path))
+            #os.popen('sudo cp {} {}'.format(global_path, path))
+            #os.popen('sudo chmod 777 {}'.format(path))
         return path
     
     def save_pcman_file(self, desktop):
@@ -67,13 +82,20 @@ class Handler:
             os.popen('sudo echo "{}" > {}'.format(self.pcman_file_desktop_0.rstrip(), self.get_pcmanfm_file(desktop, False)))
         else:
             os.popen('sudo echo "{}" > {}'.format(self.pcman_file_desktop_1.rstrip(), self.get_pcmanfm_file(desktop, False)))
-        
-
+    
 # LXPANEL FILE
 # ---------------------------------------------------------------------------------------                 
     def get_lxpanel_file(self, global_settings):
         desktop_session = GLib.getenv ("DESKTOP_SESSION")
         path = ( "/etc/xdg" if global_settings else GLib.get_user_config_dir()) + '/lxpanel/' + desktop_session + "/panels/panel"
+        try:
+            file = open(path)    
+        except IOError:
+            self.check_dir(path)
+            global_path = self.get_lxpanel_file(1)
+            os.popen('cat {} > {}'.format(global_path, path))
+            #os.popen('sudo cp {} {}'.format(global_path, path))
+            #os.popen('sudo chmod 777 {}'.format(path))
         return path
     
     def save_lxpanel_file(self):
@@ -86,27 +108,39 @@ class Handler:
 # ---------------------------------------------------------------------------------------                 
     def get_lxsession_file(self, global_settings):
         desktop_session = GLib.getenv ("DESKTOP_SESSION")
-        path = ( "/etc/xdg" if global_settings else GLib.get_user_config_dir()) + '/lxsession/' + desktop_session + "/desktop.conf"
+        path = ( "/etc/xdg" if global_settings else GLib.get_user_config_dir()) + '/lxsession/' + desktop_session + "/desktop.conf" 
+        try:
+            file = open(path)    
+        except IOError:
+            self.check_dir(path)
+            global_path = self.get_lxsession_file(1)
+            os.popen('cat {} > {}'.format(global_path, path))
+            #os.popen('sudo cp {} {}'.format(global_path, path))
+            #os.popen('sudo chmod 777 {}'.format(path))
         return path
     
     def save_lx_session_file(self):
         path = self.get_lxsession_file(False)
         config_file = os.popen('cat {}'.format(path)).read()
         config_file = config_file.split('\n')
-        config_file[1] = config_file[1].split('\\n')
-        for index in range(len(config_file[1])):
-            if 'bar_bg_color:' in config_file[1][index]:
-                config_file[1][index] = 'bar_bg_color:' + self.panel_properties['bg_color']
-            elif 'bar_fg_color:' in config_file[1][index]:
-                config_file[1][index] = 'bar_fg_color:' + self.panel_properties['fg_color']
-            elif 'selected_bg_color:' in config_file[1][index]:
-                config_file[1][index] = 'sGtk/ColorScheme=selected_bg_color:' + self.system_properties['bg_color']
-            elif 'selected_fg_color:' in config_file[1][index]:
-                config_file[1][index] = 'selected_fg_color:' + self.system_properties['fg_color']
-                
-        config_file[1] = '\\n'.join(config_file[1])
-        config_file[2] = 'sGtk/FontName=' + self.system_properties['font']
-        config_file[5] = 'iGtk/CursorThemeSize=' + self.system_properties['cursor']
+        for i in range(len(config_file)):
+            if 'sGtk/ColorScheme' in config_file[i]:
+                config_file[i] = config_file[i].split('\\n')
+                for index in range(len(config_file[i])):
+                    if 'bar_bg_color:' in config_file[i][index]:
+                        config_file[i][index] = 'bar_bg_color:' + self.panel_properties['bg_color']
+                    elif 'bar_fg_color:' in config_file[i][index]:
+                        config_file[i][index] = 'bar_fg_color:' + self.panel_properties['fg_color']
+                    elif 'selected_bg_color:' in config_file[i][index]:
+                        config_file[i][index] = 'sGtk/ColorScheme=selected_bg_color:' + self.system_properties['bg_color']
+                    elif 'selected_fg_color:' in config_file[i][index]:
+                        config_file[i][index] = 'selected_fg_color:' + self.system_properties['fg_color']
+                config_file[i] = '\\n'.join(config_file[i])
+            
+            elif 'sGtk/FontName=' in config_file[i]:
+                config_file[i] = 'sGtk/FontName=' + self.system_properties['font']
+            elif 'iGtk/CursorThemeSize=' in config_file[i]:
+                config_file[i] = 'iGtk/CursorThemeSize=' + self.system_properties['cursor']
         config_file = '\n'.join(config_file)
         config_file = config_file.rstrip()
         
@@ -118,6 +152,15 @@ class Handler:
     def get_openbox_file(self):
         filename = GLib.getenv ("DESKTOP_SESSION").lower() + '-rc.xml'
         path = GLib.get_user_config_dir() + '/openbox/' + filename
+        try:
+            file = open(path)    
+        except IOError:
+            self.check_dir(path)
+            global_path = '/etc/xdg/openbox/lxde-pi-rc.xml'
+            os.popen('cat {} > {}'.format(global_path, path))
+            #os.popen('sudo cp {} {}'.format(global_path, path))
+            #os.popen('sudo chmod 777 {}'.format(path))
+        
         return path
 # GTK3 FILE
 # ---------------------------------------------------------------------------------------      
@@ -480,7 +523,7 @@ class Handler:
         openbox_file_string = os.popen('cat {}'.format(path)).read()
         openbox_file_string = insert_font_into_xml(openbox_file_string, self.system_properties['font'])
         
-        os.popen("echo '{}' > {}".format(openbox_file_string, path))
+        os.popen('echo "{}" > {}'.format(openbox_file_string, path))
         
         self.save_lx_session_file()
         self.save_pcman_file(0)
@@ -498,10 +541,9 @@ class Handler:
         path = self.get_openbox_file()
         openbox_file_string = os.popen('cat {}'.format(path)).read()
         openbox_file_string = insert_color_in_xml(openbox_file_string, 'bg', color)
-        os.popen("echo '{}' > {}".format(openbox_file_string, path))
+        os.popen('echo "{}" > {}'.format(openbox_file_string, path))
         
         self.save_gtk3_file('bg', color)
-        
         self.save_lx_session_file()
         self.reload_pcmanfm()
         self.reload_openbox()
@@ -514,7 +556,7 @@ class Handler:
         path = self.get_openbox_file()
         openbox_file_string = os.popen('cat {}'.format(path)).read()
         openbox_file_string = insert_color_in_xml(openbox_file_string, 'fg', color)
-        os.popen("echo '{}' > {}".format(openbox_file_string, path))
+        os.popen('echo "{}" > {}'.format(openbox_file_string, path))
         
         self.save_gtk3_file('fg', color)
         
@@ -542,6 +584,12 @@ class Handler:
         self.get_system_properties()
         
     def thread_function(self):
-        self.get_number_of_monitors()
+        self.get_pcmanfm_file(0, False)
+        self.get_pcmanfm_file(1, False)
+        self.get_lxpanel_file(0)
+        self.get_lxsession_file(0)
+        self.get_openbox_file()
+        
+        #self.get_number_of_monitors()
         self.get_settings()
     
