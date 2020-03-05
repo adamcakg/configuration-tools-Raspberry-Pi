@@ -18,19 +18,19 @@ class Display(Page):
         
         
     def get_xml_object(self):
-        number_of_monitors = self.get_number_of_monitors()
-        if number_of_monitors == 1:
-            return self.__builder.get_object('one_display')
-        elif number_of_monitors == 2:
-            return self.__builder.get_object('two_displays')
+        return self.__builder.get_object('display')
+
 
     def destroy(self):
         del self
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('display/display.glade')   # creating object from XML(.glade files)
-      
+        number_of_monitors = self.get_number_of_monitors()
+        if number_of_monitors == 1:
+            self.__builder.add_from_file('display/display_monitor.glade')
+        elif number_of_monitors == 2:
+            self.__builder.add_from_file('display/display_two_monitors.glade')
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
@@ -47,9 +47,8 @@ class Display(Page):
     def get_number_of_monitors(self):
         monitors = (os.popen("xrandr --listmonitors | grep Monitors: | cut -d ' ' -f 2").read())[:1]
         monitors = int(monitors)
-        print(monitors)
         if monitors < 2:
             return 1
         elif monitors >1:
             return 2
-        
+        #return 2

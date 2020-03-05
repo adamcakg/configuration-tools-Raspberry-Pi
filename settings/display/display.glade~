@@ -9,26 +9,214 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkButton">
+      <object class="GtkImage" id="monitor1">
+        <property name="name">monitor1</property>
+        <property name="width_request">200</property>
+        <property name="height_request">120</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="stock">gtk-missing-image</property>
+      </object>
+      <packing>
+        <property name="x">120</property>
+        <property name="y">30</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
         <property name="width_request">100</property>
         <property name="height_request">80</property>
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <signal name="clicked" handler="set_position" swapped="no"/>
-        <child>
-          <object class="GtkImage" id="monitor1">
-            <property name="name">monitor1</property>
-            <property name="width_request">20</property>
-            <property name="height_request">20</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-        </child>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">1280x720  </property>
       </object>
       <packing>
-        <property name="x">168</property>
-        <property name="y">50</property>
+        <property name="x">170</property>
+        <property name="y">45</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText">
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">185</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Resolution:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">180</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Frequency:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">220</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText">
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">225</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Orientation:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">260</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText">
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">265</property>
+      </packing>
+    </child>
+  </object>
+  <object class="GtkFixed" id="two_displays">
+    <property name="name">two_displays</property>
+    <property name="width_request">440</property>
+    <property name="height_request">300</property>
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkImage" id="monitor2">
+        <property name="name">monitor1</property>
+        <property name="width_request">200</property>
+        <property name="height_request">120</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="stock">gtk-missing-image</property>
+      </object>
+      <packing>
+        <property name="x">120</property>
+        <property name="y">30</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">80</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">1280x720  </property>
+      </object>
+      <packing>
+        <property name="x">170</property>
+        <property name="y">45</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText">
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">185</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Resolution:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">180</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Frequency:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">220</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText">
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">225</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Orientation:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">260</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText">
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">265</property>
       </packing>
     </child>
   </object>

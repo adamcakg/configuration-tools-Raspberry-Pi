@@ -6,20 +6,35 @@ def insert_font_into_xml(openbox_file_string, font):
     file = file.split('\n')
 
     for index in range(len(file)):
-        if 'font' in file[index]:
-            file[index+1] = '\t\t<name>' + font[0] + '</name>'
-            file[index + 2] = '\t\t<size>' + font[-1] + '</size>'
+        if '<font' in file[index]:
+            if '<name>' in file[index+1]:
+                file[index+1] = '\t\t<name>' + font[0] + '</name>'
+            if '<size>' in file[index+1]:
+                file[index + 2] = '\t\t<size>' + font[-1] + '</size>'
             
             if 'Bold' in font:
-                file[index + 4] = '\t\t<weight>' + 'Bold' + '</weight>'
+                if '<weight>' in file[index + 3]:
+                    file[index + 3] = '\t\t<weight>' + 'Bold' + '</weight>'
+                elif '<weight>' in file[index + 4]:
+                    file[index + 4] = '\t\t<weight>' + 'Bold' + '</weight>'
             else:
-                file[index + 4] = '\t\t<weight>' + 'Normal' + '</weight>'
+                if '<weight>' in file[index + 3]:
+                    file[index + 3] = '\t\t<weight>' + 'Normal' + '</weight>'
+                elif '<weight>' in file[index + 4]:
+                    file[index + 4] = '\t\t<weight>' + 'Normal' + '</weight>'
+                
                 
             if 'Italic' in font:
-                file[index + 6] = '\t\t<slant>' + "Italic" + '</slant>'
+                if '<slant>' in file[index + 5]:
+                    file[index + 5] = '\t\t<slant>' + "Italic" + '</slant>'
+                elif '<slant>' in file[index + 6]:
+                    file[index + 6] = '\t\t<slant>' + "Italic" + '</slant>'
             else:
-                file[index + 6] = '\t\t<slant>' + "Normal" + '</slant>'
-
+                if '<slant>' in file[index + 5]:
+                    file[index + 5] = '\t\t<slant>' + "Normal" + '</slant>'
+                elif '<slant>' in file[index + 6]:
+                    file[index + 6] = '\t\t<slant>' + "Normal" + '</slant>'
+                
     return '\n'.join(file)
     
 def insert_color_in_xml(openbox_file_string, typ, color):

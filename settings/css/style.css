@@ -1,3 +1,7 @@
 .scrolled_window_border{
 	border: None;
 }
+
+.border{
+	border: 2px solid black;
+}

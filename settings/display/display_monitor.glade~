@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkFixed" id="display">
+    <property name="name">display</property>
+    <property name="width_request">440</property>
+    <property name="height_request">300</property>
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkImage" id="monitor1">
+        <property name="name">monitor1</property>
+        <property name="width_request">200</property>
+        <property name="height_request">120</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="stock">gtk-missing-image</property>
+      </object>
+      <packing>
+        <property name="x">120</property>
+        <property name="y">30</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="resolution_label_monitor_1">
+        <property name="name">resolution_label_monitor_1</property>
+        <property name="width_request">100</property>
+        <property name="height_request">80</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">1280x720  </property>
+      </object>
+      <packing>
+        <property name="x">170</property>
+        <property name="y">45</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText" id="resolution_combobox_monitor_1">
+        <property name="name">resolution_combobox_monitor_1</property>
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">185</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Resolution:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">180</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Frequency:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">220</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText" id="frequency_combobox_monitor_1">
+        <property name="name">frequency_combobox_monitor_1</property>
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">225</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Orientation:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">260</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBoxText" id="orientation_combobox_monitor_1">
+        <property name="name">orientation_combobox_monitor_1</property>
+        <property name="width_request">150</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <items>
+          <item id="0" translatable="yes">Normal</item>
+          <item id="2" translatable="yes">Inverted</item>
+          <item id="1" translatable="yes">Left</item>
+          <item id="3" translatable="yes">Right</item>
+        </items>
+      </object>
+      <packing>
+        <property name="x">220</property>
+        <property name="y">265</property>
+      </packing>
+    </child>
+  </object>
+</interface>

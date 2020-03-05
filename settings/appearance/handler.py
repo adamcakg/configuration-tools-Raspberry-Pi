@@ -165,7 +165,15 @@ class Handler:
 # GTK3 FILE
 # ---------------------------------------------------------------------------------------      
     def get_gtk3_file(self):
-        return GLib.get_user_config_dir() + '/gtk-3.0/gtk.css'
+        path = GLib.get_user_config_dir() + '/gtk-3.0/gtk.css'
+        try:
+            file = open(path)    
+        except IOError:
+            self.check_dir(path)
+            file = '@define-color theme_selected_bg_color #ffffff;\n@define-color theme_selected_fg_color #000000'
+            os.popen('echo "{}" > {}'.format(file, path))
+        
+        return path
     
     def save_gtk3_file(self, typ, color):
         path = self.get_gtk3_file()
