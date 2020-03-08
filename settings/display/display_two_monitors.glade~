@@ -9,7 +9,8 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkComboBoxText">
+      <object class="GtkComboBoxText" id="resolution_combobox_monitor_1">
+        <property name="name">resolution_combobox_monitor_1</property>
         <property name="width_request">150</property>
         <property name="height_request">30</property>
         <property name="visible">True</property>
@@ -47,7 +48,8 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBoxText">
+      <object class="GtkComboBoxText" id="frequency_combobox_monitor_1">
+        <property name="name">frequency_combobox_monitor_1</property>
         <property name="width_request">150</property>
         <property name="height_request">30</property>
         <property name="visible">True</property>
@@ -72,11 +74,18 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBoxText">
+      <object class="GtkComboBoxText" id="orientation_combobox_monitor_1">
+        <property name="name">orientation_combobox_monitor_1</property>
         <property name="width_request">150</property>
         <property name="height_request">30</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <items>
+          <item id="0" translatable="yes">Normal</item>
+          <item id="2" translatable="yes">Inverted</item>
+          <item id="1" translatable="yes">Left</item>
+          <item id="2" translatable="yes">Right</item>
+        </items>
       </object>
       <packing>
         <property name="x">220</property>
@@ -138,6 +147,34 @@
       <packing>
         <property name="x">220</property>
         <property name="y">30</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="resolution_label_monitor_1">
+        <property name="name">resolution_label_monitor_1</property>
+        <property name="width_request">200</property>
+        <property name="height_request">80</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">1920x1080</property>
+      </object>
+      <packing>
+        <property name="x">37</property>
+        <property name="y">45</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="resolution_label_monitor_2">
+        <property name="name">resolution_label_monitor_2</property>
+        <property name="width_request">200</property>
+        <property name="height_request">80</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">1920x1080</property>
+      </object>
+      <packing>
+        <property name="x">203</property>
+        <property name="y">45</property>
       </packing>
     </child>
   </object>

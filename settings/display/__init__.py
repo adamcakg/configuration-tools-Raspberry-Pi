@@ -45,10 +45,10 @@ class Display(Page):
         return self.name
     
     def get_number_of_monitors(self):
-        monitors = (os.popen("xrandr --listmonitors | grep Monitors: | cut -d ' ' -f 2").read())[:1]
-        monitors = int(monitors)
-        if monitors < 2:
-            return 1
-        elif monitors >1:
-            return 2
-        #return 2
+#        monitors = (os.popen("xrandr --listmonitors | grep Monitors: | cut -d ' ' -f 2").read())[:1]
+ #       monitors = int(monitors)
+  #      if monitors < 2:
+   #         return 1
+    #    elif monitors >1:
+     #       return 2
+        return 2
