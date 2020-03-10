@@ -15,9 +15,6 @@ class Page(ABC):
     def connect_handler(self, controller=None):
         raise NotImplementedError("connect_handler(self, ....) method must be implemented")
 
-    def connect_header(self, header=None):
-        raise NotImplementedError("connect_header(self, ....) method must be implemented")
-
     def execute(self):
         raise NotImplementedError("execute(self) method must be implemented")
     

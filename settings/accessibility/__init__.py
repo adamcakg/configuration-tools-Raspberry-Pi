@@ -29,9 +29,6 @@ class Accessibility(Page):
         self.handler.add_controller(controller)
         self.__builder.connect_signals(self.handler)
 
-    def connect_header(self, header):
-        self.header = header
-        self.header.set_title(self.name)
         
     def get_name(self):
         return self.name
