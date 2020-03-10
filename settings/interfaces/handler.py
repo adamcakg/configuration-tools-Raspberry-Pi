@@ -38,7 +38,7 @@ class Handler:
             self.original_interfaces['serial_console'] = 1
             self.interfaces['serial_console'] = 1
             self.builder.get_object('serial_console_switch').set_active(True)
-            self.builder.get_object('serial_console_switch').set_sensitive(False)
+        self.builder.get_object('serial_console_switch').set_sensitive(False)
         # CAMERA
         if os.popen('raspi-config nonint get_camera').read()[:-1] == '0':
             self.original_interfaces['camera'] = 1
@@ -92,6 +92,7 @@ class Handler:
         self.builder.get_object('apply_button').set_sensitive(True)
         
     def apply_button_clicked(self, widget):
+        self.disable_apply_button()
         os.popen('sudo raspi-config nonint do_serial {}'.format(1 - self.interfaces['serial_port']))
         # SPI NOT WORKING
         #os.popen('sudo raspi-config nonint do_spi {}'.format(1 - self.interfaces['spi']))
@@ -100,7 +101,12 @@ class Handler:
         os.popen('sudo raspi-config nonint do_i2c {}'.format(1 - self.interfaces['i2c']))
         os.popen('sudo raspi-config nonint do_onewire {}'.format(1 - self.interfaces['1wire']))
         os.popen('sudo raspi-config nonint do_rgpio {}'.format(1 - self.interfaces['remote_gpio']))
-        self.original_interfaces = self.interfaces 
+        
+        self.original_interfaces.update(self.interfaces)
+        
+        
+        
+        
     
     def thread_function(self):
         self.get_interfaces_status()
