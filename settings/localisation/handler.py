@@ -4,6 +4,8 @@ import os
 from .keyboard_list import get_keyboard_stuff
 from .locale import get_language_and_country, list_of_settings, code_into_language, code_into_country
 from .locale import list_of_actual_languages, language_into_code, country_into_code
+from .timezone import get_arreas, get_locations
+
 import gi
 
 gi.require_version('Gtk', '3.0')
@@ -116,12 +118,10 @@ class Handler:
             if current_language in language:
                 language_combo_box.set_active_id(language)
                 return
-        
         language_combo_box.set_active_id(list_of_languages[0])
         
     def fullfil_countries(self, countries):
         countries_combo_box = self.builder.get_object('country_combo_box')
-        
         for country in countries:
            countries_combo_box.append(country, country[:22])
         
@@ -129,31 +129,97 @@ class Handler:
         current_code = current_settings.split('_')[1].split('.')[0]
         countries_combo_box.set_active_id(code_into_country(current_code))
     
-    
     def change_locale(self, widget):
         self.delete_localisation_modal()
         self.what_to_do = 'set_locale'
         
         thread = Thread(self)
         self.create_setting_modal('Setting locale')
+    
+    def set_locale(self):
+        language = self.builder.get_object('language_combo_box').get_active_id()
+        country = self.builder.get_object('country_combo_box').get_active_id()
+            
+        language_code = language_into_code(language)
+        country_code = country_into_code(country)
+        self.change_progress_bar(10)
+        os.system("sudo sed -i /etc/locale.gen -e 's/^\\([^#].*\\)/# \\1/g'")
+        self.change_progress_bar(40)
+        os.system("sudo sed -i /etc/locale.gen -e 's/^# \\({}_{}[\\. ].*UTF-8\\)/\\1/g'".format(language_code, country_code))
+        self.change_progress_bar(70)
+        os.system("sudo locale-gen")
+        self.change_progress_bar(90)
+        command = "sudo LC_ALL={0}_{1}{2} LANG={0}_{1}{2} LANGUAGE={0}_{1}{2} update-locale LANG={0}_{1}{2}  LC_ALL={0}_{1}{2} LANGUAGE={0}_{1}{2}"
+        os.system(command.format(language_code, country_code, '.UTF-8'))
+                                                                                                                                                                                                                                                                                        
+        self.change_progress_bar(100)
+        self.hide_setting_modal()
+        self.builder.get_object('reboot_label').set_opacity(1)
+        self.builder.get_object('reboot_button').set_opacity(1)
+        self.builder.get_object('reboot_button').set_sensitive(1)
+    
        
     def create_localisation_modal(self, widget):
         dialog = self.builder.get_object('localisation_modal')
         dialog.set_attached_to(self.builder.get_object('localisation'))
         dialog.show_all()
 
-
     def delete_localisation_modal(self, widget=None):
         dialog = self.builder.get_object('localisation_modal')
         dialog.hide()
 # ----------------------------------------------------------------------------------------------------------------------    
-    def create_timezone_modal(self):
-        pass
+    def fulfill_arreas(self, arreas):
+        arrea_combo_box = self.builder.get_object('arrea_combo_box')
+        for arrea in arreas:
+            arrea_combo_box.append(arrea, arrea)
+        current_timezone = os.popen('timedatectl show | grep -oP [A-Za-z]+\/[a-zA-Z_]+').read().rstrip()
+        current_arrea = current_timezone.split('/')[0]
+        arrea_combo_box.set_active_id(current_arrea)
+        
     
+    def fulfill_locations(self, widget=None):    
+        arrea = self.builder.get_object('arrea_combo_box').get_active_id()
+        locations = get_locations(arrea)
+        location_combo_box = self.builder.get_object('location_combo_box')
+        location_combo_box.remove_all()
+        for location in locations:
+            location_combo_box.append(location, location)
+            
+        current_timezone = os.popen('timedatectl show | grep -oP [A-Za-z]+\/[a-zA-Z_]+').read().rstrip()
+        current_location = current_timezone.split('/')[1:]
+        current_location = '/'.join(current_location)
+        
+        if locations == ['']:
+            return
+        elif len(locations) == 1:
+            location_combo_box.set_active_id(locations[0])
+        elif current_location in locations:
+            location_combo_box.set_active_id(current_location)
+        else:
+            location_combo_box.set_active_id(locations[9])
+    
+    def set_timezone(self, widget):
+        self.delete_timezone_modal()
+        arrea = self.builder.get_object('arrea_combo_box').get_active_id()
+        location = self.builder.get_object('location_combo_box').get_active_id()
+        
+        os.popen('sudo timedatectl set-timezone {}/{}'.format(arrea, location))
+    
+    
+    
+    
+    def create_timezone_modal(self, widget):
+        dialog = self.builder.get_object('timezone_modal')
+        dialog.set_attached_to(self.builder.get_object('localisation'))
+        dialog.show_all()
+
+    def delete_timezone_modal(self, widget=None):
+        dialog = self.builder.get_object('timezone_modal')
+        dialog.hide()
+# ----------------------------------------------------------------------------------------------------------------------       
+
     def create_country_modal(self):
         pass
-
-
 
 # ----------------------------------------------------------------------------------------------------------------------   
     def create_setting_modal(self, what_setting):
@@ -180,31 +246,16 @@ class Handler:
             self.fullfil_countries(countries)
             self.fullfil_languages()
             
+            self.fulfill_arreas(get_arreas())
+            self.fulfill_locations()
+            
+           
+            
             self.models, self.layouts, self.variants = get_keyboard_stuff()
             self.fullfil_keyboard_combo_boxes(self.models, self.layouts, self.variants)
         
         elif self.what_to_do == 'set_locale':   
-            language = self.builder.get_object('language_combo_box').get_active_id()
-            country = self.builder.get_object('country_combo_box').get_active_id()
-            
-            language_code = language_into_code(language)
-            country_code = country_into_code(country)
-            self.change_progress_bar(10)
-            os.system("sudo sed -i /etc/locale.gen -e 's/^\\([^#].*\\)/# \\1/g'")
-            self.change_progress_bar(40)
-            os.system("sudo sed -i /etc/locale.gen -e 's/^# \\({}_{}[\\. ].*UTF-8\\)/\\1/g'".format(language_code, country_code))
-            self.change_progress_bar(70)
-            os.system("sudo locale-gen")
-            self.change_progress_bar(90)
-            os.system("sudo LC_ALL={0}_{1}{2} LANG={0}_{1}{2} LANGUAGE={0}_{1}{2} update-locale LANG={0}_{1}{2}  LC_ALL={0}_{1}{2} LANGUAGE={0}_{1}{2}".format(language_code,
-                                                                                                                                                          country_code,
-                                                                                                                                                          '.UTF-8'))
-            self.change_progress_bar(100)
-            self.hide_setting_modal()
-            self.builder.get_object('reboot_label').set_opacity(1)
-            self.builder.get_object('reboot_button').set_opacity(1)
-            self.builder.get_object('reboot_button').set_sensitive(1)
-            
+            self.set_locale()
             
             
         

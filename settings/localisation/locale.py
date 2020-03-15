@@ -100,12 +100,3 @@ def list_of_actual_languages(country):
         if country == item[3]:
             list_of_lang.append(item[2])
     return list_of_lang       
-    
-    
-    
-    
-if __name__ == "__main__":
-    fulfill_list_settings()
-    for item in list_of_settings:
-        print(item)
-
