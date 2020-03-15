@@ -9,6 +9,140 @@
     <property name="page_increment">10</property>
     <signal name="value-changed" handler="mouse_double_click_delay_changed" swapped="no"/>
   </object>
+  <object class="GtkWindow" id="keyboard_modal">
+    <property name="name">keyboard_modal</property>
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="modal">True</property>
+    <property name="window_position">mouse</property>
+    <property name="type_hint">notification</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="gravity">static</property>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkFixed">
+        <property name="width_request">450</property>
+        <property name="height_request">180</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Back</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="delete_keyboard_modal" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">230</property>
+            <property name="y">140</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Change</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="change_keyboard" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">340</property>
+            <property name="y">140</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Model:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="model_combo_box">
+            <property name="name">model_combo_box</property>
+            <property name="width_request">350</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="x">90</property>
+            <property name="y">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Layout:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">50</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="layout_combo_box">
+            <property name="name">layout_combo_box</property>
+            <property name="width_request">350</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <signal name="changed" handler="set_up_variant_combo_box" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">90</property>
+            <property name="y">55</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="width_request">100</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Variant:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">90</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="variant_combo_box">
+            <property name="name">variant_combo_box</property>
+            <property name="width_request">350</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="x">90</property>
+            <property name="y">95</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="border_popup"/>
+    </style>
+  </object>
   <object class="GtkAdjustment" id="mouse_acceleration_adjustment">
     <property name="upper">100</property>
     <property name="step_increment">0.01</property>
@@ -443,9 +577,10 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <signal name="clicked" handler="create_keyboard_modal" swapped="no"/>
               </object>
               <packing>
-                <property name="x">270</property>
+                <property name="x">220</property>
                 <property name="y">165</property>
               </packing>
             </child>
