@@ -205,9 +205,6 @@ class Handler:
         
         os.popen('sudo timedatectl set-timezone {}/{}'.format(arrea, location))
     
-    
-    
-    
     def create_timezone_modal(self, widget):
         dialog = self.builder.get_object('timezone_modal')
         dialog.set_attached_to(self.builder.get_object('localisation'))
@@ -217,9 +214,32 @@ class Handler:
         dialog = self.builder.get_object('timezone_modal')
         dialog.hide()
 # ----------------------------------------------------------------------------------------------------------------------       
+    def fullfil_wifi_countries(self, countries):
+        country_combo_box = self.builder.get_object('wifi_country_combo_box')
+        for country in countries:
+            country_combo_box.append(country, country)
+        current_country_code = os.popen('raspi-config nonint get_wifi_country').read().rstrip()
+        current_country = code_into_country(current_country_code)
+        country_combo_box.set_active_id(current_country)
 
-    def create_country_modal(self):
-        pass
+    def set_wifi_country(self, widget):
+        self.hide_wifi_country_modal()
+        selected_country = self.builder.get_object('wifi_country_combo_box').get_active_id()
+        country_code = country_into_code(selected_country)
+        
+        os.popen('raspi-config nonint do_wifi_country {}'.format(country_code))
+        
+        
+    
+    def create_wifi_country_modal(self, widget):
+        dialog = self.builder.get_object('wifi_country_modal')
+        dialog.set_attached_to(self.builder.get_object('localisation'))
+        dialog.show_all()
+
+    def hide_wifi_country_modal(self, widget=None):
+        dialog = self.builder.get_object('wifi_country_modal')
+        dialog.hide()
+    
 
 # ----------------------------------------------------------------------------------------------------------------------   
     def create_setting_modal(self, what_setting):
@@ -249,10 +269,14 @@ class Handler:
             self.fulfill_arreas(get_arreas())
             self.fulfill_locations()
             
-           
-            
             self.models, self.layouts, self.variants = get_keyboard_stuff()
             self.fullfil_keyboard_combo_boxes(self.models, self.layouts, self.variants)
+            
+            self.fullfil_wifi_countries(countries)
+            
+            
+            
+            
         
         elif self.what_to_do == 'set_locale':   
             self.set_locale()

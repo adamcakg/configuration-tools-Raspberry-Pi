@@ -248,6 +248,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <signal name="clicked" handler="create_wifi_country_modal" swapped="no"/>
       </object>
       <packing>
         <property name="x">220</property>
@@ -547,6 +548,79 @@
           <packing>
             <property name="x">10</property>
             <property name="y">50</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="border_popup"/>
+    </style>
+  </object>
+  <object class="GtkWindow" id="wifi_country_modal">
+    <property name="name">wifi_country_modal</property>
+    <property name="width_request">410</property>
+    <property name="height_request">95</property>
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="window_position">mouse</property>
+    <child>
+      <object class="GtkFixed">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Country:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="wifi_country_combo_box">
+            <property name="name">wifi_country_combo_box</property>
+            <property name="width_request">280</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="x">120</property>
+            <property name="y">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Back</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="hide_wifi_country_modal" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">190</property>
+            <property name="y">55</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Change</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="set_wifi_country" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">300</property>
+            <property name="y">55</property>
           </packing>
         </child>
       </object>
