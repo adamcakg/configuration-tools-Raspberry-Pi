@@ -2,6 +2,8 @@ from thread import Thread
 import os
 
 from .keyboard_list import get_keyboard_stuff
+from .locale import get_language_and_country, list_of_settings, code_into_language, code_into_country
+from .locale import list_of_actual_languages, language_into_code, country_into_code
 import gi
 
 gi.require_version('Gtk', '3.0')
@@ -14,11 +16,10 @@ class Handler:
         self.option = None
         self.language_store = None
         self.country = []
+        self.what_to_do = 'get_settings'
         
         thread = Thread(self)
         
-      
-
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------
     def add_controller(self, controller):
@@ -90,43 +91,120 @@ class Handler:
         
     def create_keyboard_modal(self, widget):
         dialog = self.builder.get_object('keyboard_modal')
-        dialog.set_attached_to(self.builder.get_object('accessibility'))
+        dialog.set_attached_to(self.builder.get_object('localisation'))
         dialog.show_all()
     
     def delete_keyboard_modal(self, widget=None):
         dialog = self.builder.get_object('keyboard_modal')
         dialog.hide()
     
-
 # ----------------------------------------------------------------------------------------------------------------------
-
-
-
-
+    def fullfil_languages(self, widget=None):
+        country = self.builder.get_object('country_combo_box').get_active_id()
+        language_combo_box = self.builder.get_object('language_combo_box')
+        language_combo_box.remove_all()
+        
+        list_of_languages = list_of_actual_languages(country)
+        for language in list_of_languages:
+            language_combo_box.append(language, language)
+            
+        current_settings = os.popen('localectl status | grep -oP [a-z]+_[A-Z]+.[A-Za-z0-9-:]+').read()
+        current_code = current_settings.split('_')[0]
+        current_language = code_into_language(current_code)
+        
+        for language in list_of_languages:
+            if current_language in language:
+                language_combo_box.set_active_id(language)
+                return
+        
+        language_combo_box.set_active_id(list_of_languages[0])
+        
+    def fullfil_countries(self, countries):
+        countries_combo_box = self.builder.get_object('country_combo_box')
+        
+        for country in countries:
+           countries_combo_box.append(country, country[:22])
+        
+        current_settings = os.popen('localectl status | grep -oP [a-z]+_[A-Z]+.[A-Za-z0-9-:]+').read()
+        current_code = current_settings.split('_')[1].split('.')[0]
+        countries_combo_box.set_active_id(code_into_country(current_code))
     
-    def create_timezone_modal(self):
-        pass
     
-    
-    
-    def create_country_modal(self):
-        pass
+    def change_locale(self, widget):
+        self.delete_localisation_modal()
+        self.what_to_do = 'set_locale'
+        
+        thread = Thread(self)
+        self.create_setting_modal('Setting locale')
+       
+    def create_localisation_modal(self, widget):
+        dialog = self.builder.get_object('localisation_modal')
+        dialog.set_attached_to(self.builder.get_object('localisation'))
+        dialog.show_all()
+
 
     def delete_localisation_modal(self, widget=None):
         dialog = self.builder.get_object('localisation_modal')
         dialog.hide()
-    
-    
-    def change_option_in_localisation(self, widget):
+# ----------------------------------------------------------------------------------------------------------------------    
+    def create_timezone_modal(self):
         pass
     
-    
-    
-    
-        
+    def create_country_modal(self):
+        pass
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------   
+    def create_setting_modal(self, what_setting):
+        self.builder.get_object("setting_label").set_text(what_setting)
+        dialog = self.builder.get_object('setting_modal')
+        dialog.set_attached_to(self.builder.get_object('localisation'))
+        dialog.show_all()
+
+    def hide_setting_modal(self):
+        dialog = self.builder.get_object('setting_modal')
+        dialog.hide()
+
+    def change_progress_bar(self, percentage):
+        self.builder.get_object('progress_bar').set_fraction(percentage/100)
+# ----------------------------------------------------------------------------------------------------------------------           
+    def reboot(self, widget):
+        os.system('reboot')
+
+# ----------------------------------------------------------------------------------------------------------------------   
     def thread_function(self):
-        self.models, self.layouts, self.variants = get_keyboard_stuff()
-        self.fullfil_keyboard_combo_boxes(self.models, self.layouts, self.variants)
         
+        if self.what_to_do == 'get_settings':
+            languages, countries = get_language_and_country()
+            self.fullfil_countries(countries)
+            self.fullfil_languages()
+            
+            self.models, self.layouts, self.variants = get_keyboard_stuff()
+            self.fullfil_keyboard_combo_boxes(self.models, self.layouts, self.variants)
         
+        elif self.what_to_do == 'set_locale':   
+            language = self.builder.get_object('language_combo_box').get_active_id()
+            country = self.builder.get_object('country_combo_box').get_active_id()
+            
+            language_code = language_into_code(language)
+            country_code = country_into_code(country)
+            self.change_progress_bar(10)
+            os.system("sudo sed -i /etc/locale.gen -e 's/^\\([^#].*\\)/# \\1/g'")
+            self.change_progress_bar(40)
+            os.system("sudo sed -i /etc/locale.gen -e 's/^# \\({}_{}[\\. ].*UTF-8\\)/\\1/g'".format(language_code, country_code))
+            self.change_progress_bar(70)
+            os.system("sudo locale-gen")
+            self.change_progress_bar(90)
+            os.system("sudo LC_ALL={0}_{1}{2} LANG={0}_{1}{2} LANGUAGE={0}_{1}{2} update-locale LANG={0}_{1}{2}  LC_ALL={0}_{1}{2} LANGUAGE={0}_{1}{2}".format(language_code,
+                                                                                                                                                          country_code,
+                                                                                                                                                          '.UTF-8'))
+            self.change_progress_bar(100)
+            self.hide_setting_modal()
+            self.builder.get_object('reboot_label').set_opacity(1)
+            self.builder.get_object('reboot_button').set_opacity(1)
+            self.builder.get_object('reboot_button').set_sensitive(1)
+            
+            
+            
         

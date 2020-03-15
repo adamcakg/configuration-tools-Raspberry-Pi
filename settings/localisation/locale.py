@@ -73,3 +73,39 @@ def get_language_and_country():
     fulfill_list_settings()
     return fullfill_country_language()
 
+def code_into_language(code):
+    for locales in list_of_settings:
+        if code == locales[0]:
+            return locales[2]
+        
+def code_into_country(code):
+    for locales in list_of_settings:
+        if code == locales[1]:
+            return locales[3]
+
+def language_into_code(language):
+    for locales in list_of_settings:
+        if language in locales[2]:
+            return locales[0]        
+        
+def country_into_code(country):
+    for locales in list_of_settings:
+        if country == locales[3]:
+            return locales[1]       
+        
+        
+def list_of_actual_languages(country):
+    list_of_lang = []
+    for item in list_of_settings:
+        if country == item[3]:
+            list_of_lang.append(item[2])
+    return list_of_lang       
+    
+    
+    
+    
+if __name__ == "__main__":
+    fulfill_list_settings()
+    for item in list_of_settings:
+        print(item)
+

@@ -7,10 +7,9 @@
     <property name="can_focus">False</property>
     <property name="type">popup</property>
     <property name="modal">True</property>
-    <property name="window_position">mouse</property>
-    <property name="type_hint">notification</property>
+    <property name="window_position">center-on-parent</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="gravity">static</property>
+    <property name="gravity">center</property>
     <child>
       <placeholder/>
     </child>
@@ -162,6 +161,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <signal name="clicked" handler="create_localisation_modal" swapped="no"/>
       </object>
       <packing>
         <property name="x">220</property>
@@ -253,40 +253,73 @@
         <property name="y">145</property>
       </packing>
     </child>
+    <child>
+      <object class="GtkLabel" id="reboot_label">
+        <property name="name">reboot_label</property>
+        <property name="width_request">420</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="opacity">0</property>
+        <property name="label" translatable="yes">Reboot is required</property>
+      </object>
+      <packing>
+        <property name="x">10</property>
+        <property name="y">210</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkButton" id="reboot_button">
+        <property name="label" translatable="yes">Reboot now</property>
+        <property name="name">reboot_button</property>
+        <property name="width_request">100</property>
+        <property name="height_request">30</property>
+        <property name="visible">True</property>
+        <property name="sensitive">False</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">True</property>
+        <property name="opacity">0</property>
+        <signal name="clicked" handler="reboot" swapped="no"/>
+      </object>
+      <packing>
+        <property name="x">156</property>
+        <property name="y">250</property>
+      </packing>
+    </child>
   </object>
   <object class="GtkWindow" id="localisation_modal">
     <property name="name">localisation_modal</property>
+    <property name="width_request">410</property>
+    <property name="height_request">135</property>
     <property name="can_focus">False</property>
+    <property name="type">popup</property>
     <property name="modal">True</property>
     <property name="window_position">mouse</property>
     <property name="type_hint">notification</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="gravity">static</property>
+    <property name="gravity">center</property>
     <property name="attached_to">localisation</property>
     <child>
       <placeholder/>
     </child>
     <child>
       <object class="GtkFixed">
-        <property name="width_request">230</property>
-        <property name="height_request">150</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="resize_mode">queue</property>
         <child>
-          <object class="GtkButton" id="change_option_in_localisation_button">
+          <object class="GtkButton">
             <property name="label" translatable="yes">Change</property>
-            <property name="name">change_option_in_localisation_button</property>
             <property name="width_request">100</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
-            <signal name="clicked" handler="change_option_in_localisation" swapped="no"/>
+            <signal name="clicked" handler="change_locale" swapped="no"/>
           </object>
           <packing>
-            <property name="x">120</property>
-            <property name="y">110</property>
+            <property name="x">300</property>
+            <property name="y">95</property>
           </packing>
         </child>
         <child>
@@ -300,29 +333,14 @@
             <signal name="clicked" handler="delete_localisation_modal" swapped="no"/>
           </object>
           <packing>
-            <property name="x">10</property>
-            <property name="y">110</property>
+            <property name="x">190</property>
+            <property name="y">95</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="localisation_dialog_label">
-            <property name="name">localisation_dialog_label</property>
-            <property name="width_request">210</property>
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Choose a locale:</property>
-            <property name="xalign">0.5</property>
-          </object>
-          <packing>
-            <property name="x">10</property>
-            <property name="y">10</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="localisation_combo_box">
-            <property name="name">localisation_combo_box</property>
-            <property name="width_request">210</property>
+          <object class="GtkComboBoxText" id="language_combo_box">
+            <property name="name">language_combo_box</property>
+            <property name="width_request">280</property>
             <property name="height_request">30</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -331,15 +349,105 @@
             <property name="hexpand">False</property>
             <property name="vexpand">False</property>
             <property name="resize_mode">immediate</property>
-            <property name="active">1</property>
-            <property name="add_tearoffs">True</property>
+          </object>
+          <packing>
+            <property name="x">120</property>
+            <property name="y">55</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBoxText" id="country_combo_box">
+            <property name="name">country_combo_box</property>
+            <property name="width_request">280</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <signal name="changed" handler="fullfil_languages" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">120</property>
+            <property name="y">15</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Language:</property>
+            <property name="xalign">0</property>
           </object>
           <packing>
             <property name="x">10</property>
-            <property name="y">55</property>
+            <property name="y">50</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Country:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">10</property>
           </packing>
         </child>
       </object>
     </child>
+    <style>
+      <class name="border_popup"/>
+    </style>
+  </object>
+  <object class="GtkWindow" id="setting_modal">
+    <property name="name">setting_modal</property>
+    <property name="width_request">300</property>
+    <property name="height_request">100</property>
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="window_position">mouse</property>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkFixed">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkLabel" id="setting_label">
+            <property name="name">setting_label</property>
+            <property name="width_request">280</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Setting locales</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkProgressBar" id="progress_bar">
+            <property name="name">progress_bar</property>
+            <property name="width_request">240</property>
+            <property name="height_request">17</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="pulse_step">0</property>
+            <property name="show_text">True</property>
+          </object>
+          <packing>
+            <property name="x">30</property>
+            <property name="y">50</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="border_popup"/>
+    </style>
   </object>
 </interface>
