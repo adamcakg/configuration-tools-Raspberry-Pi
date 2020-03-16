@@ -219,8 +219,11 @@ class Handler:
         for country in countries:
             country_combo_box.append(country, country)
         current_country_code = os.popen('raspi-config nonint get_wifi_country').read().rstrip()
-        current_country = code_into_country(current_country_code)
-        country_combo_box.set_active_id(current_country)
+        if current_country_code == '':
+            country_combo_box.set_active_id('United Kingdom')
+        else:
+            current_country = code_into_country(current_country_code)
+            country_combo_box.set_active_id(current_country)
 
     def set_wifi_country(self, widget):
         self.hide_wifi_country_modal()

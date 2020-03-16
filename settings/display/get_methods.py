@@ -25,10 +25,10 @@ def get_resolutions(monitor):
     return list_of_resolutions
 
 def get_number_of_monitors():
-#        monitors = (os.popen("xrandr --listmonitors | grep Monitors: | cut -d ' ' -f 2").read())[:1]
- #       monitors = int(monitors)
-  #      if monitors < 2:
-   #         return 1
-    #    elif monitors >1:
-     #       return 2
-         return 2
+        monitors = (os.popen("xrandr --listmonitors | grep Monitors: | cut -d ' ' -f 2").read())[:1]
+        monitors = int(monitors)
+        if monitors < 2:
+            return 1
+        elif monitors >1:
+            return 2
+        #return 2            TESTING

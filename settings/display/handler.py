@@ -43,21 +43,20 @@ class Handler:
             self.set_resolution(current_resolution,1)
             self.set_frequency(current_resolution, self.resolutions_monitor_1)
             self.set_orientation(current_orientation)
-            #current_resolution, current_orientation = get_current_settings(2)
-            #self.builder.get_object('resolution_label_monitor_2').set_label(current_resolution)
-            self.builder.get_object('resolution_label_monitor_2').set_label('800x600')
+            if self.number_of_monitors == 2:
+                self.builder.get_object('resolution_label_monitor_2').set_label('800x600')
         else:
- #           current_resolution, current_orientation = get_current_settings(2)
-  #          self.resolutions_monitor_1 = get_resolutions(2)
-   #         self.fullfil_resolutions(self.resolutions_monitor_2)
-    #        self.set_resolution(current_resolution, 2)
-     #       self.set_frequency(current_resolution, self.resolutions_monitor_2)
-      #      self.set_orientation(current_orientation)
+            current_resolution, current_orientation = get_current_settings(2)
+            self.resolutions_monitor_1 = get_resolutions(2)
+            self.fullfil_resolutions(self.resolutions_monitor_2)
+            self.set_resolution(current_resolution, 2)
+            self.set_frequency(current_resolution, self.resolutions_monitor_2)
+            self.set_orientation(current_orientation)
              # TESTING
-             self.builder.get_object('resolution_combobox_monitor_1').set_active_id('800x600')
-             self.builder.get_object('resolution_combobox_monitor_1').connect('changed', self.resolution_changed)
-             self.builder.get_object('frequency_combobox_monitor_1').connect('changed', self.frequency_changed)
-             self.builder.get_object('orientation_combobox_monitor_1').connect('changed', self.orientation_changed)
+      #       self.builder.get_object('resolution_combobox_monitor_1').set_active_id('800x600')
+       #      self.builder.get_object('resolution_combobox_monitor_1').connect('changed', self.resolution_changed)
+        #     self.builder.get_object('frequency_combobox_monitor_1').connect('changed', self.frequency_changed)
+         #    self.builder.get_object('orientation_combobox_monitor_1').connect('changed', self.orientation_changed)
              
              
             
