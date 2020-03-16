@@ -112,7 +112,9 @@ class Handler:
             self.builder.get_object('not_match_password_label').set_opacity(0)
             self.builder.get_object('pasword_missing_label').set_opacity(1)
         elif self.compare(password, confirmed):  # checking if passwords are the same
-            os.system('echo "{}" | sudo passwd'.format(password + '\n' + password))
+            whoami = os.popen('whoami').read().rstrip()
+            os.system('echo "{}:{}" | sudo chpasswd'.format(whoami, password))
+        
             self.delete_password_modal()
         else:
             self.builder.get_object('pasword_missing_label').set_opacity(0)
