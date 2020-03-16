@@ -16,12 +16,10 @@ class Handler:
         
         thread = Thread(self)
         
-        while thread.alive() :
-             while Gtk.events_pending():
-                Gtk.main_iteration_do(True)
+        
                 
                 
-        self.set_apply_button('disable')
+        
 
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------
@@ -39,6 +37,7 @@ class Handler:
     def get_hostname(self):
         hostname = os.popen("raspi-config nonint get_hostname").read()
         self.builder.get_object("hostname_entry").set_text(hostname)
+        self.builder.get_object("hostname_entry").connect('changed', self.hostname_entry_changed)
 
 # HOSTNAME ENTRY CHANGED
 # ---------------------------------------------------------------   
@@ -58,6 +57,7 @@ class Handler:
         elif autologin == '0':
             self.builder.get_object('autologin_switch').set_state(True)
             self.autologin = True
+        self.builder.get_object("autologin_switch").connect('state-set', self.autologin_switch_changed)
         
 # SET AUTOLOGIN
 # ---------------------------------------------------------------  
@@ -138,6 +138,7 @@ class Handler:
             self.builder.get_object('boot_to_desktop_switch').set_state(True)
         elif to_cli == '0':
             self.builder.get_object('boot_to_desktop_switch').set_state(False)
+        self.builder.get_object("boot_to_desktop_switch").connect('state-set', self.boot_to_desktop_switch_changed)
             
     def set_boot_option(self, state, autologin):
         if state == False:
@@ -159,6 +160,7 @@ class Handler:
             self.builder.get_object('network_at_boot_switch').set_state(False)
         elif wait == '0':
             self.builder.get_object('network_at_boot_switch').set_state(True)
+        self.builder.get_object("network_at_boot_switch").connect('state-set', self.network_at_boot_switch_changed)
             
     def network_at_boot_switch_changed(self, widget, state):
         if 'network_at_boot' not in self.what_changed:
@@ -181,6 +183,7 @@ class Handler:
             self.splash_screen_at_boot = True
         else:
             self.builder.get_object('splash_screen_switch').set_state(False)
+        self.builder.get_object("splash_screen_switch").connect('state-set', self.splash_screen_switch_changed)
        
     def splash_screen_switch_changed(self, widget, state):
         self.splash_screen_at_boot = state
@@ -221,6 +224,7 @@ class Handler:
 
 # ---------------------------------------------------------------  
     def thread_function(self):
+        self.set_apply_button('disable')
         self.get_hostname()
         self.get_autologin()
         self.get_boot_option()

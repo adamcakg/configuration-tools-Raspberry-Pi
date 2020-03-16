@@ -233,7 +233,6 @@
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <signal name="changed" handler="hostname_entry_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">170</property>
@@ -261,7 +260,6 @@
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <signal name="state-set" handler="autologin_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
@@ -307,7 +305,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="active">True</property>
-                <signal name="state-set" handler="boot_to_desktop_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
@@ -335,7 +332,6 @@
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <signal name="state-set" handler="network_at_boot_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
@@ -363,7 +359,6 @@
                 <property name="height_request">30</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <signal name="state-set" handler="splash_screen_switch_changed" swapped="no"/>
               </object>
               <packing>
                 <property name="x">280</property>
