@@ -1,9 +1,5 @@
 import os
 from thread import Thread
-from .boot_option import set_boot_option
-from .boot_option import get_boot_wait
-from .boot_option import get_boot_splash
-from .boot_option import do_boot_splash
 
 import gi
 
@@ -15,10 +11,7 @@ class Handler:
     def __init__(self, builder, controller=None):
         self.builder = builder
         self.what_changed = []
-        self.hostname = ''
-        self.autologin = False
         self.graphical_boot = True
-        self.network_at_boot = False
         self.splash_screen_at_boot = False
         
         thread = Thread(self)
@@ -30,7 +23,6 @@ class Handler:
                 
         self.set_apply_button('disable')
 
-
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------
     def add_controller(self, controller):
@@ -40,26 +32,13 @@ class Handler:
 # ---------------------------------------------------------------
     def set_hostname(self):
         new_hostname = self.builder.get_object('hostname_entry').get_text()
-        os.popen('sudo echo "{}" > /etc/hostname'.format(new_hostname + '\n'))
-        
-        #with open('/etc/hostname', 'w') as file:
-        #    file.write(new_hostname + '\n')
-            
-        hosts = os.popen('cat /etc/hosts').read()
-        hosts = hosts.replace(self.hostname, new_hostname)
-        
-        os.popen('sudo echo "{}" > /etc/hosts'.format(hosts))
-        
-        #with open('/etc/hosts', 'w') as file:
-         #   file.write(hosts)
-        
-        self.hostname = new_hostname
+        os.popen('sudo raspi-config nonint do_hostname {}'.format(new_hostname))
         
 # GETTING HOSTNAME
 # ---------------------------------------------------------------
     def get_hostname(self):
-        self.hostname = os.popen("cat /etc/hostname").read()[:-1]
-        self.builder.get_object("hostname_entry").set_text(self.hostname)
+        hostname = os.popen("raspi-config nonint get_hostname").read()
+        self.builder.get_object("hostname_entry").set_text(hostname)
 
 # HOSTNAME ENTRY CHANGED
 # ---------------------------------------------------------------   
@@ -71,33 +50,32 @@ class Handler:
 # GET AUTOLOGIN
 # ---------------------------------------------------------------          
     def get_autologin(self):
-        lightdm = os.popen('cat /etc/lightdm/lightdm.conf').read()
+        autologin = os.popen('raspi-config nonint get_autologin').read().rstrip()
 
-        if '#autologin-user=pi' in lightdm:
+        if autologin == '1':
             self.builder.get_object('autologin_switch').set_state(False)
             self.autologin = False
-        elif 'autologin-user=pi' in lightdm:
+        elif autologin == '0':
             self.builder.get_object('autologin_switch').set_state(True)
             self.autologin = True
         
-
 # SET AUTOLOGIN
 # ---------------------------------------------------------------  
     def set_autologin(self):
-        lightdm = os.popen('cat /etc/lightdm/lightdm.conf').read()
-        if self.builder.get_object('autologin_switch').get_state() == True:
-            if '#autologin-user=pi' in lightdm:
-                lightdm = lightdm.replace('#autologin-user=pi', 'autologin-user=pi')
-            if '#autologin-user=' in lightdm:
-                lightdm = lightdm.replace('#autologin-user=', 'autologin-user=pi')
-        else:
-            if 'autologin-user=pi' in lightdm:
-                lightdm = lightdm.replace('autologin-user=pi', '#autologin-user=pi')
-            
+        boot_to_cli = os.popen('raspi-config nonint get_boot_cli').read().rstrip()
+        state = self.builder.get_object('autologin_switch').get_state()
         
-        with open('/etc/lightdm/lightdm.conf', 'w') as file:
-            file.write(lightdm)
-        
+        if boot_to_cli == '0':
+            if state:
+                os.popen("sudo raspi-config nonint do_boot_behaviour B2")
+            else:
+                os.popen("sudo raspi-config nonint do_boot_behaviour B1")
+        elif boot_to_cli == '1':
+            if state:    
+                os.popen("sudo raspi-config nonint do_boot_behaviour B4")
+            else:
+                os.popen("sudo raspi-config nonint do_boot_behaviour B3")
+    
 # AUTOLOGIN SWITCH CHANGES
 # ---------------------------------------------------------------  
     def autologin_switch_changed(self, widget, state):
@@ -134,7 +112,7 @@ class Handler:
             self.builder.get_object('not_match_password_label').set_opacity(0)
             self.builder.get_object('pasword_missing_label').set_opacity(1)
         elif self.compare(password, confirmed):  # checking if passwords are the same
-            os.system('echo "{}" | passwd'.format(password + '\n' + password))
+            os.system('echo "{}" | sudo passwd'.format(password + '\n' + password))
             self.delete_password_modal()
         else:
             self.builder.get_object('pasword_missing_label').set_opacity(0)
@@ -153,43 +131,50 @@ class Handler:
 # SETUP BOOT_TO_DESKTOP_SWITCH
 # -----------------------------------------------------------------
     def get_boot_option(self):
-        boot_option = os.popen('systemctl get-default').read()
-        if boot_option == 'graphical.target':
+        to_cli = os.popen('raspi-config nonint get_boot_cli').read().rstrip()
+        if to_cli == '1':
             self.builder.get_object('boot_to_desktop_switch').set_state(True)
-        elif boot_option == 'multi-user.target':
+        elif to_cli == '0':
             self.builder.get_object('boot_to_desktop_switch').set_state(False)
             
-            
+    def set_boot_option(self, state, autologin):
+        if state == False:
+            if autologin == False:
+                os.popen('sudo raspi-config nonint do_boot_behaviour B1')
+            else:
+                os.popen('sudo raspi-config nonint do_boot_behaviour B2')
+        elif state == True:
+            if autologin == False:
+                os.popen('sudo raspi-config nonint do_boot_behaviour B3')
+            else:
+                os.popen('sudo raspi-config nonint do_boot_behaviour B4')
+        
 # WAIT FOR NETWORK TO BOOT
 # ------------------------------------------------------------------------
     def get_wait_for_network(self):
-        wait = get_boot_wait() 
-        if wait == 0:
+        wait = os.popen('raspi-config nonint get_boot_wait').read().rstrip()
+        if wait == '1':
             self.builder.get_object('network_at_boot_switch').set_state(False)
-        elif wait == 1:
+        elif wait == '0':
             self.builder.get_object('network_at_boot_switch').set_state(True)
             
     def network_at_boot_switch_changed(self, widget, state):
-        self.network_at_boot = state
         if 'network_at_boot' not in self.what_changed:
             self.what_changed.append('network_at_boot')
             self.set_apply_button('enable') 
 
     def set_wait_for_network(self):
-        if self.network_at_boot == True:
-            os.popen('mkdir -p /etc/systemd/system/dhcpcd.service.d/')
-            os.popen('''cat > /etc/systemd/system/dhcpcd.service.d/wait.conf << EOF
-[Service]
-ExecStart=
-ExecStart=/usr/lib/dhcpcd5/dhcpcd -q -w
-EOF''')
-        elif self.network_at_boot == False:
-            os.popen('rm -f /etc/systemd/system/dhcpcd.service.d/wait.conf')
-
+        wait = self.builder.get_object('network_at_boot_switch').get_state()
+        if wait:
+            os.popen('sudo raspi-config nonint do_boot_wait 0')
+        else:
+            os.popen("sudo raspi-config nonint do_boot_wait 1")
+        
 # SPLASH SCREEN
 # --------------------------------------------------------------------------------
     def get_splash_screen(self):
-        if get_boot_splash() == True:
+        splash_screen = os.popen('raspi-config nonint get_boot_splash').read().rstrip()
+        if splash_screen == '0':
             self.builder.get_object('splash_screen_switch').set_state(True)
             self.splash_screen_at_boot = True
         else:
@@ -202,11 +187,8 @@ EOF''')
             self.set_apply_button('enable')
 
     def set_splash_screen(self):
-        state = do_boot_splash(self.splash_screen_at_boot)
-        if state == 'error': 
-            self.builder.get_object('splash_screen_switch').set_state(False)
-            self.builder.get_object('splash_screen_error_label').set_opacity(1)
-       
+        os.popen('sudo raspi-config nonint do_boot_splash {}'.format(1-int(self.splash_screen_at_boot)))
+        
 # SET APPLY
 # ---------------------------------------------------------------        
     def set_apply_button(self, action):
@@ -226,16 +208,14 @@ EOF''')
             elif item == 'autologin':
                 self.set_autologin()
             elif item == 'boot_option':
-                set_boot_option(self.graphical_boot, self.autologin)
+                self.set_boot_option(self.graphical_boot, self.autologin)
             elif item == 'network_at_boot':
                 self.set_wait_for_network()
             elif item == 'splash_screen':
                 self.set_splash_screen()
         
-          
         self.what_changed = []
         self.set_apply_button('disable')
-
 
 # ---------------------------------------------------------------  
     def thread_function(self):
