@@ -1,9 +1,8 @@
-import gi
 from pages import get_pages
 
-
+import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, GdkPixbuf
 
 class Handler:
     def __init__(self, builder):
@@ -32,5 +31,21 @@ class Handler:
         list_box.connect("row-selected", self.row_activated)
 
         for page in pages:
-            list_box.insert(Gtk.Label.new(page.get_name()), -1)
+            box = Gtk.Box(spacing=0)
+            try:
+                icon = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename= page.get_icon(),
+                                                             width=8, height=8, 
+                                                             preserve_aspect_ratio=True)
+            except Exception:
+                icon = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename='main/img/minus.png',
+                                                             width=8, height=8, 
+                                                             preserve_aspect_ratio=True)
+            icon = Gtk.Image.new_from_pixbuf(icon)
+            box.pack_start(icon, False, False, 10)
+            label = Gtk.Label.new(page.get_name())
+            label.set_xalign(0)
+            box.pack_start(label, False, False, 0)
+                    
+            list_box.insert(box, -1)
+            #list_box.insert(Gtk.Label.new(page.get_name()), -1)
 
