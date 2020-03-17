@@ -1,5 +1,5 @@
 
-
+from info import Info
 from wifi import Wifi
 from bluetooth import Bluetooth
 from appearance import Appearance
@@ -12,7 +12,7 @@ from display import Display
 def get_pages():
         """
         Here are the pages of all application
-        ['name', Instance]
+        [instance]
         :return - list of pages with instances
         """
         return [
@@ -22,8 +22,8 @@ def get_pages():
             Interfaces(),
             Display(),
             Localisation(),
+            Info(),
             Wifi(),
             Bluetooth()
-            
             
         ]

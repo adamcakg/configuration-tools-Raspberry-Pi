@@ -7,7 +7,7 @@ class Page(ABC):
         raise NotImplementedError("get_xml_object(self) method must be implemented...")
     
     def destroy(self):
-        self.destroy()
+        del self
         
     def connect_builder(self):
         raise NotImplementedError("connect_builder(self, ....) method must be implemented")

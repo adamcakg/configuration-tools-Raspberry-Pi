@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkFixed" id="info">
+    <property name="name">info</property>
+    <property name="width_request">440</property>
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkLabel" id="distributor_label">
+        <property name="name">distributor_label</property>
+        <property name="width_request">200</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">200</property>
+        <property name="y">20</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="description_label">
+        <property name="name">description_label</property>
+        <property name="width_request">200</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="wrap">True</property>
+        <property name="wrap_mode">char</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">200</property>
+        <property name="y">60</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="release_label">
+        <property name="name">release_label</property>
+        <property name="width_request">200</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">200</property>
+        <property name="y">100</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="codename_label">
+        <property name="name">codename_label</property>
+        <property name="width_request">200</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">200</property>
+        <property name="y">140</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Distributor ID:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">20</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Description:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">60</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Release:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">100</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="width_request">100</property>
+        <property name="height_request">40</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Codename:</property>
+        <property name="xalign">0</property>
+      </object>
+      <packing>
+        <property name="x">80</property>
+        <property name="y">140</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkImage" id="raspbian_image">
+        <property name="name">raspbian_image</property>
+        <property name="width_request">90</property>
+        <property name="height_request">90</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="pixbuf">img/raspbian.png</property>
+      </object>
+      <packing>
+        <property name="x">110</property>
+        <property name="y">190</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkImage">
+        <property name="width_request">100</property>
+        <property name="height_request">80</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="pixbuf">img/raspberry-image.png</property>
+      </object>
+      <packing>
+        <property name="x">230</property>
+        <property name="y">190</property>
+      </packing>
+    </child>
+  </object>
+</interface>
