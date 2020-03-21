@@ -75,6 +75,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="receives_default">True</property>
+        <signal name="clicked" handler="refresh" swapped="no"/>
       </object>
       <packing>
         <property name="x">225</property>
@@ -103,6 +104,86 @@
     <property name="can_focus">False</property>
     <property name="type">popup</property>
     <property name="modal">True</property>
+    <property name="window_position">mouse</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="gravity">center</property>
+    <child>
+      <placeholder/>
+    </child>
+    <child>
+      <object class="GtkFixed">
+        <property name="width_request">260</property>
+        <property name="height_request">95</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">back</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="delete_modal_of_device" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">40</property>
+            <property name="y">55</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Pair</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="pair" object="device_name_label" swapped="no"/>
+          </object>
+          <packing>
+            <property name="x">150</property>
+            <property name="y">55</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel">
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Device:</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">10</property>
+            <property name="y">10</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="device_name_label">
+            <property name="name">device_name_label</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Device_name</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="x">100</property>
+            <property name="y">10</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="border_popup"/>
+    </style>
+  </object>
+  <object class="GtkWindow" id="paired_device_modal">
+    <property name="name">paired_device_modal</property>
+    <property name="can_focus">False</property>
+    <property name="type">popup</property>
+    <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="gravity">center</property>
@@ -111,10 +192,24 @@
     </child>
     <child>
       <object class="GtkFixed">
-        <property name="width_request">450</property>
-        <property name="height_request">180</property>
+        <property name="width_request">32</property>
+        <property name="height_request">32</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">back</property>
+            <property name="width_request">100</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="x">322</property>
+            <property name="y">117</property>
+          </packing>
+        </child>
       </object>
     </child>
     <style>

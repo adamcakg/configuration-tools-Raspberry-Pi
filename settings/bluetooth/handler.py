@@ -11,6 +11,8 @@ class Handler:
     def __init__(self, builder, controller=None):
         self.builder = builder
         self.bluetooth = None
+        self.devices = {}
+        self.paired_devices = {}
         self.what_to_do = 'check'
         Thread(self)
         
@@ -21,9 +23,9 @@ class Handler:
     
 # ----------------------------------------------------------------------------------------------------------------------    
     def fulfill_devices(self):
-        devices = self.bluetooth.get_discoverable_devices()
-        paired_devices = self.bluetooth.get_paired_devices()
-        if devices == [] or devices == None:
+        self.devices = self.bluetooth.get_discoverable_devices()
+        self.paired_devices = self.bluetooth.get_paired_devices()
+        if self.devices == [] or self.devices == None:
             return
         
         tree = self.builder.get_object('bluetooth_tree')
@@ -36,10 +38,10 @@ class Handler:
         store = Gtk.ListStore(str, str)
         tree.set_model(store)
         
-        for paired in paired_devices:
+        for paired in self.paired_devices:
             store.append(["bluetooth/img/bluetooth.svg", paired['name']])                 #TO DO : CHANGE TO RED IF PAIRED 
         
-        for device in devices:
+        for device in self.devices:
             store.append(["bluetooth/img/bluetooth.svg", device['name']])
         
         px_column = Gtk.TreeViewColumn('Devices')
@@ -86,11 +88,51 @@ class Handler:
             self.bluetooth.start_scan()
             self.fulfill_devices()
     
-# ----------------------------------------------------------------------------------------------------------------------     
-    def create_modal_of_device(self, widget):
-        pass
-    
-    
+# ----------------------------------------------------------------------------------------------------------------------
+    def create_modal_of_device(self, widget=None, position=None, column=None):
+        position = int(str(position))
+        device = None
+        try:
+            device = self.paired_devices[position]
+            dialog = self.builder.get_object('paired_device_modal')
+            dialog.set_attached_to(self.builder.get_object('bluetooth'))
+            dialog.show_all()
+            
+            
+            
+            
+        except Exception:
+            position = position - len(self.paired_devices)
+            device = self.devices[position]
+            if len(device['name'])> 17:
+                   device['name'] = device['name'][17:] + '...'
+            self.builder.get_object('device_name_label').set_text(device['name'])
+            dialog = self.builder.get_object('device_modal')
+            dialog.set_attached_to(self.builder.get_object('bluetooth'))
+            dialog.show_all()
+            
+        
+    def delete_modal_of_device(self, widget=None):
+        dialog = self.builder.get_object('device_modal')
+        dialog.hide()
+        dialog = self.builder.get_object('paired_device_modal')
+        dialog.hide()
+        self.fulfill_devices()
+
+# ----------------------------------------------------------------------------------------------------------------------  
+    def pair(self, widget):
+        name_of_device = widget.get_text()
+        for device in self.devices:
+            if device['name'] == name_of_device:
+                self.bluetooth.pair(device['mac_address'])
+                self.delete_modal_of_device()
+            
+        
+# ----------------------------------------------------------------------------------------------------------------------   
+    def refresh(self, widget):
+        self.builder.get_object('refresh_button').set_sensitive(False)
+        self.what_to_do = 'refresh'
+        Thread(self)    
 # ----------------------------------------------------------------------------------------------------------------------   
     def set_discoverable(self, widget):
         self.bluetooth.make_discoverable()
@@ -110,10 +152,13 @@ class Handler:
                 self.fulfill_devices()
         
         elif self.what_to_do == 'disable discoverable':
-            time.sleep(15)
+            time.sleep(20)
             self.bluetooth.stop_discoverable()
             try:
                 self.builder.get_object('discoverable_button').set_sensitive(True)
             except Exception:
                 return
+        elif self.what_to_do == 'refresh':
+            self.fulfill_devices()
+            self.builder.get_object('refresh_button').set_sensitive(True)
     

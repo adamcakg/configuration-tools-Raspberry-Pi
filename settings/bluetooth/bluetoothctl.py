@@ -26,6 +26,7 @@ class Bluetoothctl:
         """Run a command in bluetoothctl prompt, return output as a list of lines."""
         self.send(*args, **kwargs)
         return self.process.before.split("\r\n")
+        
 
     def start_scan(self):
         """Start bluetooth scanning process."""
