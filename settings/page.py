@@ -20,3 +20,10 @@ class Page(ABC):
     
     def get_name(self):
         raise NotImplementedError("get_name must be implemented")
+    
+    def get_icon(self):
+        """
+            Page should have an icon but if is missing minus will show in application
+
+        """
+        return None

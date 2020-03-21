@@ -32,16 +32,18 @@ class Handler:
 
         for page in pages:
             box = Gtk.Box(spacing=0)
-            try:
+            if page.get_icon() is not None:
                 icon = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename= page.get_icon(),
-                                                             width=8, height=8, 
+                                                             width=16, height=16, 
                                                              preserve_aspect_ratio=True)
-            except Exception:
+                icon = Gtk.Image.new_from_pixbuf(icon)
+                box.pack_start(icon, False, False, 6)
+            else:
                 icon = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename='main/img/minus.png',
                                                              width=8, height=8, 
                                                              preserve_aspect_ratio=True)
-            icon = Gtk.Image.new_from_pixbuf(icon)
-            box.pack_start(icon, False, False, 10)
+                icon = Gtk.Image.new_from_pixbuf(icon)
+                box.pack_start(icon, False, False, 10)
             label = Gtk.Label.new(page.get_name())
             label.set_xalign(0)
             box.pack_start(label, False, False, 0)

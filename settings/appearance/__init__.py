@@ -31,3 +31,6 @@ class Appearance(Page):
         
     def get_name(self):
         return self.name
+    
+    def get_icon(self):
+        return 'appearance/img/appearance.svg'

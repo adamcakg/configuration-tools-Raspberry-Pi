@@ -4,7 +4,6 @@ import controller
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib
 
-
 class Settings(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
@@ -14,7 +13,9 @@ class Settings(Gtk.Window):
         self.set_default_size(600, 310)
         self.move(size.get_width()/4, size.get_height()/4)
         self.set_resizable(False)
-
+        
+        self.set_icon_from_file('img/icon.svg')
+        
         controller.Controller(self)                                    # Giving control to controller class
 
 

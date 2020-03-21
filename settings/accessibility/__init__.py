@@ -32,3 +32,6 @@ class Accessibility(Page):
         
     def get_name(self):
         return self.name
+    
+    def get_icon(self):
+        return 'accessibility/img/accessibility.svg'
