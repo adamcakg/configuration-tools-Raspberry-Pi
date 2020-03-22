@@ -67,6 +67,7 @@
     <property name="name">welcome_box</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="resize_mode">queue</property>
     <child>
       <object class="GtkButton" id="back_software_button">
         <property name="name">next_page_button</property>
@@ -89,6 +90,7 @@
         <property name="can_focus">False</property>
         <property name="halign">center</property>
         <property name="valign">center</property>
+        <property name="resize_mode">queue</property>
         <child>
           <object class="GtkLabel" id="middle_label_software_page">
             <property name="name">middle_label_software_page</property>
@@ -130,13 +132,11 @@
         <child>
           <object class="GtkSwitch" id="switch_software_ssh">
             <property name="name">switch_software_ssh</property>
-            <property name="width_request">1</property>
             <property name="visible">True</property>
+            <property name="app_paintable">True</property>
             <property name="can_focus">False</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
+            <property name="receives_default">True</property>
+            <property name="vexpand">False</property>
           </object>
           <packing>
             <property name="x">180</property>

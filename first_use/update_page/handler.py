@@ -1,4 +1,4 @@
-
+import requests
 
 class Handler:
     def __init__(self, builder, controller=None):
@@ -36,6 +36,13 @@ class Handler:
         os.system('sudo apt autoremove -y -q')
         
     def thread_function(self):
+        self.create_modal()
+        try:
+            request = requests.get('http://www.raspberrypi.com/', timeout=30)
+        except requests.ConnectionError:
+            self.delete_modal()
+            self.builder.get_object('no_internet_label').set_opacity(1)
+            return
         self.update()
         
     def create_modal(self):

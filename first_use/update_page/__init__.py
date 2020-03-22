@@ -5,9 +5,7 @@ from thread import Thread
 
 from page import Page
 
-
 import gi
-import requests
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -35,15 +33,8 @@ class UpdatePage(Page):
         self.handler.add_controller(controller)
         self.__builder.connect_signals(self.handler)
         
-    def execute(self):
-        try:
-            request = requests.get('http://www.raspberrypi.com/', timeout=30)
-        except requests.ConnectionError:
-            self.__builder.get_object('no_internet_label').set_opacity(1)
-            return
-        
+    def execute(self):    
         thread = Thread(self.handler)
-        self.handler.create_modal()
         
         while thread.alive() :
              while Gtk.events_pending():

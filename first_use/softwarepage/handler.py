@@ -23,6 +23,9 @@ class Handler:
             if self.builder.get_object('switch_software_{}'.format(switch)).get_active():
                 active_switches.append(switch)
                 
+                
+    
+                
         return active_switches
     
     def turn_on_functions(self, list_of_functions):
@@ -70,53 +73,23 @@ class Handler:
     def vnc(self):
         print('---vnc')
         self.builder.get_object('software_dialog_label').set_label("Setting up VNC")
-        system('systemctl enable vncserver-x11-serviced')
-        system('systemctl start vncserver-x11-serviced')
+        popen('sudo raspi-config nonint do_vnc 0')
 
 #SPI -----------------------------------------------------------------------------------------------------------------
     def spi(self):
         print('---spi')
         self.builder.get_object('software_dialog_label').set_label("Setting up SPI")
-        modified_file = ''
-        with open('/boot/config.txt', 'r') as file:
-            line = file.readline()
-            while line:
-                if '#dtparam=spi=on' in line:
-                    line = line.replace('#','')
-                
-                modified_file += line
-                
-                line = file.readline()
-        with open('/boot/config.txt', 'w') as file:
-            file.write(modified_file)
+        # SPI NOT WORKING
+        #popen('sudo raspi-config nonint do_spi 0')
 
 #i2c -----------------------------------------------------------------------------------------------------------------
     def i_two_c(self):
         print('---i2c')
-        self.builder.get_object('software_dialog_label').set_label("Setting up I2C")
-        #i2c-bcm2708
-        result = popen("grep 'i2c-bcm2708' /etc/modules")
-        if list(result) == []:
-            popen("echo 'i2c-bcm2708' >> /etc/modules")
-        #i2c-dev
-        result = popen("grep 'i2c-dev' /etc/modules")
-        if list(result) == []:
-            popen("echo 'i2c-dev' >> /etc/modules")
-        #dtparam=i2c1=on                                                                   toto pozri nenastavuje i2c
-            
-        result = popen("grep 'dtparam=i2c1=on' /boot/config.txt")
-        if list(result) == []: 
-            popen("echo 'dtparam=i2c1=on' >> /boot/config.txt")  
-        #dtparam=i2c_arm=on
-        result = popen("grep 'dtparam=i2c_arm=on' /boot/config.txt")
-        if list(result) == []:
-            popen("echo 'dtparam=i2c_arm=on' >> /boot/config.txt")
-        # installing i2c-tools
-        system('apt-get install -y i2c-tools')
-
+        popen('sudo raspi-config nonint do_i2c 0')
+        
 #SERIAL -----------------------------------------------------------------------------------------------------------------
     def serial(self):
         print('---serial')
         self.builder.get_object('software_dialog_label').set_label("Setting up Serial Port")
-        
+        popen('sudo raspi-config nonint do_serial 0')
 
