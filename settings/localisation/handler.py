@@ -277,10 +277,6 @@ class Handler:
             
             self.fullfil_wifi_countries(countries)
             
-            
-            
-            
-        
         elif self.what_to_do == 'set_locale':   
             self.set_locale()
             

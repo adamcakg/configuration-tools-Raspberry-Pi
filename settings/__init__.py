@@ -11,7 +11,9 @@ class Settings(Gtk.Window):
         size = Gdk.Screen.get_default()
         
         self.set_default_size(600, 310)
-        self.move(size.get_width()/4, size.get_height()/4)
+        x = (size.get_width() - 600)/2
+        y = (size.get_height() - 310)/2
+        self.move(x, y)
         self.set_resizable(False)
         
         self.set_icon_from_file('img/icon.svg')
