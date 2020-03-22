@@ -170,8 +170,9 @@
     <property name="can_focus">False</property>
     <property name="type">popup</property>
     <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
+    <property name="window_position">center</property>
     <property name="type_hint">dialog</property>
+    <property name="gravity">east</property>
     <child type="titlebar">
       <placeholder/>
     </child>

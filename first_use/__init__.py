@@ -14,9 +14,24 @@ from gi.repository import Gtk, Gdk
 class FirstStart(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
-        self.set_border_width(10)                           # Border all around window
-        self.set_default_size(600, 600)                     # Setting default size of window
-        #self.fullscreen()
+        
+        size = Gdk.Screen.get_default()
+        
+        if size.get_width() <= 600 or size.get_height() <= 800:
+            self.set_border_width(10)      
+            self.set_resizable(True)
+            self.fullscreen()
+        else:
+            self.set_decorated(False)
+            self.set_keep_above(True)
+            x = (size.get_width() - 500)/2
+            y = (size.get_height() - 500)/2
+            
+            self.move(x, y)
+        
+            self.set_border_width(10)                           # Border all around window
+            self.set_default_size(500, 500)                     # Setting default size of window
+            self.set_resizable(False)
         
         controller.Controller(self)                                    # Giving control to controller class
 
