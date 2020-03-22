@@ -69,6 +69,16 @@ def fullfill_country_language():
     
     countries.sort()
     languages.sort()
+    
+def country_into_code(country):
+    for locales in list_of_settings:
+        if country == locales[3]:
+            return locales[1]
+        
+def language_into_code(language):
+    for locales in list_of_settings:
+        if language in locales[2]:
+            return locales[0]    
 
 
 # METHOD TO DO THREADING

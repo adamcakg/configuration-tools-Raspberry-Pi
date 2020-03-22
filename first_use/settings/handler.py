@@ -1,7 +1,7 @@
 from keeper import keeper
 import locale
 
-from .settings_stuff import list_of_settings
+from .settings_stuff import list_of_settings, country_into_code
 from .timezone import get_timezones_from_country
 import os
 
@@ -140,6 +140,11 @@ class Handler:
     def thread_function(self):
         self.set_timezone()
         self.set_locale()
+        
+        
+        country_code = country_into_code(keeper['settingspage']['country'])
+        
+        os.popen('raspi-config nonint do_wifi_country {}'.format(country_code))
         
 # MODAL
 # ----------------------------------------------------------------------------------------------------------------------        
