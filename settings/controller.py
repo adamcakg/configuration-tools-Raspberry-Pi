@@ -1,4 +1,3 @@
-
 import main
 from main import Main
 
@@ -29,9 +28,6 @@ class Controller:
     def quit(self):
         self.window.close()
         exit(0)
-        
-    def execute(self):
-        self.state.execute()
         
     def set_title(self, title):
         self.window.set_title(title)
