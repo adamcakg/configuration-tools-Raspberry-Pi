@@ -98,9 +98,6 @@ class Handler:
             dialog.set_attached_to(self.builder.get_object('bluetooth'))
             dialog.show_all()
             
-            
-            
-            
         except Exception:
             position = position - len(self.paired_devices)
             device = self.devices[position]

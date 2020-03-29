@@ -32,10 +32,6 @@ class Wifi(Page):
     def get_name(self):
         return self.name
     
-# METHOD TO EXECUTE PAGE
-# ----------------------------------------------------------------------------------------------------------------------
-    def execute(self):
-        Thread(self.handler)
         
         
         

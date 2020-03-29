@@ -1,6 +1,8 @@
 import gi
 import os
 
+from thread import Thread
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -11,6 +13,8 @@ class Handler:
         self.do_in_thread = 'search'
         self.cell = None
         self.password = ''
+        
+        self.thread = Thread(self)
         
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------        
@@ -37,7 +41,7 @@ class Handler:
                 print('modal displayed')
             else:
                 self.do_in_thread = 'connect'
-                self.controller.execute()
+                self.thread = Thread(self)
 # DELETE MODAL
 # ----------------------------------------------------------------------------------------------------------
     def delete_modal(self, button=None):
@@ -50,14 +54,16 @@ class Handler:
 # -----------------------------------------------------------------------------------------------
     def button_pressed(self, button):
         self.do_in_thread = 'search'
-        self.controller.execute()
+        if self.thread.alive():
+            return
+        self.thread = Thread(self)
         
 # CONNECT BUTTON HANDLER FOR CONNECTING TO NETWORK
 # --------------------------------------------------------------------------------------------------
     def connect_pressed(self, button):
         self.password = self.builder.get_object('connect_entry').get_text()
         self.do_in_thread = 'connect'
-        self.controller.execute()
+        self.thread = Thread(self)
         
 # CONNECTING    
 # ------------------------------------------------------------------------------------    
@@ -92,8 +98,10 @@ class Handler:
                 "key":"None"
                 } 
 
+# ----------------------------------------------------------------------------------- 
     def search(self):
         print('Searching for the networks...')
+        self.builder.get_object('refresh_button').set_sensitive(False)
         wifi_networks = os.popen("iwlist wlan0 scan").read() 
         self.list_of_networks = [] 
          
@@ -118,7 +126,9 @@ class Handler:
         else:
             self.builder.get_object('not_found_label').set_opacity(0)
             self.fulfill_wifi_tree()
-                       
+        self.builder.get_object('refresh_button').set_sensitive(True)
+
+# ----------------------------------------------------------------------------------- 
     def fulfill_wifi_tree(self):          
         wifi_tree = self.builder.get_object('wifi_tree')
         
@@ -149,28 +159,65 @@ class Handler:
         column.add_attribute(signal, 'text', 2)
 
         wifi_tree.append_column(column)
+        
+# ---------------------------------------------------------------------------------------------------------------------- 
+    def set_widgets_to(self, state):
+        self.builder.get_object('wifi_switch').set_active(state)
+        self.builder.get_object('wifi_scrolled_window').set_sensitive(state)
+        self.builder.get_object('refresh_button').set_sensitive(state)
 
+
+            
+# AIRPLANE MODE ------------------------------------------------------------------------
+    def get_airplane_mode(self):
+        bluetooth_state = os.popen('rfkill list bluetooth | grep -oP "Soft blocked: [a-z]+"').read().rstrip().split(' ')[-1:]
+        wifi_state = os.popen('rfkill list wifi | grep -oP "Soft blocked: [a-z]+"').read().rstrip().split(' ')[-1:]
+        
+        if wifi_state[0] == 'no':
+            self.builder.get_object('wifi_switch').set_active(True)
+        
+        elif bluetooth_state[0] == 'yes' and wifi_state[0] == 'yes':
+            self.builder.get_object('airplane_mode_switch').set_active(True)
+            return True
+        elif wifi_state[0] == 'yes':
+            self.builder.get_object('wifi_scrolled_window').set_sensitive(False)
+            self.builder.get_object('refresh_button').set_sensitive(False)
+        
+        return False
+    
+    def set_airplane_mode(self, widget, state):
+        if state:
+            self.set_widgets_to(False)
+            os.popen('rfkill block bluetooth')
+            os.popen('rfkill block wifi')
+        else:
+            self.set_widgets_to(True)
+            os.popen('rfkill unblock bluetooth')
+            os.popen('rfkill unblock wifi')
+        
+# WIFI button -------------------------------------------------------------------------
+
+    def set_wifi_button(self, widget, state):
+        if state:
+            os.popen('rfkill unblock wifi')
+            self.set_widgets_to(True)
+        else:
+            os.popen('rfkill block wifi')
+            self.builder.get_object('wifi_scrolled_window').set_sensitive(False)
+            self.builder.get_object('refresh_button').set_sensitive(False)
+            
 # THREAD FUNCTION OF HANDLER
 # --------------------------------------------------------------------------------------
     def thread_function(self):
-        if self.do_in_thread == 'search':
+        if self.get_airplane_mode():
+              self.set_widgets_to(False)
+          
+        elif self.do_in_thread == 'search':
             self.search()
         elif self.do_in_thread == 'connect':
             self.connect(self.cell, self.password)
             self.delete_modal()
-            
-# AIRPLANE MODE ------------------------------------------------------------------------
-    
-    def set_airplane_mode(self):
-        # todo
-        pass    
-
-# WIFI button -------------------------------------------------------------------------
-
-    def set_wifi_button(self):
-        #todo    rfkill list
-
-        pass
+        
         
 
 
