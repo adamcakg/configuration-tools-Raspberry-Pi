@@ -127,7 +127,6 @@ class Handler:
         
 # ----------------------------------------------------------------------------------------------------------------------   
     def refresh(self, widget):
-        self.builder.get_object('refresh_button').set_sensitive(False)
         self.what_to_do = 'refresh'
         Thread(self)    
 # ----------------------------------------------------------------------------------------------------------------------   
@@ -151,11 +150,8 @@ class Handler:
         elif self.what_to_do == 'disable discoverable':
             time.sleep(20)
             self.bluetooth.stop_discoverable()
-            try:
-                self.builder.get_object('discoverable_button').set_sensitive(True)
-            except Exception:
-                return
+            self.builder.get_object('discoverable_button').set_sensitive(True)
         elif self.what_to_do == 'refresh':
             self.fulfill_devices()
-            self.builder.get_object('refresh_button').set_sensitive(True)
+            
     

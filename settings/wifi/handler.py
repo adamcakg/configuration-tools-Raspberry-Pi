@@ -13,8 +13,9 @@ class Handler:
         self.do_in_thread = 'search'
         self.cell = None
         self.password = ''
+        self.changing = False
         
-        self.thread = Thread(self)
+        Thread(self)
         
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------        
@@ -41,7 +42,7 @@ class Handler:
                 print('modal displayed')
             else:
                 self.do_in_thread = 'connect'
-                self.thread = Thread(self)
+                Thread(self)
 # DELETE MODAL
 # ----------------------------------------------------------------------------------------------------------
     def delete_modal(self, button=None):
@@ -54,16 +55,14 @@ class Handler:
 # -----------------------------------------------------------------------------------------------
     def button_pressed(self, button):
         self.do_in_thread = 'search'
-        if self.thread.alive():
-            return
-        self.thread = Thread(self)
+        Thread(self)
         
 # CONNECT BUTTON HANDLER FOR CONNECTING TO NETWORK
 # --------------------------------------------------------------------------------------------------
     def connect_pressed(self, button):
         self.password = self.builder.get_object('connect_entry').get_text()
         self.do_in_thread = 'connect'
-        self.thread = Thread(self)
+        Thread(self)
         
 # CONNECTING    
 # ------------------------------------------------------------------------------------    
@@ -101,7 +100,6 @@ class Handler:
 # ----------------------------------------------------------------------------------- 
     def search(self):
         print('Searching for the networks...')
-        self.builder.get_object('refresh_button').set_sensitive(False)
         wifi_networks = os.popen("iwlist wlan0 scan").read() 
         self.list_of_networks = [] 
          
@@ -126,7 +124,6 @@ class Handler:
         else:
             self.builder.get_object('not_found_label').set_opacity(0)
             self.fulfill_wifi_tree()
-        self.builder.get_object('refresh_button').set_sensitive(True)
 
 # ----------------------------------------------------------------------------------- 
     def fulfill_wifi_tree(self):          
@@ -209,17 +206,17 @@ class Handler:
 # THREAD FUNCTION OF HANDLER
 # --------------------------------------------------------------------------------------
     def thread_function(self):
-        if self.get_airplane_mode():
+        if not self.changing:
+            self.changing = True
+            if self.get_airplane_mode():
               self.set_widgets_to(False)
-          
-        elif self.do_in_thread == 'search':
-            self.search()
-        elif self.do_in_thread == 'connect':
-            self.connect(self.cell, self.password)
-            self.delete_modal()
-        
-        
-
-
+            
+            if self.do_in_thread == 'search':
+                self.search()
+                
+            elif self.do_in_thread == 'connect':
+                self.connect(self.cell, self.password)
+                self.delete_modal()
+            self.changing = False
 
 

@@ -33,4 +33,7 @@ gtk_style()
 win = Settings()                                          # Starting app
 win.connect("destroy", Gtk.main_quit)
 win.show_all()
+
 Gtk.main()                                                  # App loop
+
+
