@@ -4,6 +4,6 @@ GenericName=Settings app
 Comment=Settngs app
 Exec=python3 /etc/settings/__init__.py
 Icon=/etc/settings/img/icon.svg
-Categories=Audio;AudioVideo;
+Categories=GTK;Settings;HardwareSettings;X-LXDE-Settings;
 Terminal=true
 Type=Application
