@@ -8,7 +8,7 @@ from gi.repository import Gtk
 class Main:
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('main/main.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/etc/settings/main/main.glade')   # creating object from XML(.glade files)
         
         self.handler = Handler(builder=self.__builder)
 

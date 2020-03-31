@@ -16,24 +16,24 @@ class Settings(Gtk.Window):
         self.move(x, y)
         self.set_resizable(False)
         
-        self.set_icon_from_file('img/icon.svg')
+        self.set_icon_from_file('/etc/settings/img/icon.svg')
         
         controller.Controller(self)                                    # Giving control to controller class
 
 
 def gtk_style():
         style_provider = Gtk.CssProvider()
-        style_provider.load_from_path('css/style.css')
+        style_provider.load_from_path('/etc/settings//css/style.css')
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
+if __name__ == '__main__':
+    gtk_style()
 
-gtk_style()
+    win = Settings()                                          # Starting app
+    win.connect("destroy", Gtk.main_quit)
+    win.show_all()
 
-win = Settings()                                          # Starting app
-win.connect("destroy", Gtk.main_quit)
-win.show_all()
-
-Gtk.main()                                                  # App loop
+    Gtk.main()                                                  # App loop
 
 

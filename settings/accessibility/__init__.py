@@ -21,7 +21,7 @@ class Accessibility(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()  # Initializing builder
-        self.__builder.add_from_file('accessibility/accessibility.glade')  # creating object from XML(.glade files)
+        self.__builder.add_from_file('/etc/settings/accessibility/accessibility.glade')  # creating object from XML(.glade files)
 
 
     def connect_handler(self, controller):
@@ -34,4 +34,4 @@ class Accessibility(Page):
         return self.name
     
     def get_icon(self):
-        return 'accessibility/img/accessibility.svg'
+        return '/etc/settings/accessibility/img/accessibility.svg'

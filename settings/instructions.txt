@@ -1,0 +1,7 @@
+mkdir /etc/settings
+
+move setting into /etc/settings
+
+sudo cp -r * /etc/settings
+
+sudo cp settings.desktop /usr/share/applications/

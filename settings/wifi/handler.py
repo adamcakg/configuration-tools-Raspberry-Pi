@@ -138,16 +138,16 @@ class Handler:
         self.list_of_networks.sort(key=lambda x: x['quality'])
         for item in self.list_of_networks:
             if item["encrypted"]:
-                encr_icon = 'wifi/img/lock.svg'
+                encr_icon = '/etc/settings/wifi/img/lock.svg'
             else:
-                encr_icon = 'wifi/img/none.svg'
+                encr_icon = '/etc/settings/wifi/img/none.svg'
             quality = int(item["quality"])
             if quality < -20:
-                sig_icon = 'wifi/img/signal_high.svg'
+                sig_icon = '/etc/settings/wifi/img/signal_high.svg'
             elif quality < -50:
-                sig_icon = 'wifi/img/signal_medium.svg'
+                sig_icon = '/etc/settings/wifi/img/signal_medium.svg'
             elif quality < -80:
-                sig_icon = 'wifi/img/signal_low.svg'
+                sig_icon = '/etc/settings/wifi/img/signal_low.svg'
                 
             store.append([item["ssid"][:15], encr_icon, sig_icon])
         

@@ -11,7 +11,7 @@ from .get_methods import get_current_settings, get_resolutions, get_number_of_mo
 class Handler:
     def __init__(self, builder, controller=None):
         self.builder = builder
-        self.monitor_path = "display/img/display1.svg"
+        self.monitor_path = "/etc/settings/display/img/display1.svg"
         self.number_of_monitors = 1
         self.monitor_pressed = 1
         self.resolutions_monitor_1 = []

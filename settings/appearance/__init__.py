@@ -21,7 +21,7 @@ class Appearance(Page):
 
     def connect_builder(self):
         self.__builder = Gtk.Builder()  # Initializing builder
-        self.__builder.add_from_file('appearance/appearance.glade')  # creating object from XML(.glade files)
+        self.__builder.add_from_file('/etc/settings/appearance/appearance.glade')  # creating object from XML(.glade files)
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
@@ -33,4 +33,4 @@ class Appearance(Page):
         return self.name
     
     def get_icon(self):
-        return 'appearance/img/appearance.svg'
+        return '/etc/settings/appearance/img/appearance.svg'

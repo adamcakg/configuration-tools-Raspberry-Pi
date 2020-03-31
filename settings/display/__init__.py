@@ -28,9 +28,9 @@ class Display(Page):
         self.__builder = Gtk.Builder()                  # Initializing builder
         number_of_monitors = self.get_number_of_monitors()
         if number_of_monitors == 1:
-            self.__builder.add_from_file('display/display_monitor.glade')
+            self.__builder.add_from_file('/etc/settings/display/display_monitor.glade')
         elif number_of_monitors == 2:
-            self.__builder.add_from_file('display/display_two_monitors.glade')
+            self.__builder.add_from_file('/etc/settings/display/display_two_monitors.glade')
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
