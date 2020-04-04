@@ -48,3 +48,6 @@ class Display(Page):
         elif monitors >1:
             return 2
         #return 2               TESTING
+
+    def get_icon(self):
+        return '/etc/settings/display/img/display1.svg'

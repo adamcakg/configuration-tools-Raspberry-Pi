@@ -26,4 +26,6 @@ class Info(Page):
         
     def get_name(self):
         return self.name
-        
+
+    def get_icon(self):
+        return '/etc/settings/info/img/info.svg'
