@@ -142,11 +142,13 @@ class Handler:
             else:
                 encr_icon = '/etc/settings/wifi/img/none.svg'
             quality = int(item["quality"])
-            if quality < -20:
+            print(quality)
+            print(type(quality))
+            if quality > -50:
                 sig_icon = '/etc/settings/wifi/img/signal_high.svg'
-            elif quality < -50:
+            elif quality > -70:
                 sig_icon = '/etc/settings/wifi/img/signal_medium.svg'
-            elif quality < -80:
+            else:
                 sig_icon = '/etc/settings/wifi/img/signal_low.svg'
                 
             store.append([item["ssid"][:15], encr_icon, sig_icon])
