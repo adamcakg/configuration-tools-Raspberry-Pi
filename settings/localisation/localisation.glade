@@ -592,7 +592,7 @@
             <property name="can_focus">False</property>
           </object>
           <packing>
-            <property name="x">120</property>
+            <property name="x">110</property>
             <property name="y">15</property>
           </packing>
         </child>

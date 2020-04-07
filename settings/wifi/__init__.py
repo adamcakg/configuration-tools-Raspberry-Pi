@@ -15,7 +15,7 @@ class Wifi(Page):
         self.header = None
         
     def get_xml_object(self):
-        return self.__builder.get_object('wifi')
+        return self.builder.get_object('wifi')
 
     def destroy(self):
         del self
@@ -25,9 +25,9 @@ class Wifi(Page):
         self.builder.add_from_file('/etc/settings/wifi/wifi.glade')   # creating object from XML(.glade files)
 
     def connect_handler(self, controller):
-        self.handler = Handler(builder=self.__builder)
+        self.handler = Handler(builder=self.builder)
         self.handler.add_controller(controller)
-        self.__builder.connect_signals(self.handler)
+        self.builder.connect_signals(self.handler)
         
     def get_name(self):
         return self.name
