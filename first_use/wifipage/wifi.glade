@@ -29,6 +29,17 @@
         <property name="halign">center</property>
         <property name="valign">center</property>
         <child>
+          <object class="GtkLabel">
+            <property name="width_request">330</property>
+            <property name="height_request">410</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <style>
+              <class name="card_border"/>
+            </style>
+          </object>
+        </child>
+        <child>
           <object class="GtkLabel" id="middle_label_wifi_page">
             <property name="name">middle_label_wifi_page</property>
             <property name="width_request">300</property>
@@ -39,7 +50,8 @@
             <property name="valign">center</property>
           </object>
           <packing>
-            <property name="y">40</property>
+            <property name="x">15</property>
+            <property name="y">55</property>
           </packing>
         </child>
         <child>
@@ -50,10 +62,13 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <style>
-              <class name="card_border"/>
               <class name="bottom_strip_green"/>
             </style>
           </object>
+          <packing>
+            <property name="x">15</property>
+            <property name="y">15</property>
+          </packing>
         </child>
         <child>
           <object class="GtkLabel" id="text_label_wifi_page">
@@ -64,6 +79,10 @@
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">WiFi</property>
           </object>
+          <packing>
+            <property name="x">15</property>
+            <property name="y">15</property>
+          </packing>
         </child>
         <child>
           <object class="GtkScrolledWindow">
@@ -92,8 +111,8 @@
             </child>
           </object>
           <packing>
-            <property name="x">25</property>
-            <property name="y">70</property>
+            <property name="x">40</property>
+            <property name="y">85</property>
           </packing>
         </child>
         <child>
@@ -107,8 +126,8 @@
             <signal name="clicked" handler="button_pressed" swapped="no"/>
           </object>
           <packing>
-            <property name="x">100</property>
-            <property name="y">329</property>
+            <property name="x">115</property>
+            <property name="y">344</property>
           </packing>
         </child>
         <child>
@@ -122,8 +141,8 @@
             <property name="label" translatable="yes">No networks found...</property>
           </object>
           <packing>
-            <property name="x">80</property>
-            <property name="y">177</property>
+            <property name="x">95</property>
+            <property name="y">193</property>
           </packing>
         </child>
       </object>
