@@ -97,10 +97,10 @@ class Handler:
 # ---------------------------------------------------------------------------------------------------
     def thread_function(self):
         password = keeper['passwordpage']['password'] + '\n' + keeper['passwordpage']['password']
-        #os.system('echo "{}" | sudo passwd "pi"'.format(password))
+        os.system('echo "{}" | sudo passwd "pi"'.format(password))
         #os.system('echo "{}" | sudo passwd'.format(password))
-        whoami = os.popen('whoami').read().rstrip()
-        os.system('echo "{}:{}" | sudo chpasswd'.format(whoami, password))
+        #whoami = os.popen('whoami').read().rstrip()
+        #os.system('echo "{}:{}" | sudo chpasswd'.format('pi', password))
         
     def create_modal(self):
         print('modal function')

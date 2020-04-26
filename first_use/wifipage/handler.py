@@ -6,7 +6,7 @@ from keeper import keeper
 
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, GdkPixbuf
 
 class Handler:
     def __init__(self, builder):
@@ -159,26 +159,53 @@ class Handler:
         store = Gtk.ListStore(str, str, str)
         self.list_of_networks.sort(key=lambda x: x['quality'])
         for item in self.list_of_networks:
-            store.append([item["ssid"][:15], item["encrypted"], item["quality"]])
+            if item["encrypted"]:
+                encr_icon = '/etc/settings/wifi/img/lock.svg'
+            else:
+                encr_icon = '/etc/settings/wifi/img/none.svg'
+            quality = int(item["quality"])
+            print(quality)
+            print(type(quality))
+            if quality > -50:
+                sig_icon = '/etc/settings/wifi/img/signal_high.svg'
+            elif quality > -70:
+                sig_icon = '/etc/settings/wifi/img/signal_medium.svg'
+            else:
+                sig_icon = '/etc/settings/wifi/img/signal_low.svg'
+                
+            store.append([item["ssid"][:15], encr_icon, sig_icon])
         
         wifi_tree.set_model(store)
         
         column = Gtk.TreeViewColumn("Network")
+        
+        name_renderer = Gtk.CellRendererText()
+        column.pack_start(name_renderer, False)
+        
+        lock_renderer = Gtk.CellRendererPixbuf()
+        column.pack_start(lock_renderer, False)
+        
+        signal_renderer = Gtk.CellRendererPixbuf()
+        column.pack_start(signal_renderer, False)
 
-        ssid = Gtk.CellRendererText()
-        encrypted = Gtk.CellRendererText()
-        signal = Gtk.CellRendererText()
-
-        column.pack_start(ssid, True)
-        column.pack_start(encrypted, True)
-        column.pack_start(signal, True)
-
-        column.add_attribute(ssid, "text", 0)
-        column.add_attribute(encrypted, "text", 1)
-        column.add_attribute(signal, 'text', 2)
-
+        column.set_cell_data_func(name_renderer, self.get_tree_cell_network_name)
+        column.set_cell_data_func(lock_renderer, self.get_tree_cell_lock_pixbuf)
+        column.set_cell_data_func(signal_renderer, self.get_tree_cell_signal_pixbuf)
         wifi_tree.append_column(column)
+        
+# ---------------------------------------------------------------------------------------------------------------------- 
+    def get_tree_cell_network_name(self, col, cell, model, iter, user_data):
+        cell.set_property('text', model.get_value(iter, 0))
 
+    def get_tree_cell_signal_pixbuf(self, col, cell, model, iter, user_data):
+        cell.set_property('pixbuf', GdkPixbuf.Pixbuf.new_from_file_at_scale(filename=model.get_value(iter, 2),width=16, height=16, 
+                                                             preserve_aspect_ratio=True))
+
+    def get_tree_cell_lock_pixbuf(self, col, cell, model, iter, user_data):
+        cell.set_property('pixbuf', GdkPixbuf.Pixbuf.new_from_file_at_scale(filename=model.get_value(iter, 1),width=16, height=16, 
+                                                             preserve_aspect_ratio=True))
+        
+# ----------------------------------------------------------------------------------------------
 # THREAD FUNCTION OF HANDLER
 # --------------------------------------------------------------------------------------
     def thread_function(self):
