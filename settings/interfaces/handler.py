@@ -96,7 +96,7 @@ class Handler:
         os.popen('sudo raspi-config nonint do_serial {}'.format(1 - self.interfaces['serial_port']))
         # SPI NOT WORKING
         #os.popen('sudo raspi-config nonint do_spi {}'.format(1 - self.interfaces['spi']))
-        os.popen('sudo raspi-config nonint do_camera {}'.format(1 - self.interfaces['camera']))
+        os.system('sudo raspi-config nonint do_camera {}'.format(1 - self.interfaces['camera']))
         os.popen('sudo raspi-config nonint do_vnc {}'.format(1 - self.interfaces['vnc']))
         os.popen('sudo raspi-config nonint do_i2c {}'.format(1 - self.interfaces['i2c']))
         os.popen('sudo raspi-config nonint do_onewire {}'.format(1 - self.interfaces['1wire']))

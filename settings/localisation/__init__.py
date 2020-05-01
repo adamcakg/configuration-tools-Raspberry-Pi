@@ -32,3 +32,6 @@ class Localisation(Page):
         
     def get_name(self):
         return self.name
+
+    def get_icon(self):
+        return '/etc/settings/localisation/img/localisation.svg'

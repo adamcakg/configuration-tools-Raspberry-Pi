@@ -47,9 +47,9 @@ class Handler:
         px_column = Gtk.TreeViewColumn('Devices')
         px_renderer = Gtk.CellRendererPixbuf()
             
-        px_column.pack_start(px_renderer, False)
+        px_column.pack_start(px_renderer, True)
         str_renderer = Gtk.CellRendererText()
-        px_column.pack_start(str_renderer, False)
+        px_column.pack_start(str_renderer, True)
 
         px_column.set_cell_data_func(px_renderer, self.get_tree_cell_pixbuf)
         px_column.set_cell_data_func(str_renderer, self.get_tree_cell_text)

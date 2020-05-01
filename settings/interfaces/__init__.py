@@ -31,4 +31,6 @@ class Interfaces(Page):
     def get_name(self):
         return self.name
 
+    def get_icon(self):
+        return '/etc/settings/interfaces/img/interfaces.svg'
     

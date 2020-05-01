@@ -156,15 +156,16 @@ class Handler:
         wifi_tree.set_model(store)
         
         column = Gtk.TreeViewColumn("Network")
+        column.set_alignment(0.5)
         
         name_renderer = Gtk.CellRendererText()
-        column.pack_start(name_renderer, False)
+        column.pack_start(name_renderer, True)
         
         lock_renderer = Gtk.CellRendererPixbuf()
-        column.pack_start(lock_renderer, False)
+        column.pack_start(lock_renderer, True)
         
         signal_renderer = Gtk.CellRendererPixbuf()
-        column.pack_start(signal_renderer, False)
+        column.pack_start(signal_renderer, True)
 
         column.set_cell_data_func(name_renderer, self.get_tree_cell_network_name)
         column.set_cell_data_func(lock_renderer, self.get_tree_cell_lock_pixbuf)

@@ -170,7 +170,7 @@ class Handler:
             file = open(path)    
         except IOError:
             self.check_dir(path)
-            file = '@define-color theme_selected_bg_color #ffffff;\n@define-color theme_selected_fg_color #000000'
+            file = '@define-color theme_selected_bg_color #ffffff;\n@define-color theme_selected_fg_color #000000;'
             os.popen('echo "{}" > {}'.format(file, path))
         
         return path
