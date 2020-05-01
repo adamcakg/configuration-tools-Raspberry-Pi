@@ -122,7 +122,6 @@ class Handler:
                 } 
 
     def search(self):
-        print('Searching for the networks...')
         wifi_networks = os.popen("iwlist wlan0 scan").read() 
         self.list_of_networks = [] 
          
@@ -160,18 +159,16 @@ class Handler:
         self.list_of_networks.sort(key=lambda x: x['quality'])
         for item in self.list_of_networks:
             if item["encrypted"]:
-                encr_icon = '/etc/settings/wifi/img/lock.svg'
+                encr_icon = '/etc/first_use/wifipage/img/lock.svg'
             else:
-                encr_icon = '/etc/settings/wifi/img/none.svg'
+                encr_icon = '/etc/first_use/wifipage/img/none.svg'
             quality = int(item["quality"])
-            print(quality)
-            print(type(quality))
             if quality > -50:
-                sig_icon = '/etc/settings/wifi/img/signal_high.svg'
+                sig_icon = '/etc/first_use/wifipage/img/signal_high.svg'
             elif quality > -70:
-                sig_icon = '/etc/settings/wifi/img/signal_medium.svg'
+                sig_icon = '/etc/first_use/wifipage/img/signal_medium.svg'
             else:
-                sig_icon = '/etc/settings/wifi/img/signal_low.svg'
+                sig_icon = '/etc/first_use/wifipage/img/signal_low.svg'
                 
             store.append([item["ssid"][:15], encr_icon, sig_icon])
         
@@ -187,7 +184,7 @@ class Handler:
         column.pack_start(lock_renderer, True)
         
         signal_renderer = Gtk.CellRendererPixbuf()
-        column.pack_start(signal_renderer, False)
+        column.pack_start(signal_renderer, True)
 
         column.set_cell_data_func(name_renderer, self.get_tree_cell_network_name)
         column.set_cell_data_func(lock_renderer, self.get_tree_cell_lock_pixbuf)

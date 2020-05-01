@@ -36,23 +36,20 @@ class Handler:
         os.system('sudo apt autoremove -y -q')
         
     def thread_function(self):
-        self.create_modal()
+        #self.create_modal()
         try:
             request = requests.get('http://www.raspberrypi.com/', timeout=30)
+            self.update()
         except requests.ConnectionError:
             self.delete_modal()
-            self.builder.get_object('no_internet_label').set_opacity(1)
-            return
-        self.update()
+            self.builder.get_object('no_internet_label').set_opacity(1)       
         
     def create_modal(self):
-        print('modal function')
         dialog = self.builder.get_object('update_dialog')
         dialog.set_attached_to(self.builder.get_object('update_page'))
         dialog.set_destroy_with_parent(True)
         dialog.set_modal(True)
         dialog.show_all()
-        print('modal displayed')
         
     def delete_modal(self):
         dialog = self.builder.get_object('update_dialog')
