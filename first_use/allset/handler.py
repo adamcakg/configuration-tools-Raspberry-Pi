@@ -5,6 +5,7 @@ class Handler:
         self.controller = controller
 
     def on_destroy(self,button):
+        self.remove_autostart()
         os.system('reboot')
         self.controller.quit()
         

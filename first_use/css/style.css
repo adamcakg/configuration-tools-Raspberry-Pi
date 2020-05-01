@@ -144,6 +144,13 @@ window{
     color: #C51A4A;
 }
 
+.update_bg{
+    background-image: url("../img/raspberry_in_hand.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}
+
 .button_update{
     
 
