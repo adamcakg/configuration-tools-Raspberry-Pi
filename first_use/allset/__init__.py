@@ -13,9 +13,9 @@ class AllSet(Page):
 
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('allset/all_set.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/etc/first_use/allset/all_set.glade')   # creating object from XML(.glade files)
         
-        self.pixbufanim = GdkPixbuf.PixbufAnimation.new_from_file('img/raspberry.gif')
+        self.pixbufanim = GdkPixbuf.PixbufAnimation.new_from_file('/etc/first_use/img/raspberry.gif')
         self.image = self.__builder.get_object("gif")
         self.image.set_from_animation(self.pixbufanim)
         self.image.show()
