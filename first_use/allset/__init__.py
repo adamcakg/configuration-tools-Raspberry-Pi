@@ -1,12 +1,11 @@
 import softwarepage as softwarepage
 from .handler import Handler
-
 from page import Page
 
 import gi
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk,GdkPixbuf
+from gi.repository import Gtk, GdkPixbuf
 
 
 class AllSet(Page):
@@ -20,10 +19,8 @@ class AllSet(Page):
         self.image.set_from_animation(self.pixbufanim)
         self.image.show()
         
-        
-
     def next(self, controller):
-        pass
+        return
 
     def back(self, controller):
         controller.set_state(softwarepage.SoftwarePage())

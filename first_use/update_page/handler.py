@@ -1,4 +1,5 @@
 import requests
+import os
 
 class Handler:
     def __init__(self, builder, controller=None):
@@ -19,8 +20,6 @@ class Handler:
         self.controller.execute()
         
     def update(self):
-        print('updating')
-        import os
         os.system('sudo apt update -y -q')
         os.system('echo {} | sudo apt upgrade -q'.format('yes'))
         os.system('echo {} | sudo apt dist-upgrade -q'.format('yes'))
@@ -36,7 +35,6 @@ class Handler:
         os.system('sudo apt autoremove -y -q')
         
     def thread_function(self):
-        #self.create_modal()
         try:
             request = requests.get('http://www.raspberrypi.com/', timeout=30)
             self.update()

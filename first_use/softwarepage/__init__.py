@@ -43,9 +43,4 @@ class SoftwarePage(Page):
                 Gtk.main_iteration_do(True)
         self.handler.delete_modal()
         
-        
-        
-        
-        
-        
-        
+    

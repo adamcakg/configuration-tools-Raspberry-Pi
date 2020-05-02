@@ -65,9 +65,8 @@ class Handler:
 # METHOD TO INSERT COUNTRIES INTO COUNTRY COMBO-BOX
 # ----------------------------------------------------------------------------------------------------------------------
     def insert_countries(self):
-        countries_object = self.builder.get_object('combo_box_country')
-
         from .settings_stuff import countries
+        countries_object = self.builder.get_object('combo_box_country')
         
         for item in countries:
            countries_object.append(item, item[:22])
@@ -112,10 +111,7 @@ class Handler:
     
 # SETTING LOCALES
 # ------------------------------------------------------------------------------------------------------
-    def set_locale(self):
-        """
-        SETTING LOCALES
-        """           
+    def set_locale(self):       
         print('Locale before set + ' + str(locale.getlocale()))
         
         lang = keeper['settingspage']['language']
@@ -134,13 +130,11 @@ class Handler:
        
         print('Locale was set + ' + str(locale.getlocale()))
         
-            
 # THREAD FUNCTION TO SET LOCALE AND TIMEZONE
 # ----------------------------------------------------------------------------------------------------------------------      
     def thread_function(self):
         self.set_timezone()
         self.set_locale()
-        
         
         country_code = country_into_code(keeper['settingspage']['country'])
         
@@ -161,7 +155,4 @@ class Handler:
         dialog = self.builder.get_object('settings_dialog')
         dialog.destroy()
         self.controller.next()
-
-
-
 

@@ -20,7 +20,6 @@ def get_timezones_from_country(country):
                 country = item[1]
                 break
     
-    
     for timezone in timezones:
         if timezone[0] == country:
             country_timezones.append([timezone[2].replace('\n', ''),timezone[2].split('/')[-1].replace('_', ' ').replace('\n', '')])

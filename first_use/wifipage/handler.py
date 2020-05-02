@@ -4,7 +4,6 @@ import os
 from settings.settings_stuff import list_of_settings
 from keeper import keeper
 
-
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GdkPixbuf
 
@@ -24,7 +23,6 @@ class Handler:
 # METHOD TO GO NEXT
 # ----------------------------------------------------------------------------------------------------------------------
     def next(self, button=None):
-        #self.controller.execute()
         self.controller.next()
 
 # METHOD TO GO BACK
@@ -36,7 +34,6 @@ class Handler:
 # -------------------------------------------------------------------------------------------------------------
     def create_modal(self, tree, position, column):
         position = int(str(position))
-        
         self.cell = self.list_of_networks[position]
         
         if self.cell:
@@ -112,7 +109,6 @@ class Handler:
         
 # SEARCHING
 # -----------------------------------------------------------------------------------
-     
     def get_empty_cell(self):
         return {
                 "ssid":"",
@@ -203,7 +199,6 @@ class Handler:
         cell.set_property('pixbuf', GdkPixbuf.Pixbuf.new_from_file_at_scale(filename=model.get_value(iter, 1),width=16, height=16, 
                                                              preserve_aspect_ratio=True))
         
-# ----------------------------------------------------------------------------------------------
 # THREAD FUNCTION OF HANDLER
 # --------------------------------------------------------------------------------------
     def thread_function(self):

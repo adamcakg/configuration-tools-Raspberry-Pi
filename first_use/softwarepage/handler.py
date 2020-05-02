@@ -23,9 +23,6 @@ class Handler:
             if self.builder.get_object('switch_software_{}'.format(switch)).get_active():
                 active_switches.append(switch)
                 
-                
-    
-                
         return active_switches
     
     def turn_on_functions(self, list_of_functions):

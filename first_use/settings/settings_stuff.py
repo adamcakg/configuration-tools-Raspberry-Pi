@@ -3,7 +3,6 @@ countries = []
 languages = []
 timezone = []
 
-
 # METHOD TO FIND TERRITORY AND LANGUAGE FROM LOCALE FILES
 # ----------------------------------------------------------------------------------------------------------------------
 def find_in_file(path, file, territory, language):

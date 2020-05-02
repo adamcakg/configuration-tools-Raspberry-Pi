@@ -9,7 +9,6 @@ class Handler:
         os.system('reboot')
         self.controller.quit()
         
-
     def back(self,button):
         self.controller.back()
         

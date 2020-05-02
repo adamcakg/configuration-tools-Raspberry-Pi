@@ -2,13 +2,11 @@ import passwordpage as passwordpage
 import welcome as welcome
 from .handler import Handler
 from thread import Thread
+from keeper import keeper
+from page import Page
 
 import locale
 from locale import gettext as _
-
-from keeper import keeper
-
-from page import Page
 
 import gi
 
@@ -83,10 +81,4 @@ class SettingsPage(Page):
         # note that language is "ar_AE.utf8" not "ar" or "ar_AE"
         self.builder.set_translation_domain(domain )
 
-
-        
-     
-
-        
-        
 

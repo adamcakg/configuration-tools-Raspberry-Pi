@@ -12,7 +12,6 @@ class Handler:
     
     def add_controller(self, controller):
         self.controller = controller
-
 # NEXT
 # ----------------------------------------------------------------------------------------------------------------------
     def next(self, button):
@@ -22,22 +21,18 @@ class Handler:
         if password == '':
             self.builder.get_object('password_label').set_opacity(0) 
             self.builder.get_object('missing_password_label').set_opacity(1) 
-        
         elif self.compare(password, confirmed):  # checking if passwords are the same
             keeper['passwordpage']['password'] = password
             self.controller.execute()                       # executing page settings
-            #self.controller.next()                          # moving to next page
         else:
             self.builder.get_object('missing_password_label').set_opacity(0) 
             self.builder.get_object('password_label').set_opacity(1) 
-
 # BACK
 # ----------------------------------------------------------------------------------------------------------------------
     def back(self, button):
         keeper['passwordpage']['password'] = self.builder.get_object('password').get_text()
         self.controller.back()                              # moving to previous page
         
-
 # METHOD TO HANDLE ENTRY WITH PASSWORD
 # ----------------------------------------------------------------------------------------------------------------------
     def input_password(self, entry, text, length, position):
@@ -50,7 +45,7 @@ class Handler:
 
 # METHOD TO COMPARE PASSWORDS(STRINGS)
 # ----------------------------------------------------------------------------------------------------------------------
-    def compare(self, string1, string2):                                              # checking if strings are the same
+    def compare(self, string1, string2):   # checking if strings are the same
         if string1 == '' or string2 == '':
             return False
         elif string1 == string2:
@@ -84,10 +79,8 @@ class Handler:
 
         if is_number:
             strength += 2
-
         if is_upper:
             strength += 2
-
         if is_special:
             strength += 2
 
@@ -98,9 +91,6 @@ class Handler:
     def thread_function(self):
         password = keeper['passwordpage']['password'] + '\n' + keeper['passwordpage']['password']
         os.system('echo "{}" | sudo passwd "pi"'.format(password))
-        #os.system('echo "{}" | sudo passwd'.format(password))
-        #whoami = os.popen('whoami').read().rstrip()
-        #os.system('echo "{}:{}" | sudo chpasswd'.format('pi', password))
         
     def create_modal(self):
         print('modal function')

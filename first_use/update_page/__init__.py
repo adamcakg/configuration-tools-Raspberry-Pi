@@ -2,7 +2,6 @@ import wifipage as wifi_page
 import softwarepage as softwarepage
 from .handler import Handler
 from thread import Thread
-
 from page import Page
 
 import gi
@@ -14,7 +13,7 @@ from gi.repository import Gtk
 class UpdatePage(Page):
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/first_use/update_page/update_page.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/etc/first_use/update_page/update_page.glade')  
         self.handler = Handler(builder=self.__builder)
 
     def next(self, controller):
@@ -41,9 +40,3 @@ class UpdatePage(Page):
              while Gtk.events_pending():
                 Gtk.main_iteration_do(True)
         self.handler.delete_modal()
-        
-        
-        
-        
-        
-        

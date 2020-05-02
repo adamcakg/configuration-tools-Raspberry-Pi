@@ -1,7 +1,6 @@
 import settings as settings
 import random
 from .handler import Handler
-
 from page import Page
 
 import gi
@@ -12,12 +11,12 @@ from gi.repository import Gtk, GLib
 
 class WelcomePage(Page):
     def __init__(self):
-        self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/first_use/welcome/welcome.glade')   # creating object from XML(.glade files)
+        self.builder = Gtk.Builder()                  # Initializing builder
+        self.builder.add_from_file('/etc/first_use/welcome/welcome.glade')   # creating object from XML(.glade files)
 
-        self.__list_of_welcomes = ['Welcome', 'Vitajte', 'Willkommen', 'Bienvenidos', 'Bienvenue', 'أهلا بك']
-        self.__previous = 'Welcome'
-        self.__label = self.__builder.get_object('welcome_label')
+        self.list_of_welcomes = ['Welcome', 'Vitajte', 'Willkommen', 'Bienvenidos', 'Bienvenue', 'أهلا بك']
+        self.previous = 'Welcome'
+        self.label = self.builder.get_object('welcome_label')
         self.execute()
 
 # METHOD TO GO NEXT
@@ -33,7 +32,7 @@ class WelcomePage(Page):
 # METHOD TO GET XML OBJECT
 # ----------------------------------------------------------------------------------------------------------------------
     def get_xml_object(self):
-        return self.__builder.get_object('welcome')
+        return self.builder.get_object('welcome')
 
 # METHOD TO DESTROY ITSELF
 # ----------------------------------------------------------------------------------------------------------------------
@@ -42,22 +41,22 @@ class WelcomePage(Page):
 
 # METHOD TO SET RANDOM WELCOME TEXT LABEL ON SCREEN
 # ----------------------------------------------------------------------------------------------------------------------
-    def __get_random_welcome_text(self):
-        label = random.choice(self.__list_of_welcomes)
+    def get_random_welcome_text(self):
+        label = random.choice(self.list_of_welcomes)
 
-        while label == self.__previous:
-            label = random.choice(self.__list_of_welcomes)
+        while label == self.previous:
+            label = random.choice(self.list_of_welcomes)
 
-        self.__previous = label
-        self.__label.set_label(label)
-        GLib.timeout_add_seconds(3, self.__get_random_welcome_text)
+        self.previous = label
+        self.label.set_label(label)
+        GLib.timeout_add_seconds(3, self.get_random_welcome_text)
 
 # METHOD TO CONNECT HANDLER
 # ----------------------------------------------------------------------------------------------------------------------
     def connect_handler(self, controller):
-        self.__builder.connect_signals(Handler(controller))
+        self.builder.connect_signals(Handler(controller))
 
 # METHOD TO EXECUTE PAGE
 # ----------------------------------------------------------------------------------------------------------------------
     def execute(self):
-        GLib.timeout_add_seconds(3, self.__get_random_welcome_text)
+        GLib.timeout_add_seconds(3, self.get_random_welcome_text)
