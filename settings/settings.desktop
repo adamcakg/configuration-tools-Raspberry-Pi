@@ -5,5 +5,5 @@ Comment=Settngs app
 Exec=python3 /etc/settings/__init__.py
 Icon=/etc/settings/img/icon.svg
 Categories=GTK;Settings;HardwareSettings;X-LXDE-Settings;
-Terminal=true
+Terminal=false
 Type=Application

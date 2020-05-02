@@ -50,7 +50,6 @@ class Handler:
         dialog.hide()
         self.cell = None
         
-
 # REFRESH BUTTON HANDLER FOR RESEARCHING NETWORK AGAIN
 # -----------------------------------------------------------------------------------------------
     def button_pressed(self, button):
@@ -183,14 +182,11 @@ class Handler:
     def get_tree_cell_lock_pixbuf(self, col, cell, model, iter, user_data):
         cell.set_property('pixbuf', GdkPixbuf.Pixbuf.new_from_file_at_scale(filename=model.get_value(iter, 1),width=16, height=16, 
                                                              preserve_aspect_ratio=True))
-        
 # ---------------------------------------------------------------------------------------------------------------------- 
     def set_widgets_to(self, state):
         self.builder.get_object('wifi_switch').set_active(state)
         self.builder.get_object('wifi_scrolled_window').set_sensitive(state)
         self.builder.get_object('refresh_button').set_sensitive(state)
-
-
             
 # AIRPLANE MODE ------------------------------------------------------------------------
     def get_airplane_mode(self):
@@ -245,5 +241,3 @@ class Handler:
                 self.connect(self.cell, self.password)
                 self.delete_modal()
             self.changing = False
-
-

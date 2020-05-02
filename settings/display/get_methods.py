@@ -1,6 +1,5 @@
 import os
 
-
 def get_current_settings(monitor):
     current_orientation = os.popen("xrandr --verbose --screen {} | grep -oP '\) [a-z]+ \('".format(monitor-1)).read()
     current_orientation = current_orientation.rstrip()[2:][:-2]
@@ -31,4 +30,3 @@ def get_number_of_monitors():
             return 1
         elif monitors >1:
             return 2
-        #return 2            TESTING

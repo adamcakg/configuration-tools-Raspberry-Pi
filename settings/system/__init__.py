@@ -21,7 +21,7 @@ class System(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/system/system.glade')  # creating object from XML(.glade files)
+        self.__builder.add_from_file('/etc/settings/system/system.glade') 
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)

@@ -4,6 +4,7 @@ import gi
 from .handler import Handler
 from page import Page
 
+from .get_methods import get_number_of_monitors
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -16,17 +17,15 @@ class Display(Page):
         self.handler = None
         self.header = None
         
-        
     def get_xml_object(self):
         return self.__builder.get_object('display')
-
 
     def destroy(self):
         del self
         
     def connect_builder(self):
-        self.__builder = Gtk.Builder()                  # Initializing builder
-        number_of_monitors = self.get_number_of_monitors()
+        self.__builder = Gtk.Builder()              
+        number_of_monitors = get_number_of_monitors()
         if number_of_monitors == 1:
             self.__builder.add_from_file('/etc/settings/display/display_monitor.glade')
         elif number_of_monitors == 2:
@@ -39,15 +38,6 @@ class Display(Page):
         
     def get_name(self):
         return self.name
-    
-    def get_number_of_monitors(self):
-        monitors = (os.popen("xrandr --listmonitors | grep Monitors: | cut -d ' ' -f 2").read())[:1]
-        monitors = int(monitors)
-        if monitors < 2:
-            return 1
-        elif monitors >1:
-            return 2
-        #return 2               TESTING
 
     def get_icon(self):
         return '/etc/settings/display/img/display1.svg'

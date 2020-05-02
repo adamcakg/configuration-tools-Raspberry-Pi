@@ -33,7 +33,6 @@ class Handler:
         else:
             self.set_picture_size(170,120,1)
             self.set_picture_size(170,120,2)
-            #self.builder.get_object('display').move(widget, 0, 0)
 # ----------------------------------------------------------------------------------------------------------------------        
     def get_settings(self, monitor):
         if monitor == 1:
@@ -52,13 +51,6 @@ class Handler:
             self.set_resolution(current_resolution, 2)
             self.set_frequency(current_resolution, self.resolutions_monitor_2)
             self.set_orientation(current_orientation)
-             # TESTING
-      #       self.builder.get_object('resolution_combobox_monitor_1').set_active_id('800x600')
-       #      self.builder.get_object('resolution_combobox_monitor_1').connect('changed', self.resolution_changed)
-        #     self.builder.get_object('frequency_combobox_monitor_1').connect('changed', self.frequency_changed)
-         #    self.builder.get_object('orientation_combobox_monitor_1').connect('changed', self.orientation_changed)
-             
-             
             
 # ----------------------------------------------------------------------------------------------------------------------            
     def fullfil_resolutions(self, resolutions):
@@ -140,13 +132,11 @@ class Handler:
             self.builder.get_object('monitor2_event_box').set_property("height-request", y)
         
     def monitor_one_pressed(self, widget, state):
-        print('----- Monitor 1 -------')
         self.disconnect_handlers()
         self.monitor_pressed = 1
         self.get_settings(1)
     
     def monitor_two_pressed(self, widget, state):
-        print('----- Monitor 2 -------')
         self.disconnect_handlers()
         self.monitor_pressed = 2
         self.get_settings(2)

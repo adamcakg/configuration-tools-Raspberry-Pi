@@ -1,4 +1,3 @@
-    
 def get_keyboard_stuff():    
     models = []
     layouts = []

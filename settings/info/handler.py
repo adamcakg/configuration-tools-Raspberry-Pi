@@ -11,7 +11,6 @@ class Handler:
         
         Thread(self)
         
-        
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------        
     def add_controller(self, controller):
@@ -27,14 +26,12 @@ class Handler:
         version.append(release[2].replace('Release:', '').lstrip())
         version.append(release[3].replace('Codename:', '').lstrip())
         return version
-        
-        
+         
     def set_os_version(self, version):
         self.builder.get_object('distributor_label').set_text(version[0])
         self.builder.get_object('description_label').set_text(version[1])
         self.builder.get_object('release_label').set_text(version[2])
         self.builder.get_object('codename_label').set_text(version[3])
-        
     
     def thread_function(self):
         version = self.get_os_version()

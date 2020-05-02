@@ -138,13 +138,7 @@ class Handler:
         command += "{}/g' /etc/default/keyboard || sudo echo 'XKBVARIANT={}' >> /etc/default/keyboard".format('' if variant== "''" else variant, '' if variant== "''" else variant)
         os.popen(command)
         
-        #os.popen("sudo invoke-rc.d keyboard-setup start")
-        #os.popen("sudo setsid sh -c 'exec setupcon -k --force <> /dev/tty1 >&0 2>&1'")
-        #os.popen("sudo udevadm trigger --subsystem-match=input --action=change")
-        #os.popen("udevadm settle")
         os.popen("setxkbmap {} {} {} {} {} {}".format('-model', model, '-layout', layout, '-variant', variant))
-        #os.popen('sudo systemctl restart keyboard-setup.service')
-        #os.popen("sudo dpkg-reconfigure keyboard-configuration")
         
     def create_keyboard_modal(self, widget):
         dialog = self.builder.get_object('keyboard_modal')
@@ -214,6 +208,5 @@ class Handler:
         
         self.models, self.layouts, self.variants = get_keyboard_stuff()
         self.fullfil_keyboard_combo_boxes(self.models, self.layouts, self.variants)
-        #print(models)
         
         

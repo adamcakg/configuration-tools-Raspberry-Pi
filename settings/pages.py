@@ -25,5 +25,4 @@ def get_pages():
             Info(),
             Wifi(),
             Bluetooth()
-            
         ]

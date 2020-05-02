@@ -59,7 +59,6 @@ class Handler:
         path = path.split('/')
         path = path[:-1]
         path = '/'.join(path)
-        #print(path)
         os.popen('mkdir -p {}'.format(path))
    
 # PCMANFM FILE
@@ -73,8 +72,6 @@ class Handler:
             self.check_dir(path)
             global_path = self.get_pcmanfm_file(desktop, 1)
             os.popen('cat {} > {}'.format(global_path, path))
-            #os.popen('sudo cp {} {}'.format(global_path, path))
-            #os.popen('sudo chmod 777 {}'.format(path))
         return path
     
     def save_pcman_file(self, desktop):
@@ -94,8 +91,6 @@ class Handler:
             self.check_dir(path)
             global_path = self.get_lxpanel_file(1)
             os.popen('cat {} > {}'.format(global_path, path))
-            #os.popen('sudo cp {} {}'.format(global_path, path))
-            #os.popen('sudo chmod 777 {}'.format(path))
         return path
     
     def save_lxpanel_file(self):
@@ -115,8 +110,6 @@ class Handler:
             self.check_dir(path)
             global_path = self.get_lxsession_file(1)
             os.popen('cat {} > {}'.format(global_path, path))
-            #os.popen('sudo cp {} {}'.format(global_path, path))
-            #os.popen('sudo chmod 777 {}'.format(path))
         return path
     
     def save_lx_session_file(self):
@@ -146,7 +139,6 @@ class Handler:
         
         os.popen('sudo echo "{}" > {}'.format(config_file, path))
     
-    
 # OPENBOX FILE
 # ---------------------------------------------------------------------------------------                 
     def get_openbox_file(self):
@@ -158,9 +150,6 @@ class Handler:
             self.check_dir(path)
             global_path = '/etc/xdg/openbox/lxde-pi-rc.xml'
             os.popen('cat {} > {}'.format(global_path, path))
-            #os.popen('sudo cp {} {}'.format(global_path, path))
-            #os.popen('sudo chmod 777 {}'.format(path))
-        
         return path
 # GTK3 FILE
 # ---------------------------------------------------------------------------------------      
@@ -597,7 +586,6 @@ class Handler:
         self.get_lxpanel_file(0)
         self.get_lxsession_file(0)
         self.get_openbox_file()
-        
         #self.get_number_of_monitors()
         self.get_settings()
     

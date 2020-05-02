@@ -16,11 +16,6 @@ class Handler:
         
         thread = Thread(self)
         
-        
-                
-                
-        
-
 # ADDING CONTROLLER TO HANDLER
 # ----------------------------------------------------------------------------------------------------------------------
     def add_controller(self, controller):
@@ -202,7 +197,6 @@ class Handler:
         elif action == 'enable':
             if len(self.what_changed) < 2:
                 self.builder.get_object("apply_button").set_sensitive(True)
-            
             
 # APPLY METHOD
 # ---------------------------------------------------------------          

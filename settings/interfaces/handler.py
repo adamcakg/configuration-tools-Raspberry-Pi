@@ -8,11 +8,11 @@ class Handler:
         self.original_interfaces = {'serial_port': 0, 'spi': 0, 'serial_console': 0,
                                     'camera': 0, 'vnc': 0, 'i2c': 0, '1wire': 0,
                                     'remote_gpio': 0
-            }
+                                   }
         self.interfaces = { 'serial_port': 0, 'spi': 0, 'serial_console': 0,
                             'camera': 0, 'vnc': 0, 'i2c': 0, '1wire': 0,
                             'remote_gpio': 0
-            }
+                          }
         self.disable_apply_button()
         
         thread = Thread(self)
@@ -104,10 +104,6 @@ class Handler:
         
         self.original_interfaces.update(self.interfaces)
         
-        
-        
-        
-    
     def thread_function(self):
         self.get_interfaces_status()
         self.connect_method_to_switches()

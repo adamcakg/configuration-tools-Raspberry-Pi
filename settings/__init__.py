@@ -6,8 +6,8 @@ from gi.repository import Gtk, Gdk, GLib
 
 class Settings(Gtk.Window):
     def __init__(self):
-        Gtk.Window.__init__(self, title="Welcome")          # Constructor to Gtk.window
-                                   # Setting window to not be resizable
+        Gtk.Window.__init__(self, title="Welcome")   # Constructor to Gtk.window
+        # Setting window to not be resizable
         size = Gdk.Screen.get_default()
         
         self.set_default_size(600, 310)
@@ -18,7 +18,7 @@ class Settings(Gtk.Window):
         
         self.set_icon_from_file('/etc/settings/img/icon.svg')
         
-        controller.Controller(self)                                    # Giving control to controller class
+        controller.Controller(self)
 
 
 def gtk_style():
@@ -30,10 +30,10 @@ def gtk_style():
 if __name__ == '__main__':
     gtk_style()
 
-    win = Settings()                                          # Starting app
+    win = Settings()                                    
     win.connect("destroy", Gtk.main_quit)
     win.show_all()
 
-    Gtk.main()                                                  # App loop
+    Gtk.main()                                                
 
 

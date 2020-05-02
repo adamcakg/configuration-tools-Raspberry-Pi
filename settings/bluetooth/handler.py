@@ -39,7 +39,7 @@ class Handler:
         tree.set_model(store)
         
         for paired in self.paired_devices:
-            store.append(["/etc/settings/bluetooth/img/bluetooth_row_paired.svg", paired['name']])                 #TO DO : CHANGE TO RED IF PAIRED
+            store.append(["/etc/settings/bluetooth/img/bluetooth_row_paired.svg", paired['name']])
         
         for device in self.devices:
             store.append(["/etc/settings/bluetooth/img/bluetooth_row.svg", device['name']])

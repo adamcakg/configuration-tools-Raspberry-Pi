@@ -1,7 +1,7 @@
 list_of_settings = []
 
 # METHOD TO FIND TERRITORY AND LANGUAGE FROM LOCALE FILES
-# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 def find_in_file(path, file, territory, language):
     founded_language = founded_territory = ''
     
@@ -26,9 +26,8 @@ def find_in_file(path, file, territory, language):
             line = file.readline()
     return [founded_territory, founded_language]
 
-
 # METHOD TO FULFILL LIST OF SETTINGS
-# ----------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 def fulfill_list_settings():
     global list_of_settings
     cptr = None
@@ -50,7 +49,6 @@ def fulfill_list_settings():
                 list_of_settings.append([lang, country,lname,cname])
             line = file.readline()
             
-
 # METHOD TO FULFULL COUNTRY AND LANGUAGE LISTS
 # ----------------------------------------------------------------------------------------------------------------------
 def fullfill_country_language():
