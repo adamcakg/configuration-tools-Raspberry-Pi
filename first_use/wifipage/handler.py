@@ -138,18 +138,25 @@ class Handler:
                 cell["key"] = 'WPA2'
                 
         if len(self.list_of_networks) == 0:
+            self.clear_wifi_tree()
             self.builder.get_object('not_found_label').set_opacity(1)
         else:
             self.builder.get_object('not_found_label').set_opacity(0)
             self.fulfill_wifi_tree()
-                       
-    def fulfill_wifi_tree(self):          
+            
+    def clear_wifi_tree(self):
         wifi_tree = self.builder.get_object('wifi_tree')
         
         columns_to_remove = wifi_tree.get_columns()         #REMOVING COLUMNS IF EXIST ALREADY
         if columns_to_remove is not None:
             for column in columns_to_remove:
                 wifi_tree.remove_column(column)
+        
+                       
+    def fulfill_wifi_tree(self):          
+        wifi_tree = self.builder.get_object('wifi_tree')
+
+        self.clear_wifi_tree()
         
         store = Gtk.ListStore(str, str, str)
         self.list_of_networks.sort(key=lambda x: x['quality'])
