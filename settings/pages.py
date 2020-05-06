@@ -8,6 +8,7 @@ from localisation import Localisation
 from interfaces import Interfaces
 from accessibility import Accessibility
 from display import Display
+from storage import Storage
 
 def get_pages():
         """
@@ -17,6 +18,7 @@ def get_pages():
         """
         return [
             System(),
+            Storage(),
             Appearance(),
             Accessibility(),
             Interfaces(),

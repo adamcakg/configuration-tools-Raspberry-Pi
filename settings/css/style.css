@@ -9,3 +9,7 @@
 .border_popup{
 	border: 1px solid gray;
 }
+
+.available_space_progress_bar{
+	color: black;
+}
