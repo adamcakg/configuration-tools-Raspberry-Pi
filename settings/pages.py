@@ -9,6 +9,7 @@ from interfaces import Interfaces
 from accessibility import Accessibility
 from display import Display
 from storage import Storage
+from datetime import DateTime
 
 def get_pages():
         """
@@ -18,6 +19,7 @@ def get_pages():
         """
         return [
             System(),
+            DateTime(),
             Storage(),
             Appearance(),
             Accessibility(),
