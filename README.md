@@ -53,6 +53,9 @@ $ sudo python3 setup.py -i
 
 The settings utility is accesible through menu of the Raspbian operating system.
 
+<img width="354" alt="settings_menu" src="https://user-images.githubusercontent.com/51970723/106365690-655ee100-6337-11eb-835d-2fbafd5616f3.png">
+
+
 ### Contribution
 We will be happy if you contribute :)
 Big thanks to all the contributors!
