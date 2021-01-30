@@ -8,6 +8,11 @@ This repository contains two configuration tools.
   - First start utility
   - Settings utility
  
+ 
+### First start utility
+ 
+ <img width="389" alt="first_1" src="https://user-images.githubusercontent.com/51970723/106365166-03e94300-6334-11eb-86d1-ceab8844d978.png">
+ 
 
 ### Extensibility
 This tools was designed to be extensible as much as they can. Feel free to extend them as you like.
