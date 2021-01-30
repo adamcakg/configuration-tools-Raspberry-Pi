@@ -13,6 +13,10 @@ This repository contains two configuration tools.
  
  <img width="389" alt="first_1" src="https://user-images.githubusercontent.com/51970723/106365166-03e94300-6334-11eb-86d1-ceab8844d978.png">
  
+ 
+### Settings utility
+ <img width="462" alt="sett_1" src="https://user-images.githubusercontent.com/51970723/106365217-490d7500-6334-11eb-9875-335bdd594673.png">
+ 
 
 ### Extensibility
 This tools was designed to be extensible as much as they can. Feel free to extend them as you like.
