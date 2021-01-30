@@ -32,7 +32,7 @@ In both applications, default blank screen is created, so creating new screens i
 
 
 
-This tools was designed to be extensible as much as they can. Feel free to extend them as you like.
+This tools were designed to be extensible as much as they can. Feel free to extend them as you like.
 
 
 ### Installation
