@@ -15,6 +15,9 @@ This repository contains two configuration tools.
  
  
 ### Settings utility
+
+System settings are also one of the main parts of the operating system. They are created modularly, so there is no problem with adding new screens, removing them or changing the order in the application.
+
  <img width="462" alt="sett_1" src="https://user-images.githubusercontent.com/51970723/106365217-490d7500-6334-11eb-9875-335bdd594673.png">
  
 
