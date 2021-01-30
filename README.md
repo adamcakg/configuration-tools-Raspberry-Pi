@@ -48,13 +48,13 @@ Then simply run the command:
 $ sudo python3 setup.py
 ```
 
-If we want show the first start utility right after the Raspberry Pi boots up we need to add additional parameter when installing.
+If you want to show the first start utility right after the Raspberry Pi boots up you need to add an additional parameter when installing.
 ```sh
 $ sudo python3 setup.py -i
 ```
 
 
-The settings utility is accesible through menu of the Raspbian operating system.
+The settings utility is accesible through the menu of the Raspbian operating system.
 
 <img width="354" alt="settings_menu" src="https://user-images.githubusercontent.com/51970723/106365690-655ee100-6337-11eb-835d-2fbafd5616f3.png">
 
