@@ -23,13 +23,24 @@ This tools was designed to be extensible as much as they can. Feel free to exten
 
 
 ### Installation
-There are no dependencies. Simply download the repository and run:
+There are no dependencies. Simply download and go to the directory:
 
 ```sh
 $ cd {repository}
+```
+
+Then simply run the command:
+
+```sh
 $ sudo python3 setup.py
 ```
-Then after a reboot of Raspberry PI the First start utility will show up.
+
+If we want show the first start utility right after the Raspberry Pi boots up we need to add additional parameter when installing.
+```sh
+$ sudo python3 setup.py -i
+```
+
+
 The settings utility is accesible through menu of the Raspbian operating system.
 
 ### Contribution
