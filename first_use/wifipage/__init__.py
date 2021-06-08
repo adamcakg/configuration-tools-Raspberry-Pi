@@ -14,7 +14,7 @@ from gi.repository import Gtk
 class WifiPage(Page):
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/first_use/wifipage/wifi.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/opt/first_use/wifipage/wifi.glade')   # creating object from XML(.glade files)
         self.handler = Handler(builder=self.__builder)
         
         self.execute()

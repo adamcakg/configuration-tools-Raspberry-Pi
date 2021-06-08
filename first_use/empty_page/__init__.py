@@ -8,25 +8,20 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GdkPixbuf
 
 
-class AllSet(Page):
+class EmptyPage(Page):
 
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/opt/first_use/allset/all_set.glade')   # creating object from XML(.glade files)
-        
-        self.pixbufanim = GdkPixbuf.PixbufAnimation.new_from_file('/opt/first_use/img/raspberry.gif')
-        self.image = self.__builder.get_object("gif")
-        self.image.set_from_animation(self.pixbufanim)
-        self.image.show()
+        self.__builder.add_from_file('/opt/first_use/empty_page/empty_page.glade')  
         
     def next(self, controller):
-        return
+        controller.set_state() # Here add next page f.e. softwarepage.SoftwarePage()
 
     def back(self, controller):
-        controller.set_state(softwarepage.SoftwarePage())
+        controller.set_state() # Here add previous page f.e. softwarepage.SoftwarePage()
 
     def get_xml_object(self):
-        return self.__builder.get_object('all_set')
+        return self.__builder.get_object('empty_page')
 
     def destroy(self):
         del self

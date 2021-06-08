@@ -40,7 +40,7 @@ class FirstStart(Gtk.Window):
 # ----------------------------------------------------------------------------------------------------------------------
 def gtk_style():
         style_provider = Gtk.CssProvider()
-        style_provider.load_from_path('/etc/first_use/css/style.css')
+        style_provider.load_from_path('/opt/first_use/css/style.css')
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), style_provider,
                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 

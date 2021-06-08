@@ -14,5 +14,5 @@ class Handler:
         
     def remove_autostart(self):
         file = os.popen('cat /etc/xdg/lxsession/LXDE-pi/autostart').read().rstrip()
-        file = file.replace('@sudo python3 /etc/first_use','')
+        file = file.replace('@sudo python3 /opt/first_use','')
         os.popen('echo "{}" > /etc/xdg/lxsession/LXDE-pi/autostart'.format(file))

@@ -162,16 +162,16 @@ class Handler:
         self.list_of_networks.sort(key=lambda x: x['quality'])
         for item in self.list_of_networks:
             if item["encrypted"]:
-                encr_icon = '/etc/first_use/wifipage/img/lock.svg'
+                encr_icon = '/opt/first_use/wifipage/img/lock.svg'
             else:
-                encr_icon = '/etc/first_use/wifipage/img/none.svg'
+                encr_icon = '/opt/first_use/wifipage/img/none.svg'
             quality = int(item["quality"])
             if quality > -50:
-                sig_icon = '/etc/first_use/wifipage/img/signal_high.svg'
+                sig_icon = '/opt/first_use/wifipage/img/signal_high.svg'
             elif quality > -70:
-                sig_icon = '/etc/first_use/wifipage/img/signal_medium.svg'
+                sig_icon = '/opt/first_use/wifipage/img/signal_medium.svg'
             else:
-                sig_icon = '/etc/first_use/wifipage/img/signal_low.svg'
+                sig_icon = '/opt/first_use/wifipage/img/signal_low.svg'
                 
             store.append([item["ssid"][:15], encr_icon, sig_icon])
         

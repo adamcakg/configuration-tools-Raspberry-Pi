@@ -37,7 +37,7 @@ class EmptyPage(Page):
             
         """
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/empty_page/empty_page.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/opt/settings/empty_page/empty_page.glade')   # creating object from XML(.glade files)
       
 
     def connect_handler(self, controller):

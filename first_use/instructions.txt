@@ -2,4 +2,4 @@ sudo cp -r first_use/ /etc/
 
 
 Add line to /etc/xdg/lxsession/LXDE-pi/autostart 
-@sudo python3 /etc/first_use
+@sudo python3 /opt/first_use

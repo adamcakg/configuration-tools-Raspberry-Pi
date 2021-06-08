@@ -12,7 +12,7 @@ from gi.repository import Gtk, GLib
 class WelcomePage(Page):
     def __init__(self):
         self.builder = Gtk.Builder()                  # Initializing builder
-        self.builder.add_from_file('/etc/first_use/welcome/welcome.glade')   # creating object from XML(.glade files)
+        self.builder.add_from_file('/opt/first_use/welcome/welcome.glade')   # creating object from XML(.glade files)
 
         self.list_of_welcomes = ['Welcome', 'Vitajte', 'Willkommen', 'Bienvenidos', 'Bienvenue', 'أهلا بك']
         self.previous = 'Welcome'

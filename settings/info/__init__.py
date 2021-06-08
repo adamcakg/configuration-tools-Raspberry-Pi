@@ -17,7 +17,7 @@ class Info(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/info/info.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/opt/settings/info/info.glade')   # creating object from XML(.glade files)
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
@@ -28,4 +28,4 @@ class Info(Page):
         return self.name
 
     def get_icon(self):
-        return '/etc/settings/info/img/info.svg'
+        return '/opt/settings/info/img/info.svg'

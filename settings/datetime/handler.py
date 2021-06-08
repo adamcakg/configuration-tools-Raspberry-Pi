@@ -32,7 +32,10 @@ class Handler:
         
     def get_time(self):
         time = os.popen("date | grep -oP '[0-9]+:[0-9]+:[0-9]+'").read().rstrip()
+        is_pm = os.popen("date | grep -oP '[P,A][M]'").read().rstrip()
         hours, minutes, secs = time.split(':')
+        if is_pm == 'PM':
+            hours = str(int(hours) + 12)
         return int(hours), int(minutes), int(secs)
         
     def on_draw(self, wid, cr):
@@ -121,26 +124,46 @@ class Handler:
         dialog.hide()
         
 # -------------------------------------------------------------------------------------------------------
-    def create_time_modal(self, widget):
+    def fulfill_time(self):
+        hours = self.builder.get_object('hours_combo_box')
+        minutes = self.builder.get_object('minutes_combo_box')
+        seconds = self.builder.get_object('seconds_combo_box')
+        
+        for number in range(1,61):
+            if number < 25:
+                hours.append(str(number), str(number))
+            minutes.append(str(number), str(number))
+            seconds.append(str(number), str(number))
+    
+    
+    def create_date_time_modal(self, widget):
+        time = self.get_time()
+        
+        hours = self.builder.get_object('hours_combo_box').set_active_id(str(time[0]))
+        minutes = self.builder.get_object('minutes_combo_box').set_active_id(str(time[1]))
+        seconds = self.builder.get_object('seconds_combo_box').set_active_id(str(time[2]))
+        
         dialog = self.builder.get_object('time_modal')
         dialog.set_attached_to(self.builder.get_object('date_time_page'))
         dialog.show_all()
         
-    def delete_time_modal(self, widget=None):
+    def delete_date_time_modal(self, widget=None):
         dialog = self.builder.get_object('time_modal')
         dialog.hide()
 
-    def set_time(self, widget):
-        pass
-    # date -s "2 OCT 2006 18:00:00"
-    
-    
-
-
+    def set_date_time(self, widget):
+        date = self.builder.get_object('calendar').get_date()
+        os.popen('sudo date --set {}-{}-{}'.format(date[0], date[1], date[2]))
         
+        hours = self.builder.get_object('hours_combo_box').get_active_id()
+        minutes = self.builder.get_object('minutes_combo_box').get_active_id()
+        seconds = self.builder.get_object('seconds_combo_box').get_active_id()
+        os.popen('sudo date --set {}:{}:{}'.format(hours, minutes, seconds))
+        self.delete_date_time_modal()
         
+    def thread_function(self):
+        self.fulfill_time()
         
-    def thread_function(self):       
         self.fulfill_arreas(get_arreas())
         self.fulfill_locations()
 

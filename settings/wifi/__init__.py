@@ -22,7 +22,7 @@ class Wifi(Page):
         
     def connect_builder(self):
         self.builder = Gtk.Builder()                  # Initializing builder
-        self.builder.add_from_file('/etc/settings/wifi/wifi.glade')  
+        self.builder.add_from_file('/opt/settings/wifi/wifi.glade')  
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.builder)
@@ -33,5 +33,5 @@ class Wifi(Page):
         return self.name
 
     def get_icon(self):
-        return '/etc/settings/wifi/img/wifi.svg'
+        return '/opt/settings/wifi/img/wifi.svg'
     

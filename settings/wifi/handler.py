@@ -119,7 +119,15 @@ class Handler:
                 cell["key"] = 'WPA2'
                 
         if len(self.list_of_networks) == 0:
+            wifi_tree = self.builder.get_object('wifi_tree')
+        
+            columns_to_remove = wifi_tree.get_columns()         #REMOVING COLUMNS IF EXIST ALREADY
+            if columns_to_remove is not None:
+                for column in columns_to_remove:
+                    wifi_tree.remove_column(column)
+            
             self.builder.get_object('not_found_label').set_opacity(1)
+
         else:
             self.builder.get_object('not_found_label').set_opacity(0)
             self.fulfill_wifi_tree()
@@ -137,18 +145,18 @@ class Handler:
         self.list_of_networks.sort(key=lambda x: x['quality'])
         for item in self.list_of_networks:
             if item["encrypted"]:
-                encr_icon = '/etc/settings/wifi/img/lock.svg'
+                encr_icon = '/opt/settings/wifi/img/lock.svg'
             else:
-                encr_icon = '/etc/settings/wifi/img/none.svg'
+                encr_icon = '/opt/settings/wifi/img/none.svg'
             quality = int(item["quality"])
             print(quality)
             print(type(quality))
             if quality > -50:
-                sig_icon = '/etc/settings/wifi/img/signal_high.svg'
+                sig_icon = '/opt/settings/wifi/img/signal_high.svg'
             elif quality > -70:
-                sig_icon = '/etc/settings/wifi/img/signal_medium.svg'
+                sig_icon = '/opt/settings/wifi/img/signal_medium.svg'
             else:
-                sig_icon = '/etc/settings/wifi/img/signal_low.svg'
+                sig_icon = '/opt/settings/wifi/img/signal_low.svg'
                 
             store.append([item["ssid"][:15], encr_icon, sig_icon])
         

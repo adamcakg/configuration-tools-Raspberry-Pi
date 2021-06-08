@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <object class="GtkFixed" id="appearance">
+    <property name="name">appearance</property>
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkNotebook">
+        <property name="width_request">440</property>
+        <property name="height_request">289</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="scrollable">True</property>
+        <child>
+          <object class="GtkFixed">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="width_request">-1</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Layout:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbox_documents_monitor_1">
+                <property name="label" translatable="yes">Documents</property>
+                <property name="name">show_documents</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="x">10</property>
+                <property name="y">176</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbox_trash_monitor_1">
+                <property name="label" translatable="yes">Wastebasket</property>
+                <property name="name">show_trash</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="x">140</property>
+                <property name="y">176</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="checkbox_mounts_monitor_1">
+                <property name="label" translatable="yes">Mounted disks</property>
+                <property name="name">show_mounts</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="x">285</property>
+                <property name="y">176</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="wallpaper_laytout_combo_box_1">
+                <property name="name">wallpaper_laytout_combo_box_1</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <items>
+                  <item id="color" translatable="yes">No image</item>
+                  <item id="center" translatable="yes">Centre image on screen</item>
+                  <item id="fit" translatable="yes">Fit image onto screen</item>
+                  <item id="crop" translatable="yes">Fill screen with image</item>
+                  <item id="stretch" translatable="yes">Stretch to cover screen</item>
+                  <item id="tile" translatable="yes">Tile image</item>
+                </items>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">15</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Image:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">50</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="image_choosing_dialog_0">
+                <property name="name">image_choosing_dialog_0</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="title" translatable="yes"/>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">55</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Colour:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">90</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="bg_color_button_1">
+                <property name="name">bg_color_button_1</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">95</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Text colour:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">130</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="fg_color_button_1">
+                <property name="name">fg_color_button_1</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">135</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel">
+            <property name="width_request">130</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Desktop</property>
+          </object>
+          <packing>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFixed">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Size:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="panel_size_combo_box">
+                <property name="name">panel_size_combo_box</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <items>
+                  <item id="52" translatable="yes">Very large (48x48)</item>
+                  <item id="36" translatable="yes">Large (32x32)</item>
+                  <item id="28" translatable="yes">Medium (24x24)</item>
+                  <item id="20" translatable="yes">Small (16x16)</item>
+                </items>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">15</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Position:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">50</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="panel_top_radio_button">
+                <property name="label" translatable="yes">Top</property>
+                <property name="name">panel_top_radio_button</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <property name="group">panel_bottom_radio_button</property>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">50</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="panel_bottom_radio_button">
+                <property name="label" translatable="yes">Bottom</property>
+                <property name="name">panel_bottom_radio_button</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+              </object>
+              <packing>
+                <property name="x">290</property>
+                <property name="y">50</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Colour:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">90</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Text colour:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">130</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="panel_bg_color_button">
+                <property name="name">panel_bg_color_button</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">95</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="panel_fg_color_button">
+                <property name="name">panel_fg_color_button</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">135</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel">
+            <property name="width_request">129</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Menu bar</property>
+          </object>
+          <packing>
+            <property name="position">1</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFixed">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Font:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFontButton" id="system_font_button">
+                <property name="name">system_font_button</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="font">Sans 12</property>
+                <property name="language">en-us</property>
+                <property name="level">GTK_FONT_CHOOSER_LEVEL_STYLE | GTK_FONT_CHOOSER_LEVEL_SIZE | GTK_FONT_CHOOSER_LEVEL_VARIATIONS | GTK_FONT_CHOOSER_LEVEL_FEATURES | GTK_FONT_CHOOSER_LEVEL_FAMILY</property>
+                <property name="preview_text"/>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">15</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Highlight colour:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">50</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="system_bg_color_button">
+                <property name="name">system_bg_color_button</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">55</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Highlight text colour:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">90</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkColorButton" id="system_fg_color_button">
+                <property name="name">system_fg_color_button</property>
+                <property name="width_request">170</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="x">200</property>
+                <property name="y">95</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Mouse cursor:</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">130</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="system_cursor_combo_box">
+                <property name="name">system_cursor_combo_box</property>
+                <property name="width_request">200</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <items>
+                  <item id="24" translatable="yes">Small</item>
+                  <item id="36" translatable="yes">Medium</item>
+                  <item id="48" translatable="yes">Large</item>
+                </items>
+              </object>
+              <packing>
+                <property name="x">170</property>
+                <property name="y">135</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="system_mouse_cursor_restart_label">
+                <property name="name">system_mouse_cursor_restart_label</property>
+                <property name="width_request">100</property>
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="opacity">0</property>
+                <property name="label" translatable="yes">Mouse cursor size will take effect after restart</property>
+                <property name="justify">center</property>
+                <property name="xalign">0</property>
+              </object>
+              <packing>
+                <property name="x">58</property>
+                <property name="y">170</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel">
+            <property name="width_request">129</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">System</property>
+          </object>
+          <packing>
+            <property name="position">2</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="x">5</property>
+        <property name="y">5</property>
+      </packing>
+    </child>
+  </object>
+</interface>

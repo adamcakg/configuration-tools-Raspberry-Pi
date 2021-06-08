@@ -2,8 +2,8 @@
 Name=Settings
 GenericName=Settings app
 Comment=Settngs app
-Exec=python3 /etc/settings/__init__.py
-Icon=/etc/settings/img/icon.svg
+Exec=python3 /opt/settings/__init__.py
+Icon=/opt/settings/img/icon.svg
 Categories=GTK;Settings;HardwareSettings;X-LXDE-Settings;
 Terminal=false
 Type=Application

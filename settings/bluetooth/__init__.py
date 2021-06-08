@@ -21,7 +21,7 @@ class Bluetooth(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/bluetooth/bluetooth.glade') 
+        self.__builder.add_from_file('/opt/settings/bluetooth/bluetooth.glade') 
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
@@ -32,4 +32,4 @@ class Bluetooth(Page):
         return self.name
 
     def get_icon(self):
-        return '/etc/settings/bluetooth/img/bluetooth.svg'
+        return '/opt/settings/bluetooth/img/bluetooth.svg'

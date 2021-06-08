@@ -15,7 +15,7 @@
 }
 
 .clock_bg{
-	background-image: url("/etc/settings/time_page/img/clock.svg");
+	background-image: url("/opt/settings/datetime/img/clock.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

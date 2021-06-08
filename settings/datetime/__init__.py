@@ -21,7 +21,7 @@ class DateTime(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/datetime/date_time_page.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/opt/settings/datetime/date_time_page.glade')   # creating object from XML(.glade files)
       
 
     def connect_handler(self, controller):

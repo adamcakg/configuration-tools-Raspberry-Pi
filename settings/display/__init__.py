@@ -27,9 +27,9 @@ class Display(Page):
         self.__builder = Gtk.Builder()              
         number_of_monitors = get_number_of_monitors()
         if number_of_monitors == 1:
-            self.__builder.add_from_file('/etc/settings/display/display_monitor.glade')
+            self.__builder.add_from_file('/opt/settings/display/display_monitor.glade')
         elif number_of_monitors == 2:
-            self.__builder.add_from_file('/etc/settings/display/display_two_monitors.glade')
+            self.__builder.add_from_file('/opt/settings/display/display_two_monitors.glade')
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
@@ -40,4 +40,4 @@ class Display(Page):
         return self.name
 
     def get_icon(self):
-        return '/etc/settings/display/img/display1.svg'
+        return '/opt/settings/display/img/display1.svg'

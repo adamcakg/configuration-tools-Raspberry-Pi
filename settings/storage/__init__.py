@@ -20,7 +20,7 @@ class Storage(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/storage/storage.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/opt/settings/storage/storage.glade')   # creating object from XML(.glade files)
       
 
     def connect_handler(self, controller):
@@ -32,5 +32,5 @@ class Storage(Page):
         return self.name
     
     def get_icon(self):
-        return '/etc/settings/storage/img/memory_card.svg'
+        return '/opt/settings/storage/img/memory_card.svg'
         

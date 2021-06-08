@@ -13,7 +13,7 @@ from gi.repository import Gtk
 class UpdatePage(Page):
     def __init__(self):
         self.__builder = Gtk.Builder()                  # Initializing builder
-        self.__builder.add_from_file('/etc/first_use/update_page/update_page.glade')  
+        self.__builder.add_from_file('/opt/first_use/update_page/update_page.glade')  
         self.handler = Handler(builder=self.__builder)
 
     def next(self, controller):

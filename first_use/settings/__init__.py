@@ -17,7 +17,7 @@ class SettingsPage(Page):
 
     def __init__(self):
         self.__builder = Gtk.Builder()                            # Initializing builder
-        self.__builder.add_from_file('/etc/first_use/settings/settings.glade')   # creating object from XML(.glade files)
+        self.__builder.add_from_file('/opt/first_use/settings/settings.glade')   # creating object from XML(.glade files)
         self.handler = Handler(builder=self.__builder)
         
         if 'settingspage' not in keeper:

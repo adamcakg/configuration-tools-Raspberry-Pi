@@ -21,7 +21,7 @@ class System(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/system/system.glade') 
+        self.__builder.add_from_file('/opt/settings/system/system.glade') 
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
@@ -32,4 +32,4 @@ class System(Page):
         return self.name
     
     def get_icon(self):
-        return '/etc/settings/system/img/system.svg'
+        return '/opt/settings/system/img/system.svg'

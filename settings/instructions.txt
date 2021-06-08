@@ -1,3 +1,3 @@
-sudo cp -r settings/ /etc/
+sudo cp -r settings/ /opt/
 
 sudo cp settings.desktop /usr/share/applications/

@@ -1,4 +1,5 @@
 import gi
+import os
 from .handler import Handler
 from page import Page
 
@@ -21,7 +22,10 @@ class Appearance(Page):
 
     def connect_builder(self):
         self.__builder = Gtk.Builder()  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/appearance/appearance.glade') 
+        if self.get_number_of_monitors() == 1:
+            self.__builder.add_from_file('/opt/settings/appearance/appearance_monitors1.glade')
+        else:
+            self.__builder.add_from_file('/opt/settings/appearance/appearance_monitors2.glade')
 
     def connect_handler(self, controller):
         self.handler = Handler(builder=self.__builder)
@@ -33,4 +37,12 @@ class Appearance(Page):
         return self.name
     
     def get_icon(self):
-        return '/etc/settings/appearance/img/appearance.svg'
+        return '/opt/settings/appearance/img/appearance.svg'
+    
+    def get_number_of_monitors(self):
+        monitors = (os.popen("xrandr --listmonitors | grep Monitors: | cut -d ' ' -f 2").read())[:1]
+        monitors = int(monitors)
+        if monitors < 2:
+            return 1
+        elif monitors >1:
+            return 2

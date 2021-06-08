@@ -39,7 +39,7 @@ class Handler:
                 icon = Gtk.Image.new_from_pixbuf(icon)
                 box.pack_start(icon, False, False, 6)
             else:
-                icon = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename='/etc/settings/main/img/minus.png',
+                icon = GdkPixbuf.Pixbuf.new_from_file_at_scale(filename='/opt/settings/main/img/minus.png',
                                                              width=8, height=8, 
                                                              preserve_aspect_ratio=True)
                 icon = Gtk.Image.new_from_pixbuf(icon)

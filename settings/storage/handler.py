@@ -21,7 +21,7 @@ class Handler:
         progress_bar = self.builder.get_object('progress_bar')
         progress_bar.set_text('{} used out of {}'.format(used_space, size_of_filesystem))
         
-        length_of_progress_bar = float(used_space[:-1:]) / (float(size_of_filesystem[:-1:]) / 100)       
+        length_of_progress_bar = float(used_space[:-1:].replace(',', '.')) / (float(size_of_filesystem[:-1:].replace(',', '.')) / 100)       
         progress_bar.set_fraction(length_of_progress_bar / 100)
                 
     

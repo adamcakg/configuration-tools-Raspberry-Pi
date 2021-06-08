@@ -576,7 +576,10 @@ class Handler:
 # ---------------------------------------------------------------------------------   
     def get_settings(self):
         self.get_desktop_one_items()
-        self.get_desktop_two_items()
+        try:
+            self.get_desktop_two_items()
+        except:
+            print("Theres only one screen")
         self.get_panel_properties()
         self.get_system_properties()
         

@@ -21,7 +21,7 @@ class Localisation(Page):
         
     def connect_builder(self):
         self.__builder = Gtk.Builder()  # Initializing builder
-        self.__builder.add_from_file('/etc/settings/localisation/localisation.glade') 
+        self.__builder.add_from_file('/opt/settings/localisation/localisation.glade') 
 
 
     def connect_handler(self, controller):
@@ -34,4 +34,4 @@ class Localisation(Page):
         return self.name
 
     def get_icon(self):
-        return '/etc/settings/localisation/img/localisation.svg'
+        return '/opt/settings/localisation/img/localisation.svg'
